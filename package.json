@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
+    "lint": "eslint --fix --ext .svelte,.js src",
     "lint:prettier": "prettier --write src/**/{*.svelte,*.js}"
   },
   "devDependencies": {
@@ -14,10 +15,12 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-svelte3": "^3.1.2",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
     "rollup": "^2.44.0",
     "rollup-plugin-svelte": "^7.1.0",
+    "simple-git-hooks": "^2.2.0",
     "svelte": "^3.36.0"
   },
   "keywords": [
@@ -29,5 +32,12 @@
   "files": [
     "src",
     "dist"
-  ]
+  ],
+  "simple-git-hooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{svelte,js}": "eslint --cache --fix --ext .js,.svelte",
+    "*.{js,css,md,svelte}": "prettier --write"
+  }
 }

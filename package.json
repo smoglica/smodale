@@ -34,7 +34,7 @@
     "dist"
   ],
   "simple-git-hooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*.{svelte,js}": "eslint --cache --fix --ext .js,.svelte",

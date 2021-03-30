@@ -12,5 +12,5 @@ docker_build() {
 }
 
 docker_run() {
-  docker run -it --rm -v $PWD:/usr/src/app $IMAGE_NAME:$TAG_NAME $*
+  docker run -it --rm -v $PWD:/usr/src/app $IMAGE_NAME:$TAG_NAME "$@"
 }

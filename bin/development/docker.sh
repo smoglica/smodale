@@ -8,7 +8,7 @@ case "$1" in
     ;;
   run)
     shift;
-    docker_run $*
+    docker_run "$@"
     ;;
   *)
     echo "Usage: $0 {build|run}"

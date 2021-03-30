@@ -37,7 +37,7 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.{svelte,js}": "eslint --cache --fix --ext .js,.svelte",
+    "*.{svelte,js}": "eslint --fix --ext .js,.svelte",
     "*.{js,css,md,svelte}": "prettier --write"
   }
 }

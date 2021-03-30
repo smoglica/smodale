@@ -1,5 +1,5 @@
 <script>
-  const name = ' wo rld ';
+  const name = 'world';
 </script>
 
 <h1>Hello {name}!</h1>

@@ -4,7 +4,8 @@
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c build/rollup.config.js",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
     "prepublishOnly": "npm run build",
     "lint": "eslint --fix --ext .svelte,.js src",
     "lint:prettier": "prettier --write src/**/{*.svelte,*.js}"

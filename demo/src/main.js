@@ -1,5 +1,5 @@
 import './global.css';
-import App from './App.svelte';
+import App from '@/App';
 
 export default new App({
   target: document.body,

@@ -46,6 +46,6 @@
     "*.{js,css,md,svelte}": "prettier --write"
   },
   "dependencies": {
-    "svelte": "^3.36.0"
+    "svelte": "^3.37.0"
   }
 }

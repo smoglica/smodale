@@ -5,15 +5,10 @@ const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 
 module.exports = {
+  mode,
+  devtool: prod ? false : 'source-map',
   entry: {
     'build/bundle': ['./src/main.js'],
-  },
-  resolve: {
-    alias: {
-      svelte: path.dirname(require.resolve('svelte/package.json')),
-    },
-    extensions: ['.mjs', '.js', '.svelte'],
-    mainFields: ['svelte', 'browser', 'module', 'main'],
   },
   output: {
     path: path.join(__dirname, '/public'),
@@ -48,16 +43,21 @@ module.exports = {
       },
     ],
   },
-  mode,
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
   ],
-  devtool: prod ? false : 'source-map',
   devServer: {
     hot: true,
     port: 5000,
     host: '0.0.0.0',
+  },
+  resolve: {
+    alias: {
+      svelte: path.dirname(require.resolve('svelte/package.json')),
+    },
+    extensions: ['.mjs', '.js', '.svelte'],
+    mainFields: ['svelte', 'browser', 'module', 'main'],
   },
 };

@@ -56,6 +56,7 @@ module.exports = {
   resolve: {
     alias: {
       svelte: path.dirname(require.resolve('svelte/package.json')),
+      smodale: path.resolve(__dirname, '../dist/index.mjs'),
     },
     extensions: ['.mjs', '.js', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],

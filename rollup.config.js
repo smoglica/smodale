@@ -10,13 +10,13 @@ const { preprocess } = require('./svelte.config');
 
 export default (argv) => {
   const watch = process.env.ROLLUP_WATCH || argv.watch;
-  const prod = process.env.BUILD === 'demo' || false;
+  const demo = process.env.demo || false;
   const name = pkg.name
     .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
     .replace(/^\w/, (m) => m.toUpperCase())
     .replace(/-\w/g, (m) => m[1].toUpperCase());
 
-  return watch || prod
+  return watch || demo
     ? {
       input: 'demo/main',
       output: {
@@ -26,11 +26,11 @@ export default (argv) => {
         file: 'public/bundle.js',
       },
       plugins: [
-        svelte({ preprocess, compilerOptions: { dev: !prod } }),
+        svelte({ preprocess, compilerOptions: { dev: !demo } }),
         css({ output: 'public/bundle.css' }),
         resolve({ browser: true, dedupe: ['svelte'] }),
-        prod && terser(),
-        !prod
+        demo && terser(),
+        !demo
             && browsersync({
               server: 'public',
               port: 5000,

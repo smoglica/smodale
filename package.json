@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "build:demo": "npm run build -- --environment BUILD:demo",
+    "build:demo": "npm run build -- --environment demo",
     "dev": "npm run build -- -w",
     "prepublishOnly": "npm run build",
     "lint": "eslint --fix --ext .svelte,.js src",

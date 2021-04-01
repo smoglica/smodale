@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
+import browsersync from 'rollup-plugin-browsersync';
 import pkg from './package.json';
 
 const { preprocess } = require('./svelte.config');
@@ -24,14 +25,14 @@ const config = dev
     plugins: [
       svelte({ preprocess, compilerOptions: { dev } }),
       css({ output: 'public/bundle.css' }),
-      resolve({
-        browser: true,
-        dedupe: ['svelte'],
+      resolve({ browser: true, dedupe: ['svelte'] }),
+      browsersync({
+        server: 'public',
+        port: 5000,
+        open: false,
+        files: ['public/index.html'],
       }),
     ],
-    watch: {
-      clearScreen: false,
-    },
   }
   : {
     input: 'src/index.js',

@@ -7,55 +7,60 @@ import pkg from './package.json';
 
 const { preprocess } = require('./svelte.config');
 
-const dev = process.env.ROLLUP_WATCH;
-const name = pkg.name
-  .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
-  .replace(/^\w/, (m) => m.toUpperCase())
-  .replace(/-\w/g, (m) => m[1].toUpperCase());
+export default (argv) => {
+  const watch = process.env.ROLLUP_WATCH || argv.watch;
+  const demo = process.env.BUILD === 'demo' || false;
+  const name = pkg.name
+    .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
+    .replace(/^\w/, (m) => m.toUpperCase())
+    .replace(/-\w/g, (m) => m[1].toUpperCase());
 
-const config = dev
-  ? {
-    input: 'demo/main.js',
-    output: {
-      sourcemap: true,
-      format: 'iife',
-      name: 'app',
-      file: 'public/bundle.js',
-    },
-    plugins: [
-      svelte({ preprocess, compilerOptions: { dev } }),
-      css({ output: 'public/bundle.css' }),
-      resolve({ browser: true, dedupe: ['svelte'] }),
-      browsersync({
-        server: 'public',
-        port: 5000,
-        open: false,
-        files: ['public/index.html'],
-      }),
-    ],
-  }
-  : {
-    input: 'src/index.js',
-    output: [
-      { file: pkg.module, format: 'es' },
-      { file: pkg.main, format: 'umd', name },
-    ],
-    plugins: [
-      svelte({ preprocess }),
-      css({ output: 'smodale.min.css' }),
-      resolve(),
-      license({
-        banner: {
-          commentStyle: 'ignored',
-          content: `
-          @package    <%= pkg.name %>
-          @author     <%= pkg.author.name %> <<%= pkg.author.email %>>
-          @version    <%= pkg.version %>
-          @build      <%= moment().format('LLLL') %>
-        `,
-        },
-      }),
-    ],
-  };
-
-export default config;
+  return watch || demo
+    ? {
+      input: 'demo/main.js',
+      output: {
+        sourcemap: true,
+        format: 'iife',
+        name: 'app',
+        file: 'public/bundle.js',
+      },
+      plugins: [
+        svelte({ preprocess, compilerOptions: { dev: !demo } }),
+        css({ output: 'public/bundle.css' }),
+        resolve({ browser: true, dedupe: ['svelte'] }),
+        !demo
+            && browsersync({
+              server: 'public',
+              port: 5000,
+              open: false,
+              files: ['public/index.html'],
+            }),
+      ].filter(Boolean),
+      watch: {
+        clearScreen: false,
+      },
+    }
+    : {
+      input: 'src/index.js',
+      output: [
+        { file: pkg.module, format: 'es' },
+        { file: pkg.main, format: 'umd', name },
+      ],
+      plugins: [
+        svelte({ preprocess }),
+        css({ output: 'smodale.min.css' }),
+        resolve(),
+        license({
+          banner: {
+            commentStyle: 'ignored',
+            content: `
+              @package <%= pkg.name %>
+              @author  <%= pkg.author.name %> <<%= pkg.author.email %>>
+              @version <%= pkg.version %>
+              @build   <%= moment().format('LLLL') %>
+          `,
+          },
+        }),
+      ],
+    };
+};

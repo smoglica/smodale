@@ -14,17 +14,12 @@ const name = pkg.name
 const config = {
   input: 'src/index.js',
   output: [
-    { file: pkg.module, format: 'es', exports: 'named' },
-    {
-      file: pkg.main,
-      format: 'umd',
-      exports: 'named',
-      name,
-    },
+    { file: pkg.module, format: 'es' },
+    { file: pkg.main, format: 'umd', name },
   ],
   plugins: [
     svelte({ preprocess }),
-    css({ output: 'smodale.css' }),
+    css({ output: 'smodale.min.css' }),
     resolve(),
     license({
       banner: {

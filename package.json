@@ -1,8 +1,14 @@
 {
   "name": "smodale",
+  "description": "A simple, light and highly customizable modal for Svelte",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+  "author": {
+    "name": "Skender Moglica",
+    "email": "moglica.s@gmail.com",
+    "url": "https://skendermoglica.it/"
+  },
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
@@ -47,5 +53,12 @@
   },
   "dependencies": {
     "svelte": "^3.37.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smoglica/smodale.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smoglica/smodale/issues"
   }
 }

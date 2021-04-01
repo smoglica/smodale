@@ -1,6 +1,9 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import css from 'rollup-plugin-css-only';
 import pkg from './package.json';
+
+const { preprocess } = require('./svelte.config');
 
 const name = pkg.name
   .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
@@ -10,8 +13,13 @@ const name = pkg.name
 export default {
   input: 'src/index.js',
   output: [
-    { file: pkg.module, format: 'es' },
-    { file: pkg.main, format: 'umd', name },
+    { file: pkg.module, format: 'es', exports: 'named' },
+    {
+      file: pkg.main,
+      format: 'umd',
+      exports: 'named',
+      name,
+    },
   ],
-  plugins: [svelte(), resolve()],
+  plugins: [svelte({ preprocess }), css({ output: 'smodale.css' }), resolve()],
 };

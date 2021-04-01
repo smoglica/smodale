@@ -3,21 +3,22 @@ import resolve from '@rollup/plugin-node-resolve';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
 import browsersync from 'rollup-plugin-browsersync';
+import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 const { preprocess } = require('./svelte.config');
 
 export default (argv) => {
   const watch = process.env.ROLLUP_WATCH || argv.watch;
-  const demo = process.env.BUILD === 'demo' || false;
+  const prod = process.env.BUILD === 'demo' || false;
   const name = pkg.name
     .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
     .replace(/^\w/, (m) => m.toUpperCase())
     .replace(/-\w/g, (m) => m[1].toUpperCase());
 
-  return watch || demo
+  return watch || prod
     ? {
-      input: 'demo/main.js',
+      input: 'demo/main',
       output: {
         sourcemap: true,
         format: 'iife',
@@ -25,10 +26,11 @@ export default (argv) => {
         file: 'public/bundle.js',
       },
       plugins: [
-        svelte({ preprocess, compilerOptions: { dev: !demo } }),
+        svelte({ preprocess, compilerOptions: { dev: !prod } }),
         css({ output: 'public/bundle.css' }),
         resolve({ browser: true, dedupe: ['svelte'] }),
-        !demo
+        prod && terser(),
+        !prod
             && browsersync({
               server: 'public',
               port: 5000,
@@ -36,12 +38,9 @@ export default (argv) => {
               files: ['public/index.html'],
             }),
       ].filter(Boolean),
-      watch: {
-        clearScreen: false,
-      },
     }
     : {
-      input: 'src/index.js',
+      input: 'src',
       output: [
         { file: pkg.module, format: 'es' },
         { file: pkg.main, format: 'umd', name },

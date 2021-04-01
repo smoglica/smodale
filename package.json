@@ -53,8 +53,8 @@
     }
   },
   "lint-staged": {
-    "*.{svelte,js}": "eslint --fix --ext .js,.svelte",
-    "*.{js,css,md,svelte}": "prettier --write"
+    "*.{js,css,md,svelte}": "prettier --write",
+    "*.{svelte,js}": "eslint --fix --ext .js,.svelte"
   },
   "dependencies": {
     "svelte": "^3.37.0"

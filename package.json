@@ -12,6 +12,9 @@
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
+    "dev": "npm run build:watch & npm run start:dev",
+    "start": "sirv public --no-clear",
+    "start:dev": "sirv public --dev",
     "prepublishOnly": "npm run build",
     "lint": "eslint --fix --ext .svelte,.js src",
     "lint:prettier": "prettier --write src/**/{*.svelte,*.js}"
@@ -34,6 +37,7 @@
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-license": "^2.3.0",
     "rollup-plugin-svelte": "^7.1.0",
+    "sirv-cli": "^1.0.11",
     "svelte-preprocess": "^4.7.0"
   },
   "keywords": [

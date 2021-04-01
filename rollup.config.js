@@ -29,6 +29,9 @@ const config = dev
         dedupe: ['svelte'],
       }),
     ],
+    watch: {
+      clearScreen: false,
+    },
   }
   : {
     input: 'src/index.js',

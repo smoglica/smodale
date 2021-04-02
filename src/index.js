@@ -1,8 +1,5 @@
-import Modal from './components/Modal';
+import Modal from './components/Modal.svelte';
+import store from './store';
 
 export { Modal };
-
-export default {
-  show() {},
-  hide() {},
-};
+export default store;

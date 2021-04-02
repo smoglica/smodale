@@ -16,6 +16,7 @@ module.exports = {
       rules: {
         'import/no-mutable-exports': 'off',
         'import/prefer-default-export': 'off',
+        'import/first': 'off',
       },
     },
   ],

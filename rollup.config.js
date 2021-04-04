@@ -27,7 +27,7 @@ export default (argv) => {
       },
       plugins: [
         svelte({ preprocess, compilerOptions: { dev: !demo } }),
-        css({ output: 'public/bundle.css' }),
+        css({ output: 'bundle.css' }),
         resolve({ browser: true, dedupe: ['svelte'] }),
         demo && terser(),
         !demo

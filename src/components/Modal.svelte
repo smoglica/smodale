@@ -4,6 +4,8 @@
   export let clickOutsideToClose = false;
   export let escapeToClose = true;
   export let breakpoints = {};
+  export let backdropColor;
+  export let backgroundColor;
 
   let modal;
   let currentBreakPoint;
@@ -11,8 +13,7 @@
   const { name } = $$props;
 
   $: visible = !!modal;
-  $: sortedBreakpoints = Object
-    .entries(breakpoints)
+  $: sortedBreakpoints = Object.entries(breakpoints)
     .map(([key, value]) => [key, value, parseInt(key.replace(/px|em|rem/, ''), 10)])
     .sort((a, b) => b[2] - a[2])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
@@ -28,19 +29,23 @@
       return;
     }
 
-    const index = sortedBreakpointList
-      .findIndex(([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches);
-
-    let config = {};
+    const index = sortedBreakpointList.findIndex(
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+    );
 
     if (index > -1) {
-      config = sortedBreakpointList
+      const config = sortedBreakpointList
         .filter((item, i) => index <= i)
         .reverse()
+        // eslint-disable-next-line no-unused-vars
         .reduce((acc, [key, value]) => ({ ...acc, ...value }), {});
+
+      currentBreakPoint = { config, index };
+
+      return;
     }
 
-    currentBreakPoint = { config, index };
+    currentBreakPoint = null;
   };
 </script>
 

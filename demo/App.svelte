@@ -4,10 +4,11 @@
   const breakpoints = {
     '1024px': {
       backgroundColor: 'yellow',
+      maxWidth: '1200px',
     },
     '375px': {
       backgroundColor: 'purple',
-      maxWidth: '200px',
+      maxWidth: '510px',
       borderRadius: '4px',
     },
     '768px': {
@@ -16,7 +17,9 @@
     },
     '320px': {
       backgroundColor: 'green',
-      maxWidth: '250px',
+      maxWidth: '400px',
+      margin: '30px',
+      height: 'auto',
     },
   };
 
@@ -41,8 +44,8 @@
   </div>
 </section>
 
-<Modal name="static-modal" {breakpoints}>
-  <div class="bg-contrast-lower padding-component">
+<Modal name="static-modal" {breakpoints} backdropColor="rgba(0,0,0,0.6)" backgroundColor="#FFF">
+  <div class="padding-component">
     <div class="text-component">
       <h2>Static modal</h2>
       <p>

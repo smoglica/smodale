@@ -3,17 +3,48 @@
 
   export let clickOutsideToClose = false;
   export let escapeToClose = true;
+  export let breakpoints = {};
 
   let modal;
+  let currentBreakPoint;
 
   const { name } = $$props;
 
   $: visible = !!modal;
+  $: sortedBreakpoints = Object
+    .entries(breakpoints)
+    .map(([key, value]) => [key, value, parseInt(key.replace(/px|em|rem/, ''), 10)])
+    .sort((a, b) => b[2] - a[2])
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+  $: sortedBreakpointList = Object.entries(sortedBreakpoints);
+  $: hasBreakpoints = !!sortedBreakpointList.length;
 
   store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
   });
+
+  const onWindowResize = () => {
+    if (!visible) {
+      return;
+    }
+
+    const index = sortedBreakpointList
+      .findIndex(([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches);
+
+    let config = {};
+
+    if (index > -1) {
+      config = sortedBreakpointList
+        .filter((item, i) => index <= i)
+        .reverse()
+        .reduce((acc, [key, value]) => ({ ...acc, ...value }), {});
+    }
+
+    currentBreakPoint = { config, index };
+  };
 </script>
+
+<svelte:window on:resize={onWindowResize} />
 
 {#if visible}
   <div class="modal">
@@ -46,13 +77,17 @@
     height: 100%;
   }
 
-  .modal__content,
-  :global(.modal__content > *) {
+  .modal__content {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  :global(.modal__content > *) {
+    width: inherit;
+    height: inherit;
   }
 </style>

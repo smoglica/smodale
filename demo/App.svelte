@@ -1,6 +1,25 @@
 <script>
   import modal, { Modal } from '../src';
 
+  const breakpoints = {
+    '1024px': {
+      backgroundColor: 'yellow',
+    },
+    '375px': {
+      backgroundColor: 'purple',
+      maxWidth: '200px',
+      borderRadius: '4px',
+    },
+    '768px': {
+      backgroundColor: 'red',
+      maxWidth: '610px',
+    },
+    '320px': {
+      backgroundColor: 'green',
+      maxWidth: '250px',
+    },
+  };
+
   const showStaticModal = () => modal.show('static-modal');
   const hideStaticModal = () => modal.hide('static-modal');
 </script>
@@ -22,8 +41,8 @@
   </div>
 </section>
 
-<Modal name="static-modal">
-  <div class="bg-white padding-component">
+<Modal name="static-modal" {breakpoints}>
+  <div class="bg-contrast-lower padding-component">
     <div class="text-component">
       <h2>Static modal</h2>
       <p>

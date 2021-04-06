@@ -36,7 +36,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
     if (index > -1) {
@@ -54,21 +54,16 @@
     currentBreakPoint = {};
   };
 
-  const toKebabCase = (string) =>
-    string
-      .replace(/([a-z])([A-Z])/g, '$1-$2')
-      .replace(/\s+/g, '-')
-      .toLowerCase();
-  const toInlineCss = (styles = {}) =>
-    Object.entries(styles).reduce((acc, [key, value]) => {
-      const rule = `${toKebabCase(key)}: ${value};`;
+  const toKebabCase = (string) => string.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
+  const toInlineCss = (styles = {}) => Object.entries(styles).reduce((acc, [key, value]) => {
+    const rule = `${toKebabCase(key)}: ${value};`;
 
-      if (acc) {
-        return `${acc} ${rule}`;
-      }
+    if (acc) {
+      return `${acc} ${rule}`;
+    }
 
-      return rule;
-    }, '');
+    return rule;
+  }, '');
 
   const bindStyles = () => {
     onWindowResize();
@@ -91,24 +86,13 @@
 
         const {
           // eslint-disable-next-line no-unused-vars
-          maxWidth,
-          margin,
-          height,
-          backgroundColor: bgColor,
-          ...rest
+          maxWidth, margin, height, backgroundColor: bgColor, ...rest
         } = currentBreakPoint.config;
 
         modalRef.style = toInlineCss({ backgroundColor: backdropColor });
-        dialogRef.style = toInlineCss({
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        });
+        dialogRef.style = toInlineCss({ display: 'flex', justifyContent: 'center', alignItems: 'center' });
         contentRef.style = toInlineCss({
-          maxWidth,
-          height,
-          margin,
-          backgroundColor: bgColor,
+          maxWidth, height, margin, backgroundColor: bgColor,
         });
       },
     };
@@ -118,7 +102,11 @@
 <svelte:window on:resize={onWindowResize} />
 
 {#if visible}
-  <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakPoint }}>
+  <div
+    class="modal"
+    bind:this={modalRef}
+    use:bindStyles={{ currentBreakPoint }}
+  >
     <div class="modal__dialog" bind:this={dialogRef}>
       <div
         bind:this={contentRef}

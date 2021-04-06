@@ -7,6 +7,7 @@
   export let breakpoints = {};
   export let backdropColor;
   export let backgroundColor;
+  export let padding;
 
   let modal;
   let modalRef;
@@ -35,7 +36,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
     if (index > -1) {
@@ -53,6 +54,22 @@
     currentBreakPoint = {};
   };
 
+  const toKebabCase = (string) =>
+    string
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
+  const toInlineCss = (styles = {}) =>
+    Object.entries(styles).reduce((acc, [key, value]) => {
+      const rule = `${toKebabCase(key)}: ${value};`;
+
+      if (acc) {
+        return `${acc} ${rule}`;
+      }
+
+      return rule;
+    }, '');
+
   const bindStyles = () => {
     onWindowResize();
 
@@ -66,20 +83,33 @@
 
         if (!hasCurrentBreakpoint) {
           dialogRef.removeAttribute('style');
-          contentRef.removeAttribute('style');
-          modalRef.style = `background-color: ${backgroundColor};`;
+          contentRef.style = toInlineCss({ padding });
+          modalRef.style = toInlineCss({ backgroundColor });
 
           return;
         }
 
         const {
           // eslint-disable-next-line no-unused-vars
-          maxWidth, margin, height, backgroundColor: bgColor, ...rest
+          maxWidth,
+          margin,
+          height,
+          backgroundColor: bgColor,
+          ...rest
         } = currentBreakPoint.config;
 
-        modalRef.style = `background-color: ${backdropColor};`;
-        dialogRef.style = 'display: flex; justify-content: center; align-items: center;';
-        contentRef.style = `max-width: ${maxWidth}; height: ${height}; margin: ${margin}; background-color: ${bgColor}`;
+        modalRef.style = toInlineCss({ backgroundColor: backdropColor });
+        dialogRef.style = toInlineCss({
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        });
+        contentRef.style = toInlineCss({
+          maxWidth,
+          height,
+          margin,
+          backgroundColor: bgColor,
+        });
       },
     };
   };
@@ -88,11 +118,7 @@
 <svelte:window on:resize={onWindowResize} />
 
 {#if visible}
-  <div
-    class="modal"
-    bind:this={modalRef}
-    use:bindStyles={{ currentBreakPoint }}
-  >
+  <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakPoint }}>
     <div class="modal__dialog" bind:this={dialogRef}>
       <div
         bind:this={contentRef}

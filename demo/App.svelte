@@ -12,7 +12,7 @@
       borderRadius: '4px',
     },
     '768px': {
-      backgroundColor: 'red',
+      backgroundColor: 'var(--color-contrast-lower)',
       maxWidth: '610px',
     },
     '320px': {

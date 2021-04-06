@@ -1,4 +1,5 @@
 <script>
+  import { tick } from 'svelte';
   import store from '../store';
 
   export let clickOutsideToClose = false;
@@ -8,6 +9,9 @@
   export let backgroundColor;
 
   let modal;
+  let modalRef;
+  let contentRef;
+  let dialogRef;
   let currentBreakPoint;
 
   const { name } = $$props;
@@ -19,6 +23,7 @@
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
   $: hasBreakpoints = !!sortedBreakpointList.length;
+  $: hasCurrentBreakpoint = currentBreakPoint && !!Object.keys(currentBreakPoint).length;
 
   store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
@@ -45,16 +50,52 @@
       return;
     }
 
-    currentBreakPoint = null;
+    currentBreakPoint = {};
+  };
+
+  const bindStyles = () => {
+    onWindowResize();
+
+    return {
+      update: async () => {
+        await tick();
+
+        if (!hasBreakpoints) {
+          return;
+        }
+
+        if (!hasCurrentBreakpoint) {
+          dialogRef.removeAttribute('style');
+          contentRef.removeAttribute('style');
+          modalRef.style = `background-color: ${backgroundColor};`;
+
+          return;
+        }
+
+        const {
+          // eslint-disable-next-line no-unused-vars
+          maxWidth, margin, height, backgroundColor: bgColor, ...rest
+        } = currentBreakPoint.config;
+
+        modalRef.style = `background-color: ${backdropColor};`;
+        dialogRef.style = 'display: flex; justify-content: center; align-items: center;';
+        contentRef.style = `max-width: ${maxWidth}; height: ${height}; margin: ${margin}; background-color: ${bgColor}`;
+      },
+    };
   };
 </script>
 
 <svelte:window on:resize={onWindowResize} />
 
 {#if visible}
-  <div class="modal">
-    <div class="modal__dialog">
+  <div
+    class="modal"
+    bind:this={modalRef}
+    use:bindStyles={{ currentBreakPoint }}
+  >
+    <div class="modal__dialog" bind:this={dialogRef}>
       <div
+        bind:this={contentRef}
         class="modal__content"
         role="alertdialog"
         aria-labelledby="modal-title"

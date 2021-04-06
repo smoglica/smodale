@@ -1,20 +1,24 @@
 <script>
   import modal, { Modal } from '../src';
 
-  const breakpoints = {
-    '1200px': {
-      backgroundColor: 'var(--color-contrast-low)',
-      maxWidth: '1140px',
-    },
-    '768px': {
-      backgroundColor: 'var(--color-contrast-lower)',
-      maxWidth: '800px',
-    },
-    '576px': {
-      backgroundColor: 'var(--color-white)',
-      maxWidth: '500px',
-      margin: 'var(--component-padding)',
-      height: 'auto',
+  const staticModalProps = {
+    padding: '20px',
+    backgroundColor: '#fff',
+    backdropColor: 'rgba(0,0,0,0.6)',
+    breakpoints: {
+      '1200px': {
+        maxWidth: '1140px',
+      },
+      '768px': {
+        maxWidth: '800px',
+      },
+      '576px': {
+        backgroundColor: 'var(--color-white)',
+        maxWidth: '500px',
+        margin: 'var(--component-padding)',
+        height: 'auto',
+        borderRadius: '4px',
+      },
     },
   };
 
@@ -39,7 +43,7 @@
   </div>
 </section>
 
-<Modal name="static-modal" {breakpoints} backdropColor="rgba(0,0,0,0.6)" backgroundColor="#FFF">
+<Modal name="static-modal" {...staticModalProps}>
   <div>
     <div class="text-component">
       <h2>Static modal</h2>

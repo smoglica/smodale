@@ -8,6 +8,7 @@
   export let backdropColor;
   export let backgroundColor;
   export let padding;
+  export let borderRadius = '';
 
   let modal;
   let modalRef;
@@ -39,12 +40,23 @@
       ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
+    const defaults = {
+      ...backdropColor && { backdropColor },
+      ...backgroundColor && { backgroundColor },
+      ...padding && { padding },
+      ...borderRadius && { borderRadius },
+    };
+
     if (index > -1) {
       const config = sortedBreakpointList
         .filter((item, i) => index <= i)
         .reverse()
         // eslint-disable-next-line no-unused-vars
-        .reduce((acc, [key, value]) => ({ ...acc, ...value }), {});
+        .reduce((acc, [key, value]) => ({
+          ...acc,
+          ...defaults,
+          ...value,
+        }), {});
 
       currentBreakPoint = { config, index };
 
@@ -78,21 +90,28 @@
 
         if (!hasCurrentBreakpoint) {
           dialogRef.removeAttribute('style');
-          contentRef.style = toInlineCss({ padding });
-          modalRef.style = toInlineCss({ backgroundColor });
+          contentRef.style = toInlineCss({ padding, backgroundColor, borderRadius });
+          modalRef.style = toInlineCss({ backgroundColor: backdropColor });
 
           return;
         }
 
         const {
+          maxWidth,
+          margin,
+          height,
+          backgroundColor: bgColor,
+          padding: p,
+          borderRadius: br,
+          backdropColor: bdc,
           // eslint-disable-next-line no-unused-vars
-          maxWidth, margin, height, backgroundColor: bgColor, ...rest
+          ...rest
         } = currentBreakPoint.config;
 
-        modalRef.style = toInlineCss({ backgroundColor: backdropColor });
+        modalRef.style = toInlineCss({ backgroundColor: bdc });
         dialogRef.style = toInlineCss({ display: 'flex', justifyContent: 'center', alignItems: 'center' });
         contentRef.style = toInlineCss({
-          maxWidth, height, margin, backgroundColor: bgColor,
+          maxWidth, height, margin, backgroundColor: bgColor, padding: p, borderRadius: br,
         });
       },
     };

@@ -5,10 +5,12 @@
   export let clickOutsideToClose = false;
   export let escapeToClose = true;
   export let breakpoints = {};
-  export let backdropColor;
-  export let backgroundColor;
-  export let padding;
+  export let backdropColor = '';
+  export let backgroundColor = '';
+  export let padding = '';
   export let borderRadius = '';
+  export let maxWidth = '';
+  export let height = '';
 
   let modal;
   let modalRef;
@@ -45,6 +47,8 @@
       ...backgroundColor && { backgroundColor },
       ...padding && { padding },
       ...borderRadius && { borderRadius },
+      ...maxWidth && { maxWidth },
+      ...height && { height },
     };
 
     if (index > -1) {
@@ -97,9 +101,9 @@
         }
 
         const {
-          maxWidth,
+          maxWidth: mw,
           margin,
-          height,
+          height: h,
           backgroundColor: bgColor,
           padding: p,
           borderRadius: br,
@@ -111,7 +115,7 @@
         modalRef.style = toInlineCss({ backgroundColor: bdc });
         dialogRef.style = toInlineCss({ display: 'flex', justifyContent: 'center', alignItems: 'center' });
         contentRef.style = toInlineCss({
-          maxWidth, height, margin, backgroundColor: bgColor, padding: p, borderRadius: br,
+          maxWidth: mw, height: h, margin, backgroundColor: bgColor, padding: p, borderRadius: br,
         });
       },
     };

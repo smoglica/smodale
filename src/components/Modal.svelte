@@ -1,5 +1,6 @@
 <script>
-  import { tick, onDestroy } from 'svelte';
+  import { setContext, tick, onDestroy } from 'svelte';
+  import { get_current_component as getCurrentComponent } from 'svelte/internal';
   import store from '../store';
 
   const {
@@ -28,6 +29,10 @@
   });
 
   onDestroy(unsubscribe);
+
+  const hide = () => store.hide(name);
+
+  setContext({ hide, component: getCurrentComponent() });
 
   const onWindowResize = () => {
     if (!visible) {
@@ -99,11 +104,9 @@
           scrollable,
         } = currentBreakPoint?.config || {};
 
-        modalRef.style = toInlineCss({ backgroundColor: backdropColor });
-
+        modalRef.style.backgroundColor = backdropColor;
         toggleClass(modalRef, 'modal--centered', centered);
         toggleClass(modalRef, 'modal--scrollable', scrollable);
-
         contentRef.style = toInlineCss({
           maxWidth,
           height,

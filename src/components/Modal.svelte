@@ -6,16 +6,16 @@
   const {
     name,
     breakpoints = {},
-    escapeToClose,
-    clickOutsideToClose,
+    escapeToClose = true,
+    clickOutsideToClose = true,
     ...defaults
-} = $$restProps;
+  } = $$restProps;
 
   let modal;
   let modalRef;
   let contentRef;
   let dialogRef;
-  let currentBreakPoint;
+  let currentBreakpoint;
 
   $: visible = !!modal;
   $: sortedBreakpoints = Object.entries(breakpoints)
@@ -31,6 +31,20 @@
   onDestroy(unsubscribe);
 
   const hide = () => store.hide(name);
+  const onModalClick = ({ target }) => {
+    if (target.closest('.js-modal__content')) {
+      return;
+    }
+
+    hide();
+  };
+  const onWindowKeydown = (event) => {
+    if (!event?.keyCode === 27 || event?.key?.toLowerCase() !== 'escape') {
+      return;
+    }
+
+    hide();
+  };
 
   setContext({ hide, component: getCurrentComponent() });
 
@@ -40,24 +54,24 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
-    currentBreakPoint = {
+    currentBreakpoint = {
       index,
       config:
         index > -1
           ? sortedBreakpointList
-            .filter((item, i) => index <= i)
-            .reverse()
-            .reduce(
-              // eslint-disable-next-line no-unused-vars
-              (acc, [key, value]) => ({
-                ...acc,
-                ...value,
-              }),
-              defaults,
-            )
+              .filter((item, i) => index <= i)
+              .reverse()
+              .reduce(
+                // eslint-disable-next-line no-unused-vars
+                (acc, [key, value]) => ({
+                  ...acc,
+                  ...value,
+                }),
+                defaults
+              )
           : defaults,
     };
   };
@@ -69,13 +83,13 @@
 
     return el.classList.remove(className);
   };
-  const toKebabCase = (string) => string
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/\s+/g, '-')
-    .toLowerCase();
-  const toInlineCss = (styles = {}) => Object
-    .entries(styles)
-    .reduce((acc, [key, value]) => {
+  const toKebabCase = (string) =>
+    string
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
+  const toInlineCss = (styles = {}) =>
+    Object.entries(styles).reduce((acc, [key, value]) => {
       const rule = `${toKebabCase(key)}: ${value};`;
 
       if (acc) {
@@ -85,11 +99,19 @@
       return rule;
     }, '');
 
-  const bindStyles = () => {
+  const bindStyles = (el) => {
     onWindowResize();
 
+    if (clickOutsideToClose) {
+      el.addEventListener('click', onModalClick);
+    }
+
+    if (escapeToClose) {
+      window.addEventListener('keydown', onWindowKeydown);
+    }
+
     return {
-      update: async () => {
+      async update() {
         await tick();
 
         const {
@@ -102,7 +124,7 @@
           backdropColor,
           centered,
           scrollable,
-        } = currentBreakPoint?.config || {};
+        } = currentBreakpoint?.config || {};
 
         modalRef.style.backgroundColor = backdropColor;
         toggleClass(modalRef, 'modal--centered', centered);
@@ -116,6 +138,15 @@
           borderRadius,
         });
       },
+      destroy() {
+        if (clickOutsideToClose) {
+          el.removeEventListener('click', onModalClick);
+        }
+
+        if (escapeToClose) {
+          window.removeEventListener('keydown', onWindowKeydown);
+        }
+      },
     };
   };
 </script>
@@ -123,11 +154,11 @@
 <svelte:window on:resize={onWindowResize} />
 
 {#if visible && $$slots.default}
-  <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakPoint }}>
+  <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakpoint }}>
     <div class="modal__dialog" bind:this={dialogRef}>
       <div
         bind:this={contentRef}
-        class="modal__content"
+        class="modal__content js-modal__content"
         role="alertdialog"
         aria-labelledby="modal-title"
         aria-describedby="modal-description"

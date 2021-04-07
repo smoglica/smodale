@@ -48,35 +48,34 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
     currentBreakPoint = {
       config:
         index > -1
           ? sortedBreakpointList
-              .filter((item, i) => index <= i)
-              .reverse()
+            .filter((item, i) => index <= i)
+            .reverse()
+            .reduce(
               // eslint-disable-next-line no-unused-vars
-              .reduce(
-                (acc, [key, value]) => ({
-                  ...acc,
-                  ...value,
-                }),
-                defaults
-              )
+              (acc, [key, value]) => ({
+                ...acc,
+                ...value,
+              }),
+              defaults,
+            )
           : defaults,
       index,
     };
   };
 
-  const toKebabCase = (string) =>
-    string
-      .replace(/([a-z])([A-Z])/g, '$1-$2')
-      .replace(/\s+/g, '-')
-      .toLowerCase();
-  const toInlineCss = (styles = {}) =>
-    Object.entries(styles).reduce((acc, [key, value]) => {
+  const toKebabCase = (string) => string
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+  const toInlineCss = (styles = {}) => Object.entries(styles)
+    .reduce((acc, [key, value]) => {
       const rule = `${toKebabCase(key)}: ${value};`;
 
       if (acc) {

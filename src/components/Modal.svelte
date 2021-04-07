@@ -88,13 +88,13 @@
           centered,
         } = currentBreakPoint?.config || {};
 
-        if (centered) {
-          dialogRef.style = toInlineCss({
+        dialogRef.style = centered
+          ? toInlineCss({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-          });
-        }
+          })
+          : '';
 
         modalRef.style = toInlineCss({ backgroundColor: backdropColor });
         contentRef.style = toInlineCss({
@@ -151,10 +151,5 @@
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  :global(.modal__content > *) {
-    width: inherit;
-    height: inherit;
   }
 </style>

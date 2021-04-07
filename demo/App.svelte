@@ -45,30 +45,28 @@
 </section>
 
 <Modal name="static-modal" {...staticModalProps}>
-  <div>
-    <div class="text-component">
-      <h2>Static modal</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
-        vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
-        reprehenderit reiciendis excepturi culpa!
-      </p>
+  <div class="text-component">
+    <h2>Static modal</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
+      vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
+      reprehenderit reiciendis excepturi culpa!
+    </p>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
-        vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
-        reprehenderit reiciendis excepturi culpa!
-      </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
+      vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
+      reprehenderit reiciendis excepturi culpa!
+    </p>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
-        vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
-        reprehenderit reiciendis excepturi culpa!
-      </p>
-    </div>
-    <div class="flex justify-end gap-xs margin-top-md">
-      <button type="button" class="btn btn--subtle">Cancel</button>
-      <button type="button" class="btn btn--primary" on:click={hideStaticModal}>Ok</button>
-    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
+      vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
+      reprehenderit reiciendis excepturi culpa!
+    </p>
+  </div>
+  <div class="flex justify-end gap-xs margin-top-md">
+    <button type="button" class="btn btn--subtle">Cancel</button>
+    <button type="button" class="btn btn--primary" on:click={hideStaticModal}>Ok</button>
   </div>
 </Modal>

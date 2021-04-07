@@ -13,6 +13,7 @@
         height: 'auto',
         scrollable: true,
         centered: true,
+        zIndex: 100,
       },
       '48rem': {
         maxWidth: '800px',

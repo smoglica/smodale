@@ -8,6 +8,7 @@
     breakpoints = {},
     escapeToClose = true,
     clickOutsideToClose = true,
+    disableBodyScroll = true,
     ...defaults
   } = $$restProps;
 
@@ -23,6 +24,11 @@
     .sort((a, b) => b[2] - a[2])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
+  $: if (visible && disableBodyScroll) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
 
   const unsubscribe = store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
@@ -54,7 +60,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
     currentBreakpoint = {
@@ -62,16 +68,16 @@
       config:
         index > -1
           ? sortedBreakpointList
-              .filter((item, i) => index <= i)
-              .reverse()
-              .reduce(
-                // eslint-disable-next-line no-unused-vars
-                (acc, [key, value]) => ({
-                  ...acc,
-                  ...value,
-                }),
-                defaults
-              )
+            .filter((item, i) => index <= i)
+            .reverse()
+            .reduce(
+              // eslint-disable-next-line no-unused-vars
+              (acc, [key, value]) => ({
+                ...acc,
+                ...value,
+              }),
+              defaults,
+            )
           : defaults,
     };
   };
@@ -83,13 +89,12 @@
 
     return el.classList.remove(className);
   };
-  const toKebabCase = (string) =>
-    string
-      .replace(/([a-z])([A-Z])/g, '$1-$2')
-      .replace(/\s+/g, '-')
-      .toLowerCase();
-  const toInlineCss = (styles = {}) =>
-    Object.entries(styles).reduce((acc, [key, value]) => {
+  const toKebabCase = (string) => string
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+  const toInlineCss = (styles = {}) => Object.entries(styles)
+    .reduce((acc, [key, value]) => {
       const rule = `${toKebabCase(key)}: ${value};`;
 
       if (acc) {
@@ -124,9 +129,10 @@
           backdropColor,
           centered,
           scrollable,
+          zIndex,
         } = currentBreakpoint?.config || {};
 
-        modalRef.style.backgroundColor = backdropColor;
+        modalRef.style = toInlineCss({ zIndex, backgroundColor: backdropColor });
         toggleClass(modalRef, 'modal--centered', centered);
         toggleClass(modalRef, 'modal--scrollable', scrollable);
         contentRef.style = toInlineCss({

@@ -1,14 +1,8 @@
 <script>
-  import { tick } from 'svelte';
+  import { tick, onDestroy } from 'svelte';
   import store from '../store';
 
-  const {
-    name,
-    breakpoints = {},
-    escapeToClose,
-    clickOutsideToClose,
-    ...defaults
-  } = $$restProps;
+  const { name, breakpoints = {}, escapeToClose, clickOutsideToClose, ...defaults } = $$restProps;
 
   let modal;
   let modalRef;
@@ -23,9 +17,11 @@
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
 
-  store.subscribe((modals) => {
+  const unsubscribe = store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
   });
+
+  onDestroy(unsubscribe);
 
   const onWindowResize = () => {
     if (!visible) {
@@ -33,7 +29,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
     currentBreakPoint = {
@@ -41,26 +37,27 @@
       config:
         index > -1
           ? sortedBreakpointList
-            .filter((item, i) => index <= i)
-            .reverse()
-            .reduce(
-              // eslint-disable-next-line no-unused-vars
-              (acc, [key, value]) => ({
-                ...acc,
-                ...value,
-              }),
-              defaults,
-            )
+              .filter((item, i) => index <= i)
+              .reverse()
+              .reduce(
+                // eslint-disable-next-line no-unused-vars
+                (acc, [key, value]) => ({
+                  ...acc,
+                  ...value,
+                }),
+                defaults
+              )
           : defaults,
     };
   };
 
-  const toKebabCase = (string) => string
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/\s+/g, '-')
-    .toLowerCase();
-  const toInlineCss = (styles = {}) => Object.entries(styles)
-    .reduce((acc, [key, value]) => {
+  const toKebabCase = (string) =>
+    string
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
+  const toInlineCss = (styles = {}) =>
+    Object.entries(styles).reduce((acc, [key, value]) => {
       const rule = `${toKebabCase(key)}: ${value};`;
 
       if (acc) {
@@ -90,10 +87,10 @@
 
         dialogRef.style = centered
           ? toInlineCss({
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          })
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            })
           : '';
 
         modalRef.style = toInlineCss({ backgroundColor: backdropColor });
@@ -112,7 +109,7 @@
 
 <svelte:window on:resize={onWindowResize} />
 
-{#if visible}
+{#if visible && $$slots.default}
   <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakPoint }}>
     <div class="modal__dialog" bind:this={dialogRef}>
       <div

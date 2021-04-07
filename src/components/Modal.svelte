@@ -57,6 +57,13 @@
     };
   };
 
+  const toggleClass = (el, className, bool) => {
+    if (bool) {
+      return el.classList.add(className);
+    }
+
+    return el.classList.remove(className);
+  };
   const toKebabCase = (string) => string
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/\s+/g, '-')
@@ -89,17 +96,14 @@
           borderRadius,
           backdropColor,
           centered,
+          scrollable,
         } = currentBreakPoint?.config || {};
 
-        dialogRef.style = centered
-          ? toInlineCss({
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          })
-          : '';
-
         modalRef.style = toInlineCss({ backgroundColor: backdropColor });
+
+        toggleClass(modalRef, 'modal--centered', centered);
+        toggleClass(modalRef, 'modal--scrollable', scrollable);
+
         contentRef.style = toInlineCss({
           maxWidth,
           height,
@@ -154,5 +158,20 @@
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  :global(.modal--scrollable.modal) {
+    overflow-y: auto;
+  }
+
+  :global(.modal--scrollable .modal__dialog) {
+    min-height: 100%;
+    height: auto;
+  }
+
+  :global(.modal--centered .modal__dialog) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

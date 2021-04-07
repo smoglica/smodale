@@ -18,6 +18,7 @@
         margin: 'var(--component-padding)',
         height: 'auto',
         borderRadius: '4px',
+        scrollable: true,
         centered: true,
       },
     },

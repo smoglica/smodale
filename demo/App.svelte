@@ -2,24 +2,23 @@
   import modal, { Modal } from '../src';
 
   const staticModalProps = {
-    padding: '20px',
-    backgroundColor: '#fff',
+    padding: 'var(--component-padding)',
+    backgroundColor: 'var(--color-white)',
     backdropColor: 'rgba(0,0,0,0.6)',
     breakpoints: {
-      '1200px': {
-        maxWidth: '1140px',
-      },
-      '768px': {
-        maxWidth: '800px',
-      },
-      '576px': {
-        backgroundColor: 'var(--color-white)',
+      '32rem': {
         maxWidth: '500px',
         margin: 'var(--component-padding)',
-        height: 'auto',
         borderRadius: '4px',
+        height: 'auto',
         scrollable: true,
         centered: true,
+      },
+      '48rem': {
+        maxWidth: '800px',
+      },
+      '80rem': {
+        maxWidth: '1140px',
       },
     },
   };

@@ -2,16 +2,13 @@
   import { tick } from 'svelte';
   import store from '../store';
 
-  export let clickOutsideToClose = false;
-  export let escapeToClose = true;
-  export let breakpoints = {};
-  export let backdropColor = '';
-  export let backgroundColor = '';
-  export let padding = '';
-  export let borderRadius = '';
-  export let maxWidth = '';
-  export let height = '';
-  export let centered = false;
+  const {
+    name,
+    breakpoints = {},
+    escapeToClose,
+    clickOutsideToClose,
+    ...defaults
+  } = $$restProps;
 
   let modal;
   let modalRef;
@@ -19,24 +16,12 @@
   let dialogRef;
   let currentBreakPoint;
 
-  const { name } = $$props;
-
   $: visible = !!modal;
   $: sortedBreakpoints = Object.entries(breakpoints)
     .map(([key, value]) => [key, value, parseInt(key.replace(/px|em|rem/, ''), 10)])
     .sort((a, b) => b[2] - a[2])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
-  $: hasBreakpoints = !!sortedBreakpointList.length;
-  $: defaults = {
-    ...(backdropColor && { backdropColor }),
-    ...(backgroundColor && { backgroundColor }),
-    ...(padding && { padding }),
-    ...(borderRadius && { borderRadius }),
-    ...(maxWidth && { maxWidth }),
-    ...(height && { height }),
-    ...(centered && { centered }),
-  };
 
   store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
@@ -52,6 +37,7 @@
     );
 
     currentBreakPoint = {
+      index,
       config:
         index > -1
           ? sortedBreakpointList
@@ -66,7 +52,6 @@
               defaults,
             )
           : defaults,
-      index,
     };
   };
 
@@ -92,24 +77,18 @@
       update: async () => {
         await tick();
 
-        if (!hasBreakpoints) {
-          return;
-        }
-
         const {
-          maxWidth: mw,
+          maxWidth,
           margin,
-          height: h,
-          backgroundColor: bgColor,
-          padding: p,
-          borderRadius: br,
-          backdropColor: bdc,
-          centered: c,
-          // eslint-disable-next-line no-unused-vars
-          ...rest
-        } = currentBreakPoint.config;
+          height,
+          backgroundColor,
+          padding,
+          borderRadius,
+          backdropColor,
+          centered,
+        } = currentBreakPoint?.config || {};
 
-        if (c) {
+        if (centered) {
           dialogRef.style = toInlineCss({
             display: 'flex',
             justifyContent: 'center',
@@ -117,14 +96,14 @@
           });
         }
 
-        modalRef.style = toInlineCss({ backgroundColor: bdc });
+        modalRef.style = toInlineCss({ backgroundColor: backdropColor });
         contentRef.style = toInlineCss({
-          maxWidth: mw,
-          height: h,
+          maxWidth,
+          height,
           margin,
-          backgroundColor: bgColor,
-          padding: p,
-          borderRadius: br,
+          backgroundColor,
+          padding,
+          borderRadius,
         });
       },
     };

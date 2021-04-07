@@ -18,6 +18,7 @@
         margin: 'var(--component-padding)',
         height: 'auto',
         borderRadius: '4px',
+        centered: true,
       },
     },
   };

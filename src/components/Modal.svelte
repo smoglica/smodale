@@ -11,6 +11,7 @@
   export let borderRadius = '';
   export let maxWidth = '';
   export let height = '';
+  export let centered = false;
 
   let modal;
   let modalRef;
@@ -27,7 +28,15 @@
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
   $: hasBreakpoints = !!sortedBreakpointList.length;
-  $: hasCurrentBreakpoint = currentBreakPoint && !!Object.keys(currentBreakPoint).length;
+  $: defaults = {
+    ...(backdropColor && { backdropColor }),
+    ...(backgroundColor && { backgroundColor }),
+    ...(padding && { padding }),
+    ...(borderRadius && { borderRadius }),
+    ...(maxWidth && { maxWidth }),
+    ...(height && { height }),
+    ...(centered && { centered }),
+  };
 
   store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
@@ -39,47 +48,43 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
-    const defaults = {
-      ...backdropColor && { backdropColor },
-      ...backgroundColor && { backgroundColor },
-      ...padding && { padding },
-      ...borderRadius && { borderRadius },
-      ...maxWidth && { maxWidth },
-      ...height && { height },
+    currentBreakPoint = {
+      config:
+        index > -1
+          ? sortedBreakpointList
+              .filter((item, i) => index <= i)
+              .reverse()
+              // eslint-disable-next-line no-unused-vars
+              .reduce(
+                (acc, [key, value]) => ({
+                  ...acc,
+                  ...value,
+                }),
+                defaults
+              )
+          : defaults,
+      index,
     };
-
-    if (index > -1) {
-      const config = sortedBreakpointList
-        .filter((item, i) => index <= i)
-        .reverse()
-        // eslint-disable-next-line no-unused-vars
-        .reduce((acc, [key, value]) => ({
-          ...acc,
-          ...defaults,
-          ...value,
-        }), {});
-
-      currentBreakPoint = { config, index };
-
-      return;
-    }
-
-    currentBreakPoint = {};
   };
 
-  const toKebabCase = (string) => string.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
-  const toInlineCss = (styles = {}) => Object.entries(styles).reduce((acc, [key, value]) => {
-    const rule = `${toKebabCase(key)}: ${value};`;
+  const toKebabCase = (string) =>
+    string
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
+  const toInlineCss = (styles = {}) =>
+    Object.entries(styles).reduce((acc, [key, value]) => {
+      const rule = `${toKebabCase(key)}: ${value};`;
 
-    if (acc) {
-      return `${acc} ${rule}`;
-    }
+      if (acc) {
+        return `${acc} ${rule}`;
+      }
 
-    return rule;
-  }, '');
+      return rule;
+    }, '');
 
   const bindStyles = () => {
     onWindowResize();
@@ -92,14 +97,6 @@
           return;
         }
 
-        if (!hasCurrentBreakpoint) {
-          dialogRef.removeAttribute('style');
-          contentRef.style = toInlineCss({ padding, backgroundColor, borderRadius });
-          modalRef.style = toInlineCss({ backgroundColor: backdropColor });
-
-          return;
-        }
-
         const {
           maxWidth: mw,
           margin,
@@ -108,14 +105,27 @@
           padding: p,
           borderRadius: br,
           backdropColor: bdc,
+          centered: c,
           // eslint-disable-next-line no-unused-vars
           ...rest
         } = currentBreakPoint.config;
 
+        if (c) {
+          dialogRef.style = toInlineCss({
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          });
+        }
+
         modalRef.style = toInlineCss({ backgroundColor: bdc });
-        dialogRef.style = toInlineCss({ display: 'flex', justifyContent: 'center', alignItems: 'center' });
         contentRef.style = toInlineCss({
-          maxWidth: mw, height: h, margin, backgroundColor: bgColor, padding: p, borderRadius: br,
+          maxWidth: mw,
+          height: h,
+          margin,
+          backgroundColor: bgColor,
+          padding: p,
+          borderRadius: br,
         });
       },
     };
@@ -125,11 +135,7 @@
 <svelte:window on:resize={onWindowResize} />
 
 {#if visible}
-  <div
-    class="modal"
-    bind:this={modalRef}
-    use:bindStyles={{ currentBreakPoint }}
-  >
+  <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakPoint }}>
     <div class="modal__dialog" bind:this={dialogRef}>
       <div
         bind:this={contentRef}

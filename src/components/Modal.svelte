@@ -9,6 +9,7 @@
     escapeToClose = true,
     clickOutsideToClose = true,
     disableBodyScroll = true,
+    focusOnOpen = true,
     ...defaults
   } = $$restProps;
 
@@ -24,11 +25,9 @@
     .sort((a, b) => b[2] - a[2])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
-  $: if (visible && disableBodyScroll) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
+
+  const getAndSetFocusableElms = () => {};
+  const unsetFocusableElms = () => {};
 
   const unsubscribe = store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
@@ -107,6 +106,14 @@
   const bindStyles = (el) => {
     onWindowResize();
 
+    if (focusOnOpen) {
+      getAndSetFocusableElms();
+    }
+
+    if (disableBodyScroll) {
+      document.body.style.overflow = 'hidden';
+    }
+
     if (clickOutsideToClose) {
       el.addEventListener('click', onModalClick);
     }
@@ -145,6 +152,14 @@
         });
       },
       destroy() {
+        if (disableBodyScroll) {
+          document.body.style.overflow = '';
+        }
+
+        if (focusOnOpen) {
+          unsetFocusableElms();
+        }
+
         if (clickOutsideToClose) {
           el.removeEventListener('click', onModalClick);
         }

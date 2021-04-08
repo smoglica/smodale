@@ -14,9 +14,7 @@
   } = $$restProps;
 
   let modal;
-  let modalRef;
-  let contentRef;
-  let dialogRef;
+  let contentElm;
   let currentBreakpoint;
 
   $: visible = !!modal;
@@ -53,13 +51,13 @@
 
   setContext({ hide, component: getCurrentComponent() });
 
-  const onWindowResize = () => {
+  const updateBreakpoint = () => {
     if (!visible) {
       return;
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
     currentBreakpoint = {
@@ -67,16 +65,16 @@
       config:
         index > -1
           ? sortedBreakpointList
-            .filter((item, i) => index <= i)
-            .reverse()
-            .reduce(
-              // eslint-disable-next-line no-unused-vars
-              (acc, [key, value]) => ({
-                ...acc,
-                ...value,
-              }),
-              defaults,
-            )
+              .filter((item, i) => index <= i)
+              .reverse()
+              .reduce(
+                // eslint-disable-next-line no-unused-vars
+                (acc, [key, value]) => ({
+                  ...acc,
+                  ...value,
+                }),
+                defaults
+              )
           : defaults,
     };
   };
@@ -88,12 +86,13 @@
 
     return el.classList.remove(className);
   };
-  const toKebabCase = (string) => string
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/\s+/g, '-')
-    .toLowerCase();
-  const toInlineCss = (styles = {}) => Object.entries(styles)
-    .reduce((acc, [key, value]) => {
+  const toKebabCase = (string) =>
+    string
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
+  const toInlineCss = (styles = {}) =>
+    Object.entries(styles).reduce((acc, [key, value]) => {
       const rule = `${toKebabCase(key)}: ${value};`;
 
       if (acc) {
@@ -103,15 +102,17 @@
       return rule;
     }, '');
 
-  const bindStyles = (el) => {
-    onWindowResize();
+  const onMount = (node) => {
+    const el = node;
 
-    if (focusOnOpen) {
-      getAndSetFocusableElms();
-    }
+    updateBreakpoint();
 
     if (disableBodyScroll) {
       document.body.style.overflow = 'hidden';
+    }
+
+    if (focusOnOpen) {
+      getAndSetFocusableElms();
     }
 
     if (clickOutsideToClose) {
@@ -139,10 +140,10 @@
           zIndex,
         } = currentBreakpoint?.config || {};
 
-        modalRef.style = toInlineCss({ zIndex, backgroundColor: backdropColor });
-        toggleClass(modalRef, 'modal--centered', centered);
-        toggleClass(modalRef, 'modal--scrollable', scrollable);
-        contentRef.style = toInlineCss({
+        el.style = toInlineCss({ zIndex, backgroundColor: backdropColor });
+        toggleClass(el, 'modal--centered', centered);
+        toggleClass(el, 'modal--scrollable', scrollable);
+        contentElm.style = toInlineCss({
           maxWidth,
           height,
           margin,
@@ -172,13 +173,13 @@
   };
 </script>
 
-<svelte:window on:resize={onWindowResize} />
+<svelte:window on:resize={updateBreakpoint} />
 
 {#if visible && $$slots.default}
-  <div class="modal" bind:this={modalRef} use:bindStyles={{ currentBreakpoint }}>
-    <div class="modal__dialog" bind:this={dialogRef}>
+  <div class="modal" use:onMount={{ currentBreakpoint }}>
+    <div class="modal__dialog">
       <div
-        bind:this={contentRef}
+        bind:this={contentElm}
         class="modal__content js-modal__content"
         role="alertdialog"
         aria-labelledby="modal-title"

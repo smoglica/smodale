@@ -37,6 +37,8 @@
     "rollup-plugin-license": "^2.3.0",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^3.37.0",
+    "svelte-notifications": "^0.9.9",
     "svelte-preprocess": "^4.7.0"
   },
   "keywords": [
@@ -58,9 +60,6 @@
   "lint-staged": {
     "*.{js,css,md,svelte}": "prettier --write",
     "*.{svelte,js}": "eslint --fix --ext .js,.svelte"
-  },
-  "dependencies": {
-    "svelte": "^3.37.0"
   },
   "repository": {
     "type": "git",

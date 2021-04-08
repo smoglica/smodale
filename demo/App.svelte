@@ -29,7 +29,7 @@
 
   const showStaticModal = () => modal.show('static-modal')
     .then(() => notifySuccess('Confirmed'))
-    .catch(() => notifyError('Cancelled'));
+    .catch((payload) => notifyError(`Cancelled ${payload}`));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
 </script>

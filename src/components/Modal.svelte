@@ -1,3 +1,10 @@
+<script context="module">
+  export const ModalDismissReasons = Object.freeze({
+    BACKDROP_CLICK: 'BACKDROP_CLICK',
+    ESC: 'ESC',
+  });
+</script>
+
 <script>
   import { setContext, tick, onDestroy } from 'svelte';
   import { get_current_component as getCurrentComponent } from 'svelte/internal';
@@ -77,14 +84,14 @@
       return;
     }
 
-    cancel();
+    cancel(ModalDismissReasons.BACKDROP_CLICK);
   };
   const onWindowKeydown = (event) => {
     if (!event?.keyCode === 27 || event?.key?.toLowerCase() !== 'escape') {
       return;
     }
 
-    cancel();
+    cancel(ModalDismissReasons.ESC);
   };
   const onModalKeydown = (event) => {
     if (!event?.keyCode === 9 || event?.key?.toLowerCase() !== 'tab') {

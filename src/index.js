@@ -1,5 +1,5 @@
-import Modal from './components/Modal.svelte';
+import Modal, { ModalDismissReasons } from './components/Modal.svelte';
 import store from './store';
 
-export { Modal };
+export { Modal, ModalDismissReasons };
 export default store;

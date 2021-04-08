@@ -16,6 +16,8 @@
   let modal;
   let contentElm;
   let currentBreakpoint;
+  let firstFocusableElm;
+  let lastFocusableElm;
 
   $: visible = !!modal;
   $: sortedBreakpoints = Object.entries(breakpoints)
@@ -24,8 +26,42 @@
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
 
-  const getAndSetFocusableElms = () => {};
-  const unsetFocusableElms = () => {};
+  const getAndSetFocusableElms = (elm) => {
+    const allFocusableElm = [...elm.querySelectorAll(
+      '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
+    )];
+
+    if (!allFocusableElm.length) {
+      return;
+    }
+
+    const elmIsVisible = (element) => element?.offsetWidth
+      || element?.offsetHeight
+      || element?.getClientRects()?.length;
+
+    for (let i = 0; i < allFocusableElm.length; i += 1) {
+      const el = allFocusableElm[i];
+
+      if (elmIsVisible(el)) {
+        firstFocusableElm = el;
+
+        break;
+      }
+    }
+
+    for (let i = allFocusableElm.length - 1; i >= 0; i -= 1) {
+      const el = allFocusableElm[i];
+
+      if (elmIsVisible(el)) {
+        lastFocusableElm = el;
+        break;
+      }
+    }
+
+    if (firstFocusableElm) {
+      firstFocusableElm.focus();
+    }
+  };
 
   const unsubscribe = store.subscribe((modals) => {
     modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
@@ -47,6 +83,23 @@
     }
 
     hide();
+  };
+  const onModalKeydown = (event) => {
+    if (!event?.keyCode === 9 || event?.key?.toLowerCase() !== 'tab') {
+      return;
+    }
+
+    if (firstFocusableElm === document.activeElement && event.shiftKey) {
+      event.preventDefault();
+
+      lastFocusableElm.focus();
+    }
+
+    if (lastFocusableElm === document.activeElement && !event.shiftKey) {
+      event.preventDefault();
+
+      firstFocusableElm.focus();
+    }
   };
 
   setContext({ hide, component: getCurrentComponent() });
@@ -79,12 +132,12 @@
     };
   };
 
-  const toggleClass = (el, className, bool) => {
+  const toggleClass = (elm, className, bool) => {
     if (bool) {
-      return el.classList.add(className);
+      return elm.classList.add(className);
     }
 
-    return el.classList.remove(className);
+    return elm.classList.remove(className);
   };
   const toKebabCase = (string) => string
     .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -102,7 +155,7 @@
     }, '');
 
   const onMount = (node) => {
-    const el = node;
+    const elm = node;
 
     updateBreakpoint();
 
@@ -111,11 +164,12 @@
     }
 
     if (focusOnOpen) {
-      getAndSetFocusableElms();
+      getAndSetFocusableElms(elm);
+      elm.addEventListener('keydown', onModalKeydown);
     }
 
     if (clickOutsideToClose) {
-      el.addEventListener('click', onModalClick);
+      elm.addEventListener('click', onModalClick);
     }
 
     if (escapeToClose) {
@@ -139,9 +193,9 @@
           zIndex,
         } = currentBreakpoint?.config || {};
 
-        el.style = toInlineCss({ zIndex, backgroundColor: backdropColor });
-        toggleClass(el, 'modal--centered', centered);
-        toggleClass(el, 'modal--scrollable', scrollable);
+        elm.style = toInlineCss({ zIndex, backgroundColor: backdropColor });
+        toggleClass(elm, 'modal--centered', centered);
+        toggleClass(elm, 'modal--scrollable', scrollable);
         contentElm.style = toInlineCss({
           maxWidth,
           height,
@@ -157,11 +211,11 @@
         }
 
         if (focusOnOpen) {
-          unsetFocusableElms();
+          elm.removeEventListener('keydown', onModalKeydown);
         }
 
         if (clickOutsideToClose) {
-          el.removeEventListener('click', onModalClick);
+          elm.removeEventListener('click', onModalClick);
         }
 
         if (escapeToClose) {

@@ -26,6 +26,7 @@
 
   const showStaticModal = () => modal.show('static-modal');
   const hideStaticModal = () => modal.hide('static-modal');
+  const cancelStaticModal = () => modal.cancel('static-modal');
 </script>
 
 <section class="margin-y-xl">
@@ -67,7 +68,7 @@
     </p>
   </div>
   <div class="flex justify-end gap-xs margin-top-md">
-    <button type="button" class="btn btn--subtle">Cancel</button>
-    <button type="button" class="btn btn--primary" on:click={hideStaticModal}>Ok</button>
+    <button type="button" class="btn btn--subtle" on:click="{cancelStaticModal}">Cancel</button>
+    <button type="button" class="btn btn--primary" on:click={hideStaticModal}>Confirm</button>
   </div>
 </Modal>

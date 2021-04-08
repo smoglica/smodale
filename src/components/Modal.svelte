@@ -69,20 +69,21 @@
 
   onDestroy(unsubscribe);
 
-  const hide = () => store.hide(name);
+  const hide = (payload) => store.hide(name, payload);
+  const cancel = (payload) => store.cancel(name, payload);
   const onModalClick = ({ target }) => {
     if (target.closest('.js-modal__content')) {
       return;
     }
 
-    hide();
+    cancel();
   };
   const onWindowKeydown = (event) => {
     if (!event?.keyCode === 27 || event?.key?.toLowerCase() !== 'escape') {
       return;
     }
 
-    hide();
+    cancel();
   };
   const onModalKeydown = (event) => {
     if (!event?.keyCode === 9 || event?.key?.toLowerCase() !== 'tab') {
@@ -102,7 +103,7 @@
     }
   };
 
-  setContext({ hide, component: getCurrentComponent() });
+  setContext({ hide, cancel, component: getCurrentComponent() });
 
   const updateBreakpoint = () => {
     if (!visible) {

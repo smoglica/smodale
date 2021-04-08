@@ -1,7 +1,7 @@
 <script>
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
-  import { notifySuccess } from './lib/notifier';
+  import { notifySuccess, notifyError } from './lib/notifier';
   import modal, { Modal } from '../src';
 
   const staticModalProps = {
@@ -27,7 +27,9 @@
     },
   };
 
-  const showStaticModal = () => modal.show('static-modal').then(() => notifySuccess('Confirmed'));
+  const showStaticModal = () => modal.show('static-modal')
+    .then(() => notifySuccess('Confirmed'))
+    .catch(() => notifyError('Cancelled'));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
 </script>

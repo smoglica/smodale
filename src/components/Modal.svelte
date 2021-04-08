@@ -71,6 +71,7 @@
 
   const hide = (payload) => store.hide(name, payload);
   const cancel = (payload) => store.cancel(name, payload);
+  const onUnhandledrejection = (event) => event.preventDefault();
   const onModalClick = ({ target }) => {
     if (target.closest('.js-modal__content')) {
       return;
@@ -177,6 +178,8 @@
       window.addEventListener('keydown', onWindowKeydown);
     }
 
+    window.addEventListener('unhandledrejection', onUnhandledrejection);
+
     return {
       async update() {
         await tick();
@@ -222,6 +225,8 @@
         if (escapeToClose) {
           window.removeEventListener('keydown', onWindowKeydown);
         }
+
+        window.removeEventListener('unhandledrejection', onUnhandledrejection);
       },
     };
   };

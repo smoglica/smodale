@@ -20,7 +20,7 @@ export const notifyWarning = (text, options) => notify(text, {
   type: NotificationTypeEnum.WARNING,
 });
 
-export const notifyDanger = (text, options) => notify(text, {
+export const notifyError = (text, options) => notify(text, {
   ...options,
   type: NotificationTypeEnum.DANGER,
 });

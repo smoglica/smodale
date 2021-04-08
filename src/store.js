@@ -13,6 +13,17 @@ const removeModalByName = (name) => {
     dynamic: modals?.dynamic.filter((m) => m?.props?.name !== name),
   }));
 };
+const resolvePromiseAndRemoveModal = (method, name, payload) => {
+  const modal = getModalByName(name);
+
+  if (!modal) {
+    return;
+  }
+
+  modal[method](payload);
+
+  removeModalByName(name);
+};
 
 const createModalsStore = () => ({
   ...store,
@@ -27,28 +38,10 @@ const createModalsStore = () => ({
     });
   },
   hide(name, payload) {
-    const modal = getModalByName(name);
-
-    if (!modal) {
-      return;
-    }
-
-    modal?.resolve(payload);
-
-    removeModalByName(name);
+    resolvePromiseAndRemoveModal('resolve', name, payload);
   },
   cancel(name, payload) {
-    const modal = getModalByName(name);
-
-    if (!modal) {
-      return;
-    }
-
-    if (payload) {
-      modal?.reject(payload);
-    }
-
-    removeModalByName(name);
+    resolvePromiseAndRemoveModal('reject', name, payload);
   },
 });
 

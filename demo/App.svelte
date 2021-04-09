@@ -27,9 +27,11 @@
     },
   };
 
-  const showStaticModal = () => modal.show('static-modal')
-    .then(() => notifySuccess('Confirmed'))
-    .catch((data) => notify(`Cancelled ${data}`));
+  const showStaticModal = () =>
+    modal
+      .show('static-modal')
+      .then(() => notifySuccess('Confirmed'))
+      .catch((data) => notify(`Cancelled <code>${data}</code>`));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
 </script>
@@ -81,12 +83,28 @@
 </Notifications>
 
 <style>
-  :global([class*="default-position-style-"]) {
+  :root {
+    --font-primary: 'Inter', system-ui, sans-serif;
+  }
+
+  :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
+      monospace;
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  :global(code::before),
+  :global(code::after) {
+    content: '`';
+  }
+
+  :global([class*='default-position-style-']) {
     width: 100% !important;
   }
 
   @media (min-width: 32rem) {
-    :global([class*="default-position-style-"]) {
+    :global([class*='default-position-style-']) {
       width: auto !important;
       max-width: 500px;
     }

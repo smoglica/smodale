@@ -24,16 +24,33 @@ const resolvePromiseAndRemoveModal = (method, name, data) => {
 
   removeModalByName(name);
 };
+const showStaticModal = (name, resolve, reject) => {
+  store.update((modals) => ({
+    static: [...modals?.static, { props: { name }, resolve, reject }],
+    dynamic: modals?.dynamic,
+  }));
+};
 
 const createModalsStore = () => ({
   ...store,
-  show(name) {
+  show(...args) {
+    const [name] = args;
+
+    if (!name) {
+      return Promise;
+    }
+
     return new Promise((resolve, reject) => {
+      const modal = getModalByName(name);
+
+      if (modal) {
+        // eslint-disable-next-line no-console
+        console.error(`[smodal] Modal ${name} already exists. You must provide an unique name.`);
+        return;
+      }
+
       if (typeof name === 'string') {
-        this.update((modals) => ({
-          static: [...modals?.static, { props: { name }, resolve, reject }],
-          dynamic: modals?.dynamic,
-        }));
+        showStaticModal(name, resolve, reject);
       }
     });
   },

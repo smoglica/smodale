@@ -17,6 +17,7 @@
     clickOutsideToClose = true,
     disableBodyScroll = true,
     focusOnOpen = true,
+    focusTrap = true,
     ...defaults
   } = $$restProps;
 
@@ -174,7 +175,10 @@
 
     if (focusOnOpen) {
       getAndSetFocusableElms(elm);
-      elm.addEventListener('keydown', onModalKeydown);
+
+      if (focusTrap) {
+        elm.addEventListener('keydown', onModalKeydown);
+      }
     }
 
     if (clickOutsideToClose) {
@@ -221,7 +225,7 @@
           document.body.style.overflow = '';
         }
 
-        if (focusOnOpen) {
+        if (focusOnOpen && focusTrap) {
           elm.removeEventListener('keydown', onModalKeydown);
         }
 

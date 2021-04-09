@@ -1,7 +1,7 @@
 <script>
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
-  import { notifySuccess, notifyError } from './lib/notifier';
+  import { notifySuccess, notify } from './lib/notifier';
   import modal, { Modal } from '../src';
 
   const staticModalProps = {
@@ -29,7 +29,7 @@
 
   const showStaticModal = () => modal.show('static-modal')
     .then(() => notifySuccess('Confirmed'))
-    .catch((payload) => notifyError(`Cancelled ${payload}`));
+    .catch((data) => notify(`Cancelled ${data}`));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
 </script>
@@ -79,3 +79,16 @@
     </div>
   </Modal>
 </Notifications>
+
+<style>
+  :global([class*="default-position-style-"]) {
+    width: 100% !important;
+  }
+
+  @media (min-width: 32rem) {
+    :global([class*="default-position-style-"]) {
+      width: auto !important;
+      max-width: 500px;
+    }
+  }
+</style>

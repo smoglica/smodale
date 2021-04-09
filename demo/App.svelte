@@ -21,16 +21,14 @@
       '48rem': {
         maxWidth: '800px',
       },
-      '80rem': {
-        maxWidth: '1140px',
-      },
     },
   };
 
-  const showStaticModal = () => modal
-    .show('static-modal')
-    .then(() => notifySuccess('Hide: Confirmed'))
-    .catch((data) => notify(`Cancel: <code>${data}</code>`));
+  const showStaticModal = () =>
+    modal
+      .show('static-modal')
+      .then(() => notifySuccess('Hide: Confirmed'))
+      .catch((data) => notify(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
   const onStaticModalOpened = () => notifySuccess('Event: <code>opened</code>');

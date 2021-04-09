@@ -9,7 +9,7 @@ export const NotificationTypeEnum = Object.freeze({
 export const notify = (text, options) => {
   svelteNotificationsStore.addNotification({
     removeAfter: 4500,
-    position: 'top-center',
+    position: 'bottom-center',
     ...options,
     text,
   });

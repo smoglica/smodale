@@ -43,7 +43,11 @@
       <slot />
     </div>
 
-    <button class="reset alert__close-btn margin-left-sm js-tab-focus" on:click={onRemove}>
+    <button
+      type="button"
+      class="reset alert__close-btn margin-left-sm js-tab-focus"
+      on:click={onRemove}
+    >
       <svg
         class="icon"
         viewBox="0 0 20 20"

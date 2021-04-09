@@ -37,17 +37,18 @@
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
 
   const getAndSetFocusableElms = (elm) => {
-    const allFocusableElm = [...elm.querySelectorAll(
-      '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
-    )];
+    const allFocusableElm = [
+      ...elm.querySelectorAll(
+        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
+      ),
+    ];
 
     if (!allFocusableElm.length) {
       return;
     }
 
     const elmIsVisible = (element) => element?.offsetWidth
-      || element?.offsetHeight
-      || element?.getClientRects()?.length;
+    || element?.offsetHeight || element?.getClientRects()?.length;
 
     for (let i = 0; i < allFocusableElm.length; i += 1) {
       const el = allFocusableElm[i];
@@ -165,6 +166,30 @@
     });
   };
 
+  const throttle = (callback, wait, immediate = false) => {
+    let timeout = null;
+    let initialCall = true;
+
+    return (...args) => {
+      const callNow = immediate && initialCall;
+      const next = () => {
+        callback.apply(this, ...args);
+        timeout = null;
+      };
+
+      if (callNow) {
+        initialCall = false;
+        next();
+      }
+
+      if (!timeout) {
+        timeout = setTimeout(next, wait);
+      }
+    };
+  };
+
+  const onWindowResize = throttle(updateBreakpoint, 120);
+
   const onMount = (elm) => {
     updateBreakpoint();
     emit('opened');
@@ -246,7 +271,7 @@
   };
 </script>
 
-<svelte:window on:resize={updateBreakpoint} />
+<svelte:window on:resize={onWindowResize} />
 
 {#if visible && $$slots.default}
   <div class="modal" use:onMount={{ currentBreakpoint }}>

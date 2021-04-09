@@ -13,14 +13,14 @@ const removeModalByName = (name) => {
     dynamic: modals?.dynamic.filter((m) => m?.props?.name !== name),
   }));
 };
-const resolvePromiseAndRemoveModal = (method, name, payload) => {
+const resolvePromiseAndRemoveModal = (method, name, data) => {
   const modal = getModalByName(name);
 
   if (!modal) {
     return;
   }
 
-  modal[method](payload);
+  modal[method](data);
 
   removeModalByName(name);
 };
@@ -37,11 +37,11 @@ const createModalsStore = () => ({
       }
     });
   },
-  hide(name, payload) {
-    resolvePromiseAndRemoveModal('resolve', name, payload);
+  hide(name, data) {
+    resolvePromiseAndRemoveModal('resolve', name, data);
   },
-  cancel(name, payload) {
-    resolvePromiseAndRemoveModal('reject', name, payload);
+  cancel(name, data) {
+    resolvePromiseAndRemoveModal('reject', name, data);
   },
 });
 

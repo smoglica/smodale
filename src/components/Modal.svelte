@@ -76,8 +76,8 @@
 
   onDestroy(unsubscribe);
 
-  const hide = (payload) => store.hide(name, payload);
-  const cancel = (payload) => store.cancel(name, payload);
+  const hide = (data) => store.hide(name, data);
+  const cancel = (data) => store.cancel(name, data);
   const onUnhandledrejection = (event) => event.preventDefault();
   const onModalClick = ({ target }) => {
     if (target.closest('.js-modal__content')) {

@@ -27,11 +27,10 @@
     },
   };
 
-  const showStaticModal = () =>
-    modal
-      .show('static-modal')
-      .then(() => notifySuccess('Confirmed'))
-      .catch((data) => notify(`Cancelled <code>${data}</code>`));
+  const showStaticModal = () => modal
+    .show('static-modal')
+    .then(() => notifySuccess('Confirmed'))
+    .catch((data) => notify(`Cancelled <code>${data}</code>`));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
 </script>

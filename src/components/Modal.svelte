@@ -7,8 +7,11 @@
 
 <script>
   import {
-    setContext, tick, onDestroy, createEventDispatcher,
-} from 'svelte';
+    setContext,
+    tick,
+    onDestroy,
+    createEventDispatcher,
+  } from 'svelte';
   import { get_current_component as getCurrentComponent } from 'svelte/internal';
   import store from '../store';
 
@@ -80,6 +83,7 @@
 
   onDestroy(unsubscribe);
 
+  const resizeObserverSupported = 'ResizeObserver' in window;
   const emit = createEventDispatcher();
   const hide = (data) => store.hide(name, data);
   const cancel = (data) => store.cancel(name, data);
@@ -188,11 +192,17 @@
     };
   };
 
-  const onWindowResize = throttle(updateBreakpoint, 120);
+  const onWindowResize = throttle(updateBreakpoint, 240);
 
   const onMount = (elm) => {
     updateBreakpoint();
     emit('opened');
+
+    if (resizeObserverSupported) {
+      new ResizeObserver(onWindowResize).observe(elm);
+    } else {
+      window.addEventListener('resize', onWindowResize);
+    }
 
     if (disableBodyScroll) {
       document.body.style.overflow = 'hidden';
@@ -265,13 +275,15 @@
           window.removeEventListener('keydown', onWindowKeydown);
         }
 
+        if (!resizeObserverSupported) {
+          window.removeEventListener('resize', onWindowResize);
+        }
+
         window.removeEventListener('unhandledrejection', onUnhandledrejection);
       },
     };
   };
 </script>
-
-<svelte:window on:resize={onWindowResize} />
 
 {#if visible && $$slots.default}
   <div class="modal" use:onMount={{ currentBreakpoint }}>

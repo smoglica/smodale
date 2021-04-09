@@ -6,7 +6,9 @@
 </script>
 
 <script>
-  import { setContext, tick, onDestroy } from 'svelte';
+  import {
+    setContext, tick, onDestroy, createEventDispatcher,
+} from 'svelte';
   import { get_current_component as getCurrentComponent } from 'svelte/internal';
   import store from '../store';
 
@@ -77,6 +79,7 @@
 
   onDestroy(unsubscribe);
 
+  const emit = createEventDispatcher();
   const hide = (data) => store.hide(name, data);
   const cancel = (data) => store.cancel(name, data);
   const onUnhandledrejection = (event) => event.preventDefault();
@@ -168,6 +171,7 @@
     const elm = node;
 
     updateBreakpoint();
+    emit('opened');
 
     if (disableBodyScroll) {
       document.body.style.overflow = 'hidden';
@@ -221,6 +225,8 @@
         });
       },
       destroy() {
+        emit('closed');
+
         if (disableBodyScroll) {
           document.body.style.overflow = '';
         }

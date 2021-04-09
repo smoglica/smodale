@@ -29,10 +29,12 @@
 
   const showStaticModal = () => modal
     .show('static-modal')
-    .then(() => notifySuccess('Confirmed'))
-    .catch((data) => notify(`Cancelled <code>${data}</code>`));
+    .then(() => notifySuccess('Hide: Confirmed'))
+    .catch((data) => notify(`Cancel: <code>${data}</code>`));
   const hideStaticModal = () => modal.hide('static-modal');
   const cancelStaticModal = () => modal.cancel('static-modal');
+  const onStaticModalOpened = () => notifySuccess('Event: <code>opened</code>');
+  const onStaticModalClosed = () => notifySuccess('Event: <code>closed</code>');
 </script>
 
 <Notifications item={Notification}>
@@ -53,7 +55,12 @@
     </div>
   </section>
 
-  <Modal name="static-modal" {...staticModalProps}>
+  <Modal
+    name="static-modal"
+    {...staticModalProps}
+    on:opened={onStaticModalOpened}
+    on:closed={onStaticModalClosed}
+  >
     <div class="text-component">
       <h2>Static modal</h2>
       <p>
@@ -90,7 +97,6 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
       monospace;
     font-weight: 600;
-    font-size: var(--text-sm);
   }
 
   :global(code::before),
@@ -100,6 +106,7 @@
 
   :global([class*='default-position-style-']) {
     width: 100% !important;
+    z-index: 100;
   }
 
   @media (min-width: 32rem) {

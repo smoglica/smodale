@@ -152,24 +152,20 @@
 
     return elm.classList.remove(className);
   };
-  const toKebabCase = (string) => string
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/\s+/g, '-')
-    .toLowerCase();
-  const toInlineCss = (styles = {}) => Object.entries(styles)
-    .reduce((acc, [key, value]) => {
-      const rule = `${toKebabCase(key)}: ${value};`;
 
-      if (acc) {
-        return `${acc} ${rule}`;
+  const toInlineCss = (elm = {}, styles = {}) => {
+    const el = elm;
+
+    Object.entries(styles).forEach(([key, value]) => {
+      if (!(key in el?.style)) {
+        return;
       }
 
-      return rule;
-    }, '');
+      el.style[key] = value || '';
+    });
+  };
 
-  const onMount = (node) => {
-    const elm = node;
-
+  const onMount = (elm) => {
     updateBreakpoint();
     emit('opened');
 
@@ -212,10 +208,11 @@
           zIndex,
         } = currentBreakpoint?.config || {};
 
-        elm.style = toInlineCss({ zIndex, backgroundColor: backdropColor });
         toggleClass(elm, 'modal--centered', centered);
         toggleClass(elm, 'modal--scrollable', scrollable);
-        contentElm.style = toInlineCss({
+
+        toInlineCss(elm, { zIndex, backgroundColor: backdropColor });
+        toInlineCss(contentElm, {
           maxWidth,
           height,
           margin,

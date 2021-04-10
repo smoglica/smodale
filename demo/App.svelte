@@ -1,6 +1,7 @@
 <script>
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
+  import ModalWithButtons from './components/examples/ModalWithButtons.svelte';
   import { notifySuccess, notifyWarning, notify } from './lib/notifier';
   import modal, { Modal } from '../src';
 
@@ -24,12 +25,11 @@
     },
   };
 
-  const showStaticModal = () => modal
-    .show('static-modal')
-    .then(() => notifySuccess('Hide: Confirmed'))
-    .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
-  const hideStaticModal = () => modal.hide('static-modal');
-  const cancelStaticModal = () => modal.cancel('static-modal');
+  const showStaticModal = () =>
+    modal
+      .show('static-modal')
+      .then(() => notifySuccess('Hide: Confirmed'))
+      .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const onStaticModalOpened = () => notify('Event: <code>opened</code>');
   const onStaticModalClosed = () => notify('Event: <code>closed</code>');
 </script>
@@ -58,30 +58,7 @@
     on:opened={onStaticModalOpened}
     on:closed={onStaticModalClosed}
   >
-    <div class="text-component">
-      <h2>Static modal</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
-        vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
-        reprehenderit reiciendis excepturi culpa!
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
-        vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
-        reprehenderit reiciendis excepturi culpa!
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam quasi iure tenetur doloremque
-        vitae cumque sint iusto, optio laborum ut dolore sequi blanditiis, accusamus qui officiis
-        reprehenderit reiciendis excepturi culpa!
-      </p>
-    </div>
-    <div class="flex justify-end gap-xs margin-top-md">
-      <button type="button" class="btn btn--subtle" on:click={cancelStaticModal}>Cancel</button>
-      <button type="button" class="btn btn--primary" on:click={hideStaticModal}>Confirm</button>
-    </div>
+    <ModalWithButtons />
   </Modal>
 </Notifications>
 

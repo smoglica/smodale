@@ -1,6 +1,6 @@
 import Modal, { ModalDismissReasons } from './components/Modal.svelte';
-import store from './store';
 import { getModalContext } from './context';
+import plugin from './plugin';
 
 export { Modal, ModalDismissReasons, getModalContext };
-export default store;
+export default plugin;

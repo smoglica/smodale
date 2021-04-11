@@ -57,7 +57,7 @@ const showDynamicModal = (
         componentProps,
         componentEvents,
         props: {
-          name: modals.length,
+          name: String(modals.length),
           ...props,
         },
         events,
@@ -89,7 +89,7 @@ const createModalsStore = () => ({
       if (typeof name === 'string') {
         showStaticModal(name, resolve, reject);
       } else if (typeof name === 'function') {
-        showDynamicModal(...[args, resolve, reject]);
+        showDynamicModal(...[...args, resolve, reject]);
       } else {
         error('Invalid name or component');
       }

@@ -1,4 +1,5 @@
 import { writable, get } from 'svelte/store';
+import { error } from './logger';
 
 const store = writable({ static: [], dynamic: [] });
 const getState = () => get(store);
@@ -30,6 +31,7 @@ const showStaticModal = (name, resolve, reject) => {
     dynamic: modals?.dynamic,
   }));
 };
+const showDynamicModal = () => {};
 
 const createModalsStore = () => ({
   ...store,
@@ -37,6 +39,7 @@ const createModalsStore = () => ({
     const [name] = args;
 
     if (!name) {
+      error('name missing');
       return Promise;
     }
 
@@ -44,13 +47,16 @@ const createModalsStore = () => ({
       const modal = getModalByName(name);
 
       if (modal) {
-        // eslint-disable-next-line no-console
-        console.error(`[smodal] Modal ${name} already exists. You must provide an unique name.`);
+        error(`Name ${name} already exists. You must provide an unique one.`);
         return;
       }
 
       if (typeof name === 'string') {
         showStaticModal(name, resolve, reject);
+      } else if (typeof name === 'function') {
+        showDynamicModal(...args);
+      } else {
+        error('Invalid name or component');
       }
     });
   },

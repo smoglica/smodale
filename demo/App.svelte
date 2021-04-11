@@ -25,11 +25,13 @@
     },
   };
 
-  const showStaticModal = () =>
-    modal
-      .show('static-modal')
-      .then(() => notifySuccess('Hide: Confirmed'))
-      .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
+  const showStaticModal = () => modal
+    .show('static-modal')
+    .then(() => notifySuccess('Hide: Confirmed'))
+    .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
+  const showDynamicModal = () => {
+    modal.show(ModalWithButtons);
+  };
   const onStaticModalOpened = () => notify('Event: <code>opened</code>');
   const onStaticModalClosed = () => notify('Event: <code>closed</code>');
 </script>
@@ -47,7 +49,9 @@
         <button type="button" class="btn btn--primary" on:click={showStaticModal}>
           Show a static modal
         </button>
-        <button type="button" class="btn btn--accent">Show a dynamic modal</button>
+        <button type="button" class="btn btn--accent" on:click={showDynamicModal}>
+          Show a dynamic modal
+        </button>
       </div>
     </div>
   </section>

@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { NotificationTypeEnum } from '../lib/notifier';
+  import { NotificationTypeEnum } from 'Demo/lib/notifier';
 
   export let severity;
 

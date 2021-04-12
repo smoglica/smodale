@@ -1,6 +1,6 @@
 <script>
   import { getModalContext } from 'smodale';
-  import arrowLeft from '../../assets/icons/arrow-left.svg';
+  import arrowLeft from 'Demo/assets/icons/arrow-left.svg';
 
   const { cancel } = getModalContext();
 </script>

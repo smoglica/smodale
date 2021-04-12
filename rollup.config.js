@@ -1,4 +1,3 @@
-import { join } from 'path';
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import image from '@rollup/plugin-image';
@@ -9,6 +8,7 @@ import browsersync from 'rollup-plugin-browsersync';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
+const { settings } = require('./.eslintrc');
 const { preprocess } = require('./svelte.config');
 
 export default (argv) => {
@@ -34,7 +34,8 @@ export default (argv) => {
         resolve({ browser: true, dedupe: ['svelte'] }),
         image(),
         alias({
-          entries: [{ find: 'smodale', replacement: join(__dirname, 'src') }],
+          entries: settings['import/resolver'].alias.map
+            .map(([find, replacement]) => ({ find, replacement })),
         }),
         demo && terser(),
         !demo

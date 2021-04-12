@@ -1,6 +1,6 @@
 <script>
   import { slide } from 'svelte/transition';
-  import Alert from './Alert.svelte';
+  import Alert from 'Demo/components/Alert.svelte';
 
   const { notification = {}, onRemove = () => ({}) } = $$restProps;
 </script>

@@ -30,6 +30,7 @@ module.exports = {
       alias: {
         map: [
           ['smodale', join(__dirname, 'src')],
+          ['Demo', join(__dirname, 'demo')],
         ],
       },
     },

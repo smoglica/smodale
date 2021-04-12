@@ -29,10 +29,11 @@
 
   const closed = () => notify('Event: <code>opened</code>');
   const opened = () => notify('Event: <code>closed</code>');
-  const showStaticModal = () => smodale
-    .show('example')
-    .then(() => notifySuccess('Hide: Confirmed'))
-    .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
+  const showStaticModal = () =>
+    smodale
+      .show('example')
+      .then(() => notifySuccess('Hide: Confirmed'))
+      .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
     smodale.show(ModalWithModal, null, modalProps, { closed, opened });
   };
@@ -58,11 +59,7 @@
     </div>
   </section>
 
-  <Modal
-    {...modalProps}
-    on:opened={opened}
-    on:closed={closed}
-  >
+  <Modal {...modalProps} on:opened={opened} on:closed={closed}>
     <ModalWithButtons />
   </Modal>
 </Notifications>

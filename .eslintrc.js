@@ -13,12 +13,18 @@ module.exports = {
   },
   overrides: [
     {
+      files: ['*'],
+      excludedFiles: ['*.svelte'],
+      extends: ['plugin:prettier/recommended'],
+    },
+    {
       files: ['*.svelte'],
       processor: 'svelte3/svelte3',
       rules: {
         'import/no-mutable-exports': 'off',
         'import/prefer-default-export': 'off',
         'import/first': 'off',
+        'implicit-arrow-linebreak': 'off',
       },
     },
   ],

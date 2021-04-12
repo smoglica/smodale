@@ -23,61 +23,61 @@ export default (argv) => {
 
   return watch || demo
     ? {
-      input: 'demo/main',
-      output: {
-        sourcemap: true,
-        format: 'iife',
-        name: 'app',
-        file: 'public/bundle.js',
-      },
-      plugins: [
-        svelte({ preprocess, compilerOptions: { dev: !demo } }),
-        css({ output: 'bundle.css' }),
-        resolve({
-          browser: true,
-          dedupe: ['svelte'],
-          extensions,
-        }),
-        image(),
-        alias({
-          entries: aliases.map(([find, replacement]) => ({ find, replacement })),
-        }),
-        demo && terser(),
-        !demo
-            && browsersync({
+        input: 'demo/main',
+        output: {
+          sourcemap: true,
+          format: 'iife',
+          name: 'app',
+          file: 'public/bundle.js',
+        },
+        plugins: [
+          svelte({ preprocess, compilerOptions: { dev: !demo } }),
+          css({ output: 'bundle.css' }),
+          resolve({
+            browser: true,
+            dedupe: ['svelte'],
+            extensions,
+          }),
+          image(),
+          alias({
+            entries: aliases.map(([find, replacement]) => ({ find, replacement })),
+          }),
+          demo && terser(),
+          !demo &&
+            browsersync({
               server: 'public',
               port: 5000,
               open: false,
               files: ['public/index.html'],
             }),
-      ].filter(Boolean),
-    }
+        ].filter(Boolean),
+      }
     : {
-      input: 'src',
-      output: [
-        { file: pkg.module, format: 'es', exports: 'named' },
-        {
-          file: pkg.main,
-          format: 'umd',
-          name,
-          exports: 'named',
-        },
-      ],
-      plugins: [
-        svelte({ preprocess }),
-        css({ output: 'smodale.min.css' }),
-        resolve(),
-        license({
-          banner: {
-            commentStyle: 'ignored',
-            content: `
+        input: 'src',
+        output: [
+          { file: pkg.module, format: 'es', exports: 'named' },
+          {
+            file: pkg.main,
+            format: 'umd',
+            name,
+            exports: 'named',
+          },
+        ],
+        plugins: [
+          svelte({ preprocess }),
+          css({ output: 'smodale.min.css' }),
+          resolve(),
+          license({
+            banner: {
+              commentStyle: 'ignored',
+              content: `
               @package <%= pkg.name %>
               @author  <%= pkg.author.name %> <<%= pkg.author.email %>>
               @version <%= pkg.version %>
               @build   <%= moment().format('LLLL') %>
           `,
-          },
-        }),
-      ],
-    };
+            },
+          }),
+        ],
+      };
 };

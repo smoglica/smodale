@@ -44,8 +44,13 @@ export default (argv) => {
     : {
       input: 'src',
       output: [
-        { file: pkg.module, format: 'es' },
-        { file: pkg.main, format: 'umd', name },
+        { file: pkg.module, format: 'es', exports: 'named' },
+        {
+          file: pkg.main,
+          format: 'umd',
+          name,
+          exports: 'named',
+        },
       ],
       plugins: [
         svelte({ preprocess }),

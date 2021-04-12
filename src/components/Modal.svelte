@@ -6,9 +6,7 @@
 </script>
 
 <script>
-  import {
-    setContext, tick, onDestroy, createEventDispatcher,
-} from 'svelte';
+  import { setContext, tick, createEventDispatcher } from 'svelte';
   import { get_current_component as getCurrentComponent } from 'svelte/internal';
   import store from '../store';
   import context from '../context';
@@ -27,13 +25,12 @@
     ...defaults
   } = $$restProps;
 
-  let modal;
   let contentElm;
   let currentBreakpoint;
   let firstFocusableElm;
   let lastFocusableElm;
 
-  $: visible = !!modal;
+  $: modal = [...$store.dynamic, ...$store.static].find((m) => m?.props?.name === name);
   $: sortedBreakpoints = Object.entries(breakpoints)
     .map(([key, value]) => [key, value, parseInt(key.replace(/px|em|rem/, ''), 10)])
     .sort((a, b) => b[2] - a[2])
@@ -53,7 +50,7 @@
     }
 
     const elmIsVisible = (element) => element?.offsetWidth
-      || element?.offsetHeight || element?.getClientRects()?.length;
+    || element?.offsetHeight || element?.getClientRects()?.length;
 
     for (let i = 0; i < allFocusableElm.length; i += 1) {
       const el = allFocusableElm[i];
@@ -78,12 +75,6 @@
       firstFocusableElm.focus();
     }
   };
-
-  const unsubscribe = store.subscribe((modals) => {
-    modal = [...modals?.static, ...modals?.dynamic].find((m) => m?.props?.name === name);
-  });
-
-  onDestroy(unsubscribe);
 
   const resizeObserverSupported = 'ResizeObserver' in window;
   const emit = createEventDispatcher();
@@ -125,7 +116,7 @@
   setContext(context, { hide, cancel, component: getCurrentComponent() });
 
   const updateBreakpoint = () => {
-    if (!visible) {
+    if (!modal) {
       return;
     }
 
@@ -289,7 +280,7 @@
   };
 </script>
 
-{#if visible && $$slots.default}
+{#if modal && $$slots.default}
   <div
     class={`modal${classList}`}
     use:onMount={{ currentBreakpoint }}

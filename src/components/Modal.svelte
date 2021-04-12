@@ -284,14 +284,13 @@
 </script>
 
 {#if visible && $$slots.default}
-  <div class="modal" use:onMount={{ currentBreakpoint }}>
+  <div class="modal" use:onMount={{ currentBreakpoint }} data-name={name}>
     <div class="modal__dialog">
       <div
         bind:this={contentElm}
         class="modal__content js-modal__content"
         role="alertdialog"
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
+        aria-expanded="true"
       >
         <slot />
       </div>

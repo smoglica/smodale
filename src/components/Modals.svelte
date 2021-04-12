@@ -5,8 +5,8 @@
 
 <div class="js-modals">
   {#each $modals?.dynamic as modal (modal?.props?.name)}
-    <Modal {...modal?.props}>
-      <svelte:component this={modal?.component} />
+    <Modal {...modal?.props} on:opened={modal?.events?.opened} on:closed={modal?.events?.closed}>
+      <svelte:component this={modal?.component} {...modal?.componentProps} />
     </Modal>
   {/each}
 </div>

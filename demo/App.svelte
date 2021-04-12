@@ -23,15 +23,15 @@
     },
   };
 
+  const closed = () => notify('Event: <code>opened</code>');
+  const opened = () => notify('Event: <code>closed</code>');
   const showStaticModal = () => smodale
     .show('static-modal')
     .then(() => notifySuccess('Hide: Confirmed'))
     .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
-    smodale.show(ModalWithModal, null, null, modalProps);
+    smodale.show(ModalWithModal, null, modalProps, { closed, opened });
   };
-  const onStaticModalOpened = () => notify('Event: <code>opened</code>');
-  const onStaticModalClosed = () => notify('Event: <code>closed</code>');
 </script>
 
 <Notifications item={Notification}>
@@ -57,8 +57,8 @@
   <Modal
     name="static-modal"
     {...modalProps}
-    on:opened={onStaticModalOpened}
-    on:closed={onStaticModalClosed}
+    on:opened={opened}
+    on:closed={closed}
   >
     <ModalWithButtons />
   </Modal>

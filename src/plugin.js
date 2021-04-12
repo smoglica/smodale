@@ -102,10 +102,12 @@ export default {
         return;
       }
 
+      const baseArgs = [resolve, reject, this.hide, this.cancel];
+
       if (typeof name === 'string') {
-        showStaticModal(name, resolve, reject, this.hide, this.cancel);
+        showStaticModal(name, ...baseArgs);
       } else if (typeof name === 'function') {
-        showDynamicModal(...[resolve, reject, this.hide, this.cancel, ...args]);
+        showDynamicModal(...baseArgs, ...args);
       } else {
         error('Invalid name or component');
       }

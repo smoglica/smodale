@@ -1,5 +1,6 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import image from '@rollup/plugin-image';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
 import browsersync from 'rollup-plugin-browsersync';
@@ -29,6 +30,7 @@ export default (argv) => {
         svelte({ preprocess, compilerOptions: { dev: !demo } }),
         css({ output: 'bundle.css' }),
         resolve({ browser: true, dedupe: ['svelte'] }),
+        image(),
         demo && terser(),
         !demo
             && browsersync({

@@ -1,0 +1,14 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="48"
+  height="48"
+  viewBox="0 0 48 48"
+>
+  <g transform="translate(0, 0)">
+    <path
+      d="M45,22H8.828l9.879-9.879a1,1,0,0,0,0-1.414L17.293,9.293a1,1,0,0,0-1.414,0l-14,14a1,1,0,0,0,0,1.414l14,14a1,1,0,0,0,1.414,0l1.414-1.414a1,1,0,0,0,0-1.414L8.828,26H45a1,1,0,0,0,1-1V23A1,1,0,0,0,45,22Z"
+      fill="currentColor"
+    ></path>
+  </g>
+</svg>

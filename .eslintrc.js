@@ -28,6 +28,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
+        extensions: ['.svelte', '.js'],
         map: [
           ['smodale', join(__dirname, 'src')],
           ['Demo', join(__dirname, 'demo')],

@@ -11,6 +11,8 @@ import pkg from './package.json';
 const { settings } = require('./.eslintrc');
 const { preprocess } = require('./svelte.config');
 
+const { extensions, map: aliases } = settings['import/resolver'].alias;
+
 export default (argv) => {
   const watch = process.env.ROLLUP_WATCH || argv.watch;
   const demo = process.env.demo || false;
@@ -31,11 +33,14 @@ export default (argv) => {
       plugins: [
         svelte({ preprocess, compilerOptions: { dev: !demo } }),
         css({ output: 'bundle.css' }),
-        resolve({ browser: true, dedupe: ['svelte'] }),
+        resolve({
+          browser: true,
+          dedupe: ['svelte'],
+          extensions,
+        }),
         image(),
         alias({
-          entries: settings['import/resolver'].alias.map
-            .map(([find, replacement]) => ({ find, replacement })),
+          entries: aliases.map(([find, replacement]) => ({ find, replacement })),
         }),
         demo && terser(),
         !demo

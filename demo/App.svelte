@@ -2,6 +2,7 @@
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
   import ModalWithButtons from './components/examples/ModalWithButtons.svelte';
+  import ModalWithCloseBtnInHeader from './components/examples/ModalWithCloseBtnInHeader.svelte';
   import { notifySuccess, notifyWarning, notify } from './lib/notifier';
   import modal, { Modal } from '../src';
 
@@ -30,7 +31,7 @@
     .then(() => notifySuccess('Hide: Confirmed'))
     .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
-    modal.show(ModalWithButtons, null, null, modalProps);
+    modal.show(ModalWithCloseBtnInHeader, null, null, modalProps);
   };
   const onStaticModalOpened = () => notify('Event: <code>opened</code>');
   const onStaticModalClosed = () => notify('Event: <code>closed</code>');

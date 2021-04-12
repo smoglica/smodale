@@ -48,25 +48,29 @@ const showDynamicModal = (
     new Modals({ target: document.body });
   }
 
-  store.update((modals) => ({
-    static: modals?.static,
-    dynamic: [
-      ...modals?.dynamic,
-      {
-        component,
-        componentProps,
-        props: {
-          name: String(modals?.dynamic?.length),
-          ...props,
+  store.update((modals) => {
+    const prefix = props?.name || 'modal';
+
+    return {
+      static: modals?.static,
+      dynamic: [
+        ...modals?.dynamic,
+        {
+          component,
+          componentProps,
+          props: {
+            ...props,
+            name: `${prefix}-${modals?.dynamic?.length}`,
+          },
+          events,
+          resolve,
+          reject,
+          hide,
+          cancel,
         },
-        events,
-        resolve,
-        reject,
-        hide,
-        cancel,
-      },
-    ],
-  }));
+      ],
+    };
+  });
 };
 
 const resolvePromiseAndRemoveModal = (method, name, data) => {

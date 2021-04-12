@@ -8,6 +8,7 @@
   import smodale, { Modal } from '../src';
 
   const modalProps = {
+    name: 'example',
     padding: 'var(--component-padding)',
     transition: fade,
     transitionParams: { duration: 150 },
@@ -29,7 +30,7 @@
   const closed = () => notify('Event: <code>opened</code>');
   const opened = () => notify('Event: <code>closed</code>');
   const showStaticModal = () => smodale
-    .show('static-modal')
+    .show('example')
     .then(() => notifySuccess('Hide: Confirmed'))
     .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
@@ -58,7 +59,6 @@
   </section>
 
   <Modal
-    name="static-modal"
     {...modalProps}
     on:opened={opened}
     on:closed={closed}

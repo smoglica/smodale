@@ -2,23 +2,20 @@
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
   import ModalWithButtons from './components/examples/ModalWithButtons.svelte';
-  import ModalWithCloseBtnInHeader from './components/examples/ModalWithCloseBtnInHeader.svelte';
+  import ModalWithModal from './components/examples/ModalWithModal.svelte';
   import { notifySuccess, notifyWarning, notify } from './lib/notifier';
   import modal, { Modal } from '../src';
 
   const modalProps = {
     padding: 'var(--component-padding)',
-    backgroundColor: 'var(--color-white)',
-    backdropColor: 'rgba(0,0,0,0.6)',
     breakpoints: {
       '32rem': {
         maxWidth: '500px',
         margin: 'var(--component-padding)',
-        borderRadius: '4px',
+        borderRadius: 'var(--radius-md)',
         height: 'auto',
         scrollable: true,
         centered: true,
-        zIndex: 100,
       },
       '48rem': {
         maxWidth: '800px',
@@ -31,7 +28,7 @@
     .then(() => notifySuccess('Hide: Confirmed'))
     .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
-    modal.show(ModalWithCloseBtnInHeader, null, null, modalProps);
+    modal.show(ModalWithModal, null, null, modalProps);
   };
   const onStaticModalOpened = () => notify('Event: <code>opened</code>');
   const onStaticModalClosed = () => notify('Event: <code>closed</code>');

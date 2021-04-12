@@ -232,13 +232,13 @@
           maxWidth,
           margin,
           height,
-          backgroundColor,
-          padding,
+          backgroundColor = '#fff',
+          padding = '20px',
           borderRadius,
-          backdropColor,
+          backdropColor = 'rgba(0, 0, 0, 0.6)',
           centered,
           scrollable,
-          zIndex,
+          zIndex = '50',
         } = currentBreakpoint?.config || {};
 
         toggleClass(elm, 'modal--centered', centered);
@@ -306,7 +306,6 @@
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 50;
   }
 
   .modal__dialog {

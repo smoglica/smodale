@@ -4,9 +4,9 @@
 </script>
 
 <div class="js-modals">
-  {#each $modals.dynamic as modal (modal.props.name)}
-    <Modal {...modal.props}>
-      <svelte:component this={modal.component} />
+  {#each $modals?.dynamic as modal (modal?.props?.name)}
+    <Modal {...modal?.props}>
+      <svelte:component this={modal?.component} />
     </Modal>
   {/each}
 </div>

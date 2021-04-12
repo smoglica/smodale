@@ -277,7 +277,7 @@
           window.removeEventListener('resize', onWindowResize);
         }
 
-        window.removeEventListener('unhandledrejection', onUnhandledrejection);
+        setTimeout(() => window.removeEventListener('unhandledrejection', onUnhandledrejection));
       },
     };
   };

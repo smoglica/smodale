@@ -1,19 +1,23 @@
 <script>
-  import Modal from '../../../src/components/Modal.svelte';
   import ModalWithTextOnly from './ModalWithTextOnly.svelte';
-  import modal from '../../../src';
+  import smodale from '../../../src';
 
-  const onClick = () => modal.show('modal-with-text');
-  const modalProps = {
+  const onClick = () => smodale.show(ModalWithTextOnly, null, null, {
     padding: 'var(--component-padding)',
+    backdropColor: 'transparent',
     breakpoints: {
       '32rem': {
         borderRadius: 'var(--radius-md)',
         margin: 'var(--component-padding)',
         maxWidth: '500px',
+        centered: true,
+        scrollable: true,
+      },
+      '48rem': {
+        maxWidth: '800px',
       },
     },
-  };
+  });
 </script>
 
 <div class="text-component">
@@ -24,7 +28,3 @@
   </p>
   <button class="btn btn--primary" type="button" on:click={onClick}>Show nested modal</button>
 </div>
-
-<Modal name="modal-with-text" {...modalProps}>
-  <ModalWithTextOnly />
-</Modal>

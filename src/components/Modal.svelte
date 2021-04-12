@@ -236,6 +236,7 @@
           padding = '20px',
           borderRadius,
           backdropColor = 'rgba(0, 0, 0, 0.6)',
+          boxShadow,
           centered,
           scrollable,
           zIndex = '50',
@@ -252,6 +253,7 @@
           backgroundColor,
           padding,
           borderRadius,
+          boxShadow,
         });
       },
       destroy() {

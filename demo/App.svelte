@@ -4,7 +4,7 @@
   import ModalWithButtons from './components/examples/ModalWithButtons.svelte';
   import ModalWithModal from './components/examples/ModalWithModal.svelte';
   import { notifySuccess, notifyWarning, notify } from './lib/notifier';
-  import modal, { Modal } from '../src';
+  import smodale, { Modal } from '../src';
 
   const modalProps = {
     padding: 'var(--component-padding)',
@@ -23,12 +23,12 @@
     },
   };
 
-  const showStaticModal = () => modal
+  const showStaticModal = () => smodale
     .show('static-modal')
     .then(() => notifySuccess('Hide: Confirmed'))
     .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
-    modal.show(ModalWithModal, null, null, modalProps);
+    smodale.show(ModalWithModal, null, null, modalProps);
   };
   const onStaticModalOpened = () => notify('Event: <code>opened</code>');
   const onStaticModalClosed = () => notify('Event: <code>closed</code>');

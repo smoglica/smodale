@@ -205,7 +205,7 @@
     }
 
     if (disableBodyScroll) {
-      document.body.style.overflow = 'hidden';
+      toInlineCss(document.body, { overflow: 'hidden' });
     }
 
     if (focusOnOpen) {
@@ -262,7 +262,7 @@
         emit('closed');
 
         if (disableBodyScroll) {
-          document.body.style.overflow = '';
+          toInlineCss(document.body, { overflow: '' });
         }
 
         if (focusOnOpen && focusTrap) {

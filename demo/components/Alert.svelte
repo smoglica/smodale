@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { NotificationTypeEnum } from 'Demo/lib/notifier';
+  import eRemove from 'Demo/assets/icons/e-remove.svg';
 
   export let severity;
 
@@ -48,19 +49,7 @@
       class="reset alert__close-btn margin-left-sm js-tab-focus"
       on:click={onRemove}
     >
-      <svg
-        class="icon"
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      >
-        <title>Close alert</title>
-        <line x1="3" y1="3" x2="17" y2="17" />
-        <line x1="17" y1="3" x2="3" y2="17" />
-      </svg>
+      <img class="height-sm width-sm block" src={eRemove} alt="Close" />
     </button>
   </div>
 </div>
@@ -82,10 +71,6 @@
     display: inline-block;
     flex-shrink: 0;
     transition: 0.2s;
-  }
-
-  .alert__close-btn .icon {
-    display: block;
   }
 
   .alert__close-btn:hover {

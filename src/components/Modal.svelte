@@ -15,6 +15,8 @@
 
   const {
     name,
+    transition = () => null,
+    transitionParams = {},
     breakpoints = {},
     escapeToClose = true,
     clickOutsideToClose = true,
@@ -288,7 +290,12 @@
 </script>
 
 {#if visible && $$slots.default}
-  <div class={`modal${classList}`} use:onMount={{ currentBreakpoint }} data-name={name}>
+  <div
+    class={`modal${classList}`}
+    use:onMount={{ currentBreakpoint }}
+    data-name={name}
+    transition:transition={transitionParams}
+  >
     <div class="modal__dialog">
       <div
         bind:this={contentElm}

@@ -1,4 +1,5 @@
 <script>
+  import { fade } from 'svelte/transition';
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
   import ModalWithButtons from './components/examples/ModalWithButtons.svelte';
@@ -8,6 +9,8 @@
 
   const modalProps = {
     padding: 'var(--component-padding)',
+    transition: fade,
+    transitionParams: { duration: 150 },
     breakpoints: {
       '32rem': {
         maxWidth: '500px',

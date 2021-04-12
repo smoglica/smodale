@@ -56,7 +56,7 @@ const showDynamicModal = (
         component,
         componentProps,
         props: {
-          name: String(modals?.dynamic.length),
+          name: String(modals?.dynamic?.length),
           ...props,
         },
         events,

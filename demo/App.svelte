@@ -5,7 +5,7 @@
   import { notifySuccess, notifyWarning, notify } from './lib/notifier';
   import modal, { Modal } from '../src';
 
-  const staticModalProps = {
+  const modalProps = {
     padding: 'var(--component-padding)',
     backgroundColor: 'var(--color-white)',
     backdropColor: 'rgba(0,0,0,0.6)',
@@ -30,7 +30,7 @@
     .then(() => notifySuccess('Hide: Confirmed'))
     .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
   const showDynamicModal = () => {
-    modal.show(ModalWithButtons);
+    modal.show(ModalWithButtons, null, null, modalProps);
   };
   const onStaticModalOpened = () => notify('Event: <code>opened</code>');
   const onStaticModalClosed = () => notify('Event: <code>closed</code>');
@@ -58,7 +58,7 @@
 
   <Modal
     name="static-modal"
-    {...staticModalProps}
+    {...modalProps}
     on:opened={onStaticModalOpened}
     on:closed={onStaticModalClosed}
   >

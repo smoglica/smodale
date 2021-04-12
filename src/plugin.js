@@ -32,15 +32,15 @@ const showStaticModal = (name, resolve, reject, hide, cancel) => {
 };
 
 const showDynamicModal = (
+  resolve,
+  reject,
+  hide,
+  cancel,
   component,
   componentProps,
   componentEvents,
   props,
   events,
-  resolve,
-  reject,
-  hide,
-  cancel,
 ) => {
   const modalsElm = document.getElementsByClassName('js-modals')[0];
 
@@ -103,7 +103,7 @@ export default {
       if (typeof name === 'string') {
         showStaticModal(name, resolve, reject, this.hide, this.cancel);
       } else if (typeof name === 'function') {
-        showDynamicModal(...[...args, resolve, reject, this.hide, this.cancel]);
+        showDynamicModal(...[resolve, reject, this.hide, this.cancel, ...args]);
       } else {
         error('Invalid name or component');
       }

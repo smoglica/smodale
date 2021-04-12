@@ -1,6 +1,6 @@
 <script>
+  import smodale from 'smodale';
   import ModalWithTextOnly from './ModalWithTextOnly.svelte';
-  import smodale from '../../../src';
 
   const onClick = () => smodale.show(ModalWithTextOnly, null, {
     padding: 'var(--component-padding)',

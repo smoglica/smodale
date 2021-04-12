@@ -1,5 +1,5 @@
 <script>
-  import { getModalContext } from '../../../src';
+  import { getModalContext } from 'smodale';
   import arrowLeft from '../../assets/icons/arrow-left.svg';
 
   const { cancel } = getModalContext();

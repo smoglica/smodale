@@ -1,5 +1,5 @@
 <script>
-  import { getModalContext } from '../../../src';
+  import { getModalContext } from 'smodale';
 
   const { hide, cancel } = getModalContext();
 </script>

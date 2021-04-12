@@ -1,6 +1,8 @@
+import { join } from 'path';
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import image from '@rollup/plugin-image';
+import alias from '@rollup/plugin-alias';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
 import browsersync from 'rollup-plugin-browsersync';
@@ -31,6 +33,9 @@ export default (argv) => {
         css({ output: 'bundle.css' }),
         resolve({ browser: true, dedupe: ['svelte'] }),
         image(),
+        alias({
+          entries: [{ find: 'smodale', replacement: join(__dirname, 'src') }],
+        }),
         demo && terser(),
         !demo
             && browsersync({

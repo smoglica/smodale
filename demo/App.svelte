@@ -1,11 +1,11 @@
 <script>
   import { fade } from 'svelte/transition';
+  import smodale, { Modal } from 'smodale';
   import Notifications from 'svelte-notifications';
   import Notification from './components/Notification.svelte';
   import ModalWithButtons from './components/examples/ModalWithButtons.svelte';
   import ModalWithModal from './components/examples/ModalWithModal.svelte';
   import { notifySuccess, notifyWarning, notify } from './lib/notifier';
-  import smodale, { Modal } from '../src';
 
   const modalProps = {
     name: 'example',

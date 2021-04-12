@@ -1,6 +1,6 @@
 <script>
+  import { getModalContext } from 'smodale';
   import eRemove from '../../assets/icons/e-remove.svg';
-  import { getModalContext } from '../../../src';
 
   const { cancel } = getModalContext();
 </script>

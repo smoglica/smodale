@@ -6,7 +6,9 @@
 </script>
 
 <script>
-  import { setContext, tick, onDestroy, createEventDispatcher } from 'svelte';
+  import {
+    setContext, tick, onDestroy, createEventDispatcher,
+} from 'svelte';
   import { get_current_component as getCurrentComponent } from 'svelte/internal';
   import store from '../store';
   import context from '../context';
@@ -38,7 +40,7 @@
   const getAndSetFocusableElms = (elm) => {
     const allFocusableElm = [
       ...elm.querySelectorAll(
-        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary'
+        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
       ),
     ];
 
@@ -46,8 +48,8 @@
       return;
     }
 
-    const elmIsVisible = (element) =>
-      element?.offsetWidth || element?.offsetHeight || element?.getClientRects()?.length;
+    const elmIsVisible = (element) => element?.offsetWidth
+      || element?.offsetHeight || element?.getClientRects()?.length;
 
     for (let i = 0; i < allFocusableElm.length; i += 1) {
       const el = allFocusableElm[i];
@@ -124,7 +126,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
     currentBreakpoint = {
@@ -132,16 +134,16 @@
       config:
         index > -1
           ? sortedBreakpointList
-              .filter((item, i) => index <= i)
-              .reverse()
-              .reduce(
-                // eslint-disable-next-line no-unused-vars
-                (acc, [key, value]) => ({
-                  ...acc,
-                  ...value,
-                }),
-                defaults
-              )
+            .filter((item, i) => index <= i)
+            .reverse()
+            .reduce(
+              // eslint-disable-next-line no-unused-vars
+              (acc, [key, value]) => ({
+                ...acc,
+                ...value,
+              }),
+              defaults,
+            )
           : defaults,
     };
   };

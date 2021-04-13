@@ -1,8 +1,7 @@
 <script>
   import { fade } from 'svelte/transition';
   import smodale, { Modal } from 'smodale';
-  import Notifications from 'svelte-notifications';
-  import Notification from 'Demo/components/atoms/Notification';
+  import Notifications from 'Demo/components/molecules/Notifications';
   import ModalWithButtons from 'Demo/components/examples/ModalWithButtons';
   import ModalWithModal from 'Demo/components/examples/ModalWithModal';
   import SidebarLayout from 'Demo/components/templates/SidebarLayout';
@@ -40,9 +39,9 @@
   };
 </script>
 
-<Notifications item={Notification}>
+<Notifications>
   <SidebarLayout>
-    <div slot="aside">Sidebar content</div>
+    <svelte:fragment slot="aside">Sidebar content</svelte:fragment>
     <div class="margin-bottom-md text-component">
       <h1>Smodale</h1>
       <p class="text-md color-contrast-medium">

@@ -1,0 +1,13 @@
+:global {
+  .notifications {
+    [class*='default-position-style-'] {
+      width: 100% !important;
+      z-index: 100;
+
+      @include breakpoint(sm) {
+        width: auto !important;
+        max-width: 32rem;
+      }
+    }
+  }
+}

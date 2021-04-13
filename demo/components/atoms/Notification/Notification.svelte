@@ -12,5 +12,3 @@
     </div>
   </Alert>
 </div>
-
-<style src="_index.scss"></style>

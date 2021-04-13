@@ -13,5 +13,11 @@ module.exports = {
     postcss: {
       plugins: [autoprefixer],
     },
+    scss: {
+      data: `
+        @import 'codyhouse-framework/main/assets/css/base/mixins';
+        @import 'codyhouse-framework/main/assets/css/base/breakpoints';
+      `,
+    },
   }),
 };

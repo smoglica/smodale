@@ -63,31 +63,4 @@
   </SidebarLayout>
 </Notifications>
 
-<style>
-  :root {
-    --font-primary: 'Inter', system-ui, sans-serif;
-  }
-
-  :global(code) {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
-      monospace;
-    font-weight: 600;
-  }
-
-  :global(code::before),
-  :global(code::after) {
-    content: '`';
-  }
-
-  :global([class*='default-position-style-']) {
-    width: 100% !important;
-    z-index: 100;
-  }
-
-  @media (min-width: 32rem) {
-    :global([class*='default-position-style-']) {
-      width: auto !important;
-      max-width: 500px;
-    }
-  }
-</style>
+<style src="./scss/main.scss"></style>

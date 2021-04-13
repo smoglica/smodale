@@ -1,0 +1,29 @@
+:global {
+  @import 'codyhouse-framework/main/assets/css/base';
+  @import 'codyhouse-framework/main/assets/css/custom-style';
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
+      monospace;
+    font-weight: 600;
+
+    &::before,
+    &::after {
+      content: '`';
+    }
+  }
+
+  [class*='default-position-style-'] {
+    width: 100% !important;
+    z-index: 100;
+
+    @include breakpoint(sm) {
+      width: auto !important;
+      max-width: 500px;
+    }
+  }
+}
+
+:root {
+  --font-primary: 'Inter', system-ui, sans-serif;
+}

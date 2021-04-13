@@ -11,6 +11,9 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
+  globals: {
+    Util: true,
+  },
   overrides: [
     {
       files: ['*'],

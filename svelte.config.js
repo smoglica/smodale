@@ -14,7 +14,7 @@ module.exports = {
       plugins: [autoprefixer],
     },
     scss: {
-      data: `
+      prependData: `
         @import 'codyhouse-framework/main/assets/css/base/mixins';
         @import 'codyhouse-framework/main/assets/css/base/breakpoints';
       `,

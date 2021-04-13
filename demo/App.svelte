@@ -2,7 +2,7 @@
   import { fade } from 'svelte/transition';
   import smodale, { Modal } from 'smodale';
   import Notifications from 'svelte-notifications';
-  import Notification from 'Demo/components/Notification';
+  import Notification from 'Demo/components/atoms/Notification';
   import ModalWithButtons from 'Demo/components/examples/ModalWithButtons';
   import ModalWithModal from 'Demo/components/examples/ModalWithModal';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';

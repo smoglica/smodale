@@ -1,0 +1,7 @@
+.sidenav-list-item {
+  :global {
+    > a:hover {
+      background-color: var(--color-contrast-lower);
+    }
+  }
+}

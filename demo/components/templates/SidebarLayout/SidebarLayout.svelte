@@ -22,7 +22,7 @@
   };
 </script>
 
-<div class="padding-component hide@md no-js:is-hidden">
+<div class="hide@md no-js:is-hidden">
   <HamburgerMenuIcon
     ariaControls="sidebar"
     class="btn btn--subtle radius-50% position-fixed top-0 right-0 z-index-fixed-element margin-top-sm margin-right-md"
@@ -53,7 +53,7 @@
       </div>
     </div>
   </aside>
-  <main class="position-relative flex-grow height-100vh">
+  <main class="position-relative flex-grow height-100%">
     <div class="padding-md">
       <slot />
     </div>

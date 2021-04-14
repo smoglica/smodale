@@ -5,6 +5,7 @@
   import ModalWithButtons from 'Demo/components/examples/ModalWithButtons';
   import ModalWithModal from 'Demo/components/examples/ModalWithModal';
   import SidebarLayout from 'Demo/components/templates/SidebarLayout';
+  import Sidenav from 'Demo/components/molecules/Sidenav';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';
 
   const modalProps = {
@@ -42,9 +43,11 @@
 <Notifications>
   <div class="container max-width-adaptive-md">
     <SidebarLayout>
-      <svelte:fragment slot="aside">Sidebar content</svelte:fragment>
+      <svelte:fragment slot="aside">
+        <Sidenav />
+      </svelte:fragment>
       <div class="text-component article">
-        <section id="getting-started">
+        <section>
           <div class="margin-bottom-md">
             <h1>Smodale</h1>
             <p class="text-md color-contrast-medium">
@@ -66,7 +69,7 @@
         </section>
 
         <section id="introduction">
-          <h3>Introduction</h3>
+          <h2>Introduction</h2>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
             officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
@@ -75,7 +78,7 @@
         </section>
 
         <section id="installation">
-          <h3>Installation</h3>
+          <h2>Installation</h2>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
             officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
@@ -110,17 +113,8 @@
           </p>
         </section>
 
-        <section id="examples">
-          <h2>Examples</h2>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-            officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-            alias quidem. Quia debitis velit autem facilis.
-          </p>
-        </section>
-
         <section id="long-content">
-          <h3>Long content</h3>
+          <h2>Long content</h2>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
             officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
@@ -129,7 +123,7 @@
         </section>
 
         <section id="vertically-centered">
-          <h3>Vertically centered</h3>
+          <h2>Vertically centered</h2>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
             officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
@@ -138,7 +132,7 @@
         </section>
 
         <section id="nested-modals">
-          <h3>Nested modals</h3>
+          <h2>Nested modals</h2>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
             officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse

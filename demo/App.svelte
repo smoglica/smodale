@@ -40,26 +40,28 @@
 </script>
 
 <Notifications>
-  <SidebarLayout>
-    <svelte:fragment slot="aside">Sidebar content</svelte:fragment>
-    <div class="margin-bottom-md text-component">
-      <h1>Smodale</h1>
-      <p class="text-md color-contrast-medium">
-        A simple, light and highly customizable modal for Svelte
-      </p>
-    </div>
-    <div class="flex flex-column flex-row@xs gap-xs">
-      <button type="button" class="btn btn--primary" on:click={showStaticModal}>
-        Show a static modal
-      </button>
-      <button type="button" class="btn btn--accent" on:click={showDynamicModal}>
-        Show a dynamic modal
-      </button>
-    </div>
-    <Modal {...modalProps} on:opened={opened} on:closed={closed}>
-      <ModalWithButtons />
-    </Modal>
-  </SidebarLayout>
+  <div class="container max-width-adaptive-md">
+    <SidebarLayout>
+      <svelte:fragment slot="aside">Sidebar content</svelte:fragment>
+      <div class="margin-bottom-md text-component">
+        <h1>Smodale</h1>
+        <p class="text-md color-contrast-medium">
+          A simple, light and highly customizable modal for Svelte
+        </p>
+      </div>
+      <div class="flex flex-column flex-row@xs gap-xs">
+        <button type="button" class="btn btn--primary" on:click={showStaticModal}>
+          Show a static modal
+        </button>
+        <button type="button" class="btn btn--accent" on:click={showDynamicModal}>
+          Show a dynamic modal
+        </button>
+      </div>
+      <Modal {...modalProps} on:opened={opened} on:closed={closed}>
+        <ModalWithButtons />
+      </Modal>
+    </SidebarLayout>
+  </div>
 </Notifications>
 
 <style src="./scss/main.scss"></style>

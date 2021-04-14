@@ -1,6 +1,7 @@
 <script>
   import Sidebar from 'Demo/components/templates/SidebarLayout/Sidebar';
   import eRemove from 'Demo/assets/icons/e-remove.svg';
+  import HamburgerMenuIcon from 'Demo/components/atoms/HamburgerMenuIcon';
 
   const onMount = (elm) => {
     const sidebar = new Sidebar(elm);
@@ -22,7 +23,10 @@
 </script>
 
 <div class="padding-component hide@md no-js:is-hidden">
-  <button type="button" class="btn btn--primary" aria-controls="sidebar">Show sidebar</button>
+  <HamburgerMenuIcon
+    ariaControls="sidebar"
+    class="btn btn--subtle radius-50% position-fixed top-0 right-0 z-index-fixed-element margin-top-sm margin-right-sm"
+  />
 </div>
 
 <div class="flex@md">

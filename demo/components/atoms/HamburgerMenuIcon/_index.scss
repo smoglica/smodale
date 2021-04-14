@@ -1,0 +1,63 @@
+:root {
+  --anim-menu-btn-size: 48px;
+  --anim-menu-btn-transition-duration: 0.2s;
+  --anim-menu-btn-icon-size: 24px;
+  --anim-menu-btn-icon-stroke: 2px;
+}
+
+.anim-menu-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--anim-menu-btn-size);
+  height: var(--anim-menu-btn-size);
+}
+
+.anim-menu-btn__icon {
+  position: relative;
+  display: block;
+  font-size: var(--anim-menu-btn-icon-size);
+  width: 1em;
+  height: var(--anim-menu-btn-icon-stroke);
+  color: inherit;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  transform: scale(1);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: inherit;
+    border-radius: inherit;
+  }
+}
+
+.anim-menu-btn__icon--close {
+  background-size: 100% 100%;
+  will-change: transform, background-size;
+  transition-property: transform, background-size;
+  transition-duration: var(--anim-menu-btn-transition-duration, 0.2s);
+
+  .anim-menu-btn:active & {
+    transform: scale(0.9);
+  }
+
+  &::before,
+  &::after {
+    will-change: inherit;
+    transition: inherit;
+  }
+
+  &::before {
+    transform: translateY(-0.25em) rotate(0);
+  }
+
+  &::after {
+    transform: translateY(0.25em) rotate(0);
+  }
+}

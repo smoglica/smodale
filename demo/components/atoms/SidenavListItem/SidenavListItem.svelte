@@ -2,11 +2,15 @@
   import SmoothScroll from 'Demo/components/atoms/SmoothScroll';
 
   export let href = '';
+  export let current = false;
+
+  $: ariaCurrent = current ? 'page' : null;
 </script>
 
 <li class="sidenav-list-item">
   <SmoothScroll
     {href}
+    {ariaCurrent}
     class="text-decoration-none radius-md padding-y-xxs padding-x-xxs block color-contrast-high"
   >
     <slot />

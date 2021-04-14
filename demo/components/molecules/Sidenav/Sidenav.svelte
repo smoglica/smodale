@@ -7,7 +7,7 @@
 <nav>
   <SidenavLabel>Getting started</SidenavLabel>
   <SidenavList>
-    <SidenavListItem href="#introduction">Introduction</SidenavListItem>
+    <SidenavListItem href="#introduction" current>Introduction</SidenavListItem>
     <SidenavListItem href="#installation">Installation</SidenavListItem>
   </SidenavList>
 

@@ -1,6 +1,11 @@
 .sidenav-list-item {
   :global {
-    > a:hover {
+    > [aria-current='page'] {
+      background-color: var(--color-contrast-higher);
+      color: var(--color-white);
+    }
+
+    > a:hover:not([aria-current='page']) {
       background-color: var(--color-contrast-lower);
     }
   }

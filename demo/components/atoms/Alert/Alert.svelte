@@ -49,7 +49,7 @@
       class="reset alert__close-btn margin-left-sm js-tab-focus"
       on:click={onRemove}
     >
-      <img class="height-sm width-sm block" src={eRemove} alt="Close" />
+      <img class="icon block" src={eRemove} alt="Close" />
     </button>
   </div>
 </div>

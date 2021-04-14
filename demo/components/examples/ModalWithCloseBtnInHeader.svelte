@@ -8,7 +8,7 @@
 <header class="flex items-center justify-between margin-bottom-sm">
   <h2>Modal title</h2>
   <button class="btn btn--subtle padding-xs js-tab-focus" type="button" on:click={cancel}>
-    <img class="height-sm width-sm" src={eRemove} alt="Close" />
+    <img class="icon icon--sm" src={eRemove} alt="Close" />
   </button>
 </header>
 <div class="text-component">

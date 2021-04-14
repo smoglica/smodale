@@ -7,7 +7,7 @@
 
 <header class="margin-bottom-sm">
   <button type="button" class="btn btn--subtle" on:click={cancel}>
-    <img class="height-xs width-xs" src={arrowLeft} alt="Go back" />
+    <img class="icon" src={arrowLeft} alt="Go back" />
     <span class="margin-left-xs">Go back</span>
   </button>
 </header>

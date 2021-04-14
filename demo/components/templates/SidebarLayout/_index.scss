@@ -58,6 +58,47 @@
       }
     }
   }
+
+  .sidebar--static,
+  html:not(.js) .sidebar {
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    .sidebar__header {
+      display: none !important;
+    }
+  }
+
+  .sidebar--sticky-on-desktop {
+    position: sticky;
+    top: var(--space-sm);
+    max-height: calc(100vh - var(--space-sm));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .js {
+    .sidebar {
+      opacity: 0;
+    }
+
+    .sidebar--loaded {
+      opacity: 1;
+    }
+  }
+
+  html:not(.js) .sidebar {
+    position: static;
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    .sidebar--static\@#{$breakpoint}::before {
+      content: 'mobile';
+      @include breakpoint(#{$breakpoint}) {
+        content: 'static';
+      }
+    }
+  }
 }
 
 .sidebar__header {
@@ -91,53 +132,6 @@
   }
 }
 
-:global {
-  .sidebar--static,
-  html:not(.js) .sidebar {
-    flex-shrink: 0;
-    flex-grow: 1;
-
-    .sidebar__header {
-      display: none !important;
-    }
-  }
-
-  .sidebar--sticky-on-desktop {
-    position: sticky;
-    top: var(--space-sm);
-    max-height: calc(100vh - var(--space-sm));
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-:global {
-  .js {
-    .sidebar {
-      opacity: 0;
-    }
-
-    .sidebar--loaded {
-      opacity: 1;
-    }
-  }
-
-  html:not(.js) .sidebar {
-    position: static;
-  }
-}
-
 [class*='sidebar--static']::before {
   display: none;
-}
-
-:global {
-  @each $breakpoint, $value in $breakpoints {
-    .sidebar--static\@#{$breakpoint}::before {
-      content: 'mobile';
-      @include breakpoint(#{$breakpoint}) {
-        content: 'static';
-      }
-    }
-  }
 }

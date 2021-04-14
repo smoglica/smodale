@@ -69,14 +69,6 @@
     }
   }
 
-  .sidebar--sticky-on-desktop {
-    position: sticky;
-    top: var(--space-sm);
-    max-height: calc(100vh - var(--space-sm));
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .js {
     .sidebar {
       opacity: 0;

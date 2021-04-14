@@ -27,7 +27,7 @@
 
 <div class="flex@md">
   <aside
-    class="sidebar sidebar--static@md js-sidebar"
+    class="sidebar sidebar--static@md sidebar--right-on-mobile js-sidebar"
     data-static-class="position-relative z-index-1 flex-grow max-width-xxxxs border-right"
     id="sidebar"
     aria-labelledby="sidebar-title"
@@ -38,7 +38,7 @@
         <h1 class="text-md text-truncate" id="sidebar-title">Sidebar title</h1>
 
         <button class="reset sidebar__close-btn js-sidebar__close-btn js-tab-focus">
-          <img class="height-xs width-xs" src={eRemove} alt="Close panel" />
+          <img class="icon" src={eRemove} alt="Close panel" />
         </button>
       </header>
 
@@ -56,3 +56,5 @@
     </div>
   </main>
 </div>
+
+<style src="_index.scss"></style>

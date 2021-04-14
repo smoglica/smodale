@@ -1,0 +1,143 @@
+:global {
+  .sidebar:not(.sidebar--static) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--zindex-fixed-element);
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    transition: visibility 0s 0.3s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: alpha(var(--color-black), 0);
+      transition: background-color 0.3s;
+      z-index: 1;
+    }
+
+    .sidebar__panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 100%;
+      max-width: 380px;
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      background-color: var(--color-bg);
+      transform: translateX(-100%);
+      transition: 0.3s;
+    }
+
+    &.sidebar--right-on-mobile {
+      .sidebar__panel {
+        left: auto;
+        right: 0;
+        transform: translateX(100%);
+      }
+    }
+
+    &.sidebar--is-visible {
+      visibility: visible;
+      transition: none;
+
+      &::after {
+        background-color: alpha(var(--color-black), 0.85);
+      }
+
+      .sidebar__panel {
+        transform: translateX(0);
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+}
+
+.sidebar__header {
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--color-contrast-lower);
+  position: sticky;
+  top: 0;
+}
+
+.sidebar__close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+  transition: 0.2s;
+  flex-shrink: 0;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .icon {
+    display: block;
+    margin: auto;
+  }
+}
+
+:global {
+  .sidebar--static,
+  html:not(.js) .sidebar {
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    .sidebar__header {
+      display: none !important;
+    }
+  }
+
+  .sidebar--sticky-on-desktop {
+    position: sticky;
+    top: var(--space-sm);
+    max-height: calc(100vh - var(--space-sm));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+:global {
+  .js {
+    .sidebar {
+      opacity: 0;
+    }
+
+    .sidebar--loaded {
+      opacity: 1;
+    }
+  }
+
+  html:not(.js) .sidebar {
+    position: static;
+  }
+}
+
+[class*='sidebar--static']::before {
+  display: none;
+}
+
+:global {
+  @each $breakpoint, $value in $breakpoints {
+    .sidebar--static\@#{$breakpoint}::before {
+      content: 'mobile';
+      @include breakpoint(#{$breakpoint}) {
+        content: 'static';
+      }
+    }
+  }
+}

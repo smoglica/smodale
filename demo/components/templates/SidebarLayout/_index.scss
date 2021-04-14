@@ -104,26 +104,6 @@
   top: 0;
 }
 
-.sidebar__close-btn {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  border-radius: 50%;
-  background-color: var(--color-bg);
-  box-shadow: var(--shadow-sm);
-  transition: 0.2s;
-  flex-shrink: 0;
-
-  &:hover {
-    box-shadow: var(--shadow-md);
-  }
-
-  .icon {
-    display: block;
-    margin: auto;
-  }
-}
-
 [class*='sidebar--static']::before {
   display: none;
 }

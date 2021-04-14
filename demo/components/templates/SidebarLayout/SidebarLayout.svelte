@@ -31,7 +31,7 @@
 <div class="flex@md">
   <aside
     class="sidebar sidebar--static@md sidebar--right-on-mobile js-sidebar"
-    data-static-class="position-relative z-index-1 flex-grow max-width-xxxxs border-right"
+    data-static-class="position-relative z-index-1 flex-grow max-width-xxxxs border-right sidebar--sticky-on-desktop"
     id="sidebar"
     aria-labelledby="sidebar-title"
     use:onMount

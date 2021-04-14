@@ -83,6 +83,14 @@
     position: static;
   }
 
+  .sidebar--sticky-on-desktop {
+    position: sticky;
+    top: 0;
+    max-height: calc(100vh - var(--space-sm));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   @each $breakpoint, $value in $breakpoints {
     .sidebar--static\@#{$breakpoint}::before {
       content: 'mobile';

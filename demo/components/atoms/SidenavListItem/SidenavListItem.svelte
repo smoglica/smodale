@@ -7,7 +7,7 @@
   $: ariaCurrent = current ? 'page' : null;
 </script>
 
-<li class="sidenav-list-item">
+<li class="sidenav-list-item margin-left-xxxxs margin-bottom-xxxxs">
   <SmoothScroll
     {href}
     {ariaCurrent}

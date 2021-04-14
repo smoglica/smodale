@@ -3,6 +3,7 @@
     > [aria-current='page'] {
       background-color: var(--color-contrast-higher);
       color: var(--color-white);
+      box-shadow: var(--shadow-sm);
     }
 
     > a:hover:not([aria-current='page']) {

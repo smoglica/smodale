@@ -35,6 +35,7 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
   settings: {
+    'svelte3/ignore-styles': ({ lang }) => lang === 'scss',
     'import/resolver': {
       alias: {
         extensions: ['.svelte', '.js'],

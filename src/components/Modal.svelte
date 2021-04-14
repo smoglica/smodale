@@ -41,7 +41,7 @@
   const getAndSetFocusableElms = (elm) => {
     const allFocusableElm = [
       ...elm.querySelectorAll(
-        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
+        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary'
       ),
     ];
 
@@ -49,8 +49,8 @@
       return;
     }
 
-    const elmIsVisible = (element) => element?.offsetWidth
-    || element?.offsetHeight || element?.getClientRects()?.length;
+    const elmIsVisible = (element) =>
+      element?.offsetWidth || element?.offsetHeight || element?.getClientRects()?.length;
 
     for (let i = 0; i < allFocusableElm.length; i += 1) {
       const el = allFocusableElm[i];
@@ -121,7 +121,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
     currentBreakpoint = {
@@ -129,16 +129,16 @@
       config:
         index > -1
           ? sortedBreakpointList
-            .filter((item, i) => index <= i)
-            .reverse()
-            .reduce(
-              // eslint-disable-next-line no-unused-vars
-              (acc, [key, value]) => ({
-                ...acc,
-                ...value,
-              }),
-              defaults,
-            )
+              .filter((item, i) => index <= i)
+              .reverse()
+              .reduce(
+                // eslint-disable-next-line no-unused-vars
+                (acc, [key, value]) => ({
+                  ...acc,
+                  ...value,
+                }),
+                defaults
+              )
           : defaults,
     };
   };
@@ -300,42 +300,42 @@
   </div>
 {/if}
 
-<style>
+<style lang="scss">
   .modal {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-  }
 
-  .modal__dialog {
-    position: relative;
-    width: auto;
-    height: 100%;
-  }
+    &__dialog {
+      position: relative;
+      width: auto;
+      height: 100%;
+    }
 
-  .modal__content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+    &__content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
 
-  :global(.modal--scrollable.modal) {
-    overflow-y: auto;
-  }
+    &--scrollable {
+      overflow-y: auto;
+    }
 
-  :global(.modal--scrollable .modal__dialog) {
-    min-height: 100%;
-    height: auto;
-  }
+    &--scrollable &__dialog {
+      min-height: 100%;
+      height: auto;
+    }
 
-  :global(.modal--centered .modal__dialog) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    &--centered &__dialog {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 </style>

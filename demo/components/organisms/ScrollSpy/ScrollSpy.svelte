@@ -21,9 +21,7 @@
         }
 
         entries.forEach(() => {
-          if (timeoutId) {
-            clearTimeout(timeoutId);
-          }
+          clearTimeout(timeoutId);
 
           timeoutId = setTimeout(() => {
             const halfWindowHeight = window.innerHeight / 2;
@@ -38,8 +36,6 @@
             }, '');
 
             scrollSpy.update((state) => ({ ...state, currentSectionId }));
-
-            timeoutId = 0;
           }, delay);
         });
       };
@@ -68,7 +64,7 @@
 
     scrollTimeoutId = setTimeout(
       () => scrollSpy.update((state) => ({ ...state, clickScrolling: false })),
-      delay,
+      delay
     );
   };
 </script>

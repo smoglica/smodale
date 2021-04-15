@@ -8,6 +8,10 @@
   import Sidenav from 'Demo/components/molecules/Sidenav';
   import ScrollSpy from 'Demo/components/organisms/ScrollSpy';
   import ScrollSpySection from 'Demo/components/atoms/ScrollSpySection';
+  import SidenavLabel from 'Demo/components/atoms/SidenavLabel';
+  import SidenavList from 'Demo/components/atoms/SidenavList';
+  import SidenavListItem from 'Demo/components/atoms/SidenavListItem';
+  import ScrollSpyLink from 'Demo/components/atoms/ScrollSpyLink';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';
 
   const modalProps = {
@@ -40,6 +44,81 @@
   const showDynamicModal = () => {
     smodale.show(ModalWithModal, null, modalProps, { closed, opened });
   };
+
+  const menu = [
+    {
+      label: 'Getting started',
+      items: [
+        {
+          id: 'introduction',
+          label: 'Introduction',
+          component: null,
+        },
+        {
+          id: 'installation',
+          label: 'Installation',
+          component: null,
+        },
+      ],
+    },
+    {
+      label: 'Component',
+      items: [
+        {
+          id: 'api',
+          label: 'Api',
+          component: null,
+        },
+        {
+          id: 'properties',
+          label: 'Properties',
+          component: null,
+        },
+        {
+          id: 'events',
+          label: 'Events',
+          component: null,
+        },
+      ],
+    },
+    {
+      label: 'Examples',
+      items: [
+        {
+          id: 'long-content',
+          label: 'Long content',
+          component: null,
+        },
+        {
+          id: 'vertically-centered',
+          label: 'Vertically centered',
+          component: null,
+        },
+        {
+          id: 'nested-modals',
+          label: 'Nested modals',
+          component: null,
+        },
+      ],
+    },
+    {
+      label: 'Other',
+      items: [
+        {
+          id: 'troubleshooting',
+          label: 'Troubleshooting',
+          component: null,
+        },
+        {
+          id: 'support',
+          label: 'Support',
+          component: null,
+        },
+      ],
+    },
+  ];
+
+  $: sections = menu.reduce((acc, menuItem) => [...acc, ...menuItem.items], []);
 </script>
 
 <Notifications>
@@ -47,7 +126,18 @@
     <ScrollSpy>
       <SidebarLayout>
         <svelte:fragment slot="aside">
-          <Sidenav />
+          <Sidenav>
+            {#each menu as { label, items }, i}
+              <SidenavLabel>{label}</SidenavLabel>
+              <SidenavList>
+                {#each items as { id, label }, j}
+                  <ScrollSpyLink let:prop={current} {id}>
+                    <SidenavListItem href={`#${id}`} {current}>{label}</SidenavListItem>
+                  </ScrollSpyLink>
+                {/each}
+              </SidenavList>
+            {/each}
+          </Sidenav>
         </svelte:fragment>
         <div class="text-component article">
           <section>
@@ -71,95 +161,16 @@
             <hr />
           </section>
 
-          <ScrollSpySection id="introduction">
-            <h2>Introduction</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="installation">
-            <h2>Installation</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="api">
-            <h2>API</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="properties">
-            <h2>Properties</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="events">
-            <h2>Events</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="long-content">
-            <h2>Long content</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="vertically-centered">
-            <h2>Vertically centered</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="nested-modals">
-            <h2>Nested modals</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="troubleshooting">
-            <h2>Troubleshooting</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
-
-          <ScrollSpySection id="support">
-            <h2>Support</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-              officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-              alias quidem. Quia debitis velit autem facilis.
-            </p>
-          </ScrollSpySection>
+          {#each sections as { id, label }, i}
+            <ScrollSpySection {id}>
+              <h2>{label}</h2>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
+                officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
+                alias quidem. Quia debitis velit autem facilis.
+              </p>
+            </ScrollSpySection>
+          {/each}
         </div>
       </SidebarLayout>
     </ScrollSpy>

@@ -45,13 +45,20 @@
   const showDynamicModal = () => {
     smodale.show(ModalWithModal, null, modalProps, { closed, opened });
   };
+  const onSidenavListItemClick = (sidebar) => {
+    if (sidebar.layout !== 'mobile') {
+      return;
+    }
+
+    sidebar.close();
+  };
   $: sections = routes.reduce((acc, route) => [...acc, ...route.items], []);
 </script>
 
 <Notifications>
   <div class="container max-width-adaptive-md">
     <ScrollSpy>
-      <SidebarLayout>
+      <SidebarLayout let:prop={{ sidebar }}>
         <svelte:fragment slot="aside">
           <Sidenav>
             {#each routes as { label, items }, i}
@@ -59,7 +66,11 @@
               <SidenavList>
                 {#each items as { id, label }, j}
                   <ScrollSpyLink let:prop={current} {id}>
-                    <SidenavListItem href={`#${id}`} {current}>{label}</SidenavListItem>
+                    <SidenavListItem
+                      href={`#${id}`}
+                      {current}
+                      on:click={onSidenavListItemClick(sidebar)}>{label}</SidenavListItem
+                    >
                   </ScrollSpyLink>
                 {/each}
               </SidenavList>

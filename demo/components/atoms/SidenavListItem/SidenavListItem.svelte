@@ -12,6 +12,7 @@
     {href}
     {ariaCurrent}
     class="text-decoration-none radius-md padding-y-xxs padding-x-xxs block color-contrast-high"
+    on:click
   >
     <slot />
   </SmoothScroll>

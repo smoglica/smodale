@@ -222,6 +222,10 @@ const Sidebar = function Sidebar(element) {
   initSidebar(this);
 };
 
+Sidebar.prototype.close = function close() {
+  closeSidebar(this);
+};
+
 Sidebar.prototype.handleEvent = function handleEvent(event) {
   // mobile layout only
   switch (event.type) {

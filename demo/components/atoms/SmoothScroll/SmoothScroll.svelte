@@ -18,6 +18,7 @@
     data-duration={duration}
     aria-current={ariaCurrent}
     use:onMount
+    on:click
   >
     <slot />
   </a>

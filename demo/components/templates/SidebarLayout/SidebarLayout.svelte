@@ -3,8 +3,10 @@
   import eRemove from 'Demo/assets/icons/e-remove.svg';
   import HamburgerMenuIcon from 'Demo/components/atoms/HamburgerMenuIcon';
 
+  let sidebar = null;
+
   const onMount = (elm) => {
-    const sidebar = new Sidebar(elm);
+    sidebar = new Sidebar(elm);
 
     if (window.requestAnimationFrame) {
       window.requestAnimationFrame(sidebar.resetLayout.bind(sidebar));
@@ -55,7 +57,7 @@
   </aside>
   <main class="position-relative flex-grow height-100%">
     <div class="padding-md">
-      <slot />
+      <slot prop={{ sidebar }} />
     </div>
   </main>
 </div>

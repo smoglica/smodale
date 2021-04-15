@@ -12,6 +12,7 @@
   import SidenavList from 'Demo/components/atoms/SidenavList';
   import SidenavListItem from 'Demo/components/atoms/SidenavListItem';
   import ScrollSpyLink from 'Demo/components/atoms/ScrollSpyLink';
+  import routes from 'Demo/routes';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';
 
   const modalProps = {
@@ -44,81 +45,7 @@
   const showDynamicModal = () => {
     smodale.show(ModalWithModal, null, modalProps, { closed, opened });
   };
-
-  const menu = [
-    {
-      label: 'Getting started',
-      items: [
-        {
-          id: 'introduction',
-          label: 'Introduction',
-          component: null,
-        },
-        {
-          id: 'installation',
-          label: 'Installation',
-          component: null,
-        },
-      ],
-    },
-    {
-      label: 'Component',
-      items: [
-        {
-          id: 'api',
-          label: 'Api',
-          component: null,
-        },
-        {
-          id: 'properties',
-          label: 'Properties',
-          component: null,
-        },
-        {
-          id: 'events',
-          label: 'Events',
-          component: null,
-        },
-      ],
-    },
-    {
-      label: 'Examples',
-      items: [
-        {
-          id: 'long-content',
-          label: 'Long content',
-          component: null,
-        },
-        {
-          id: 'vertically-centered',
-          label: 'Vertically centered',
-          component: null,
-        },
-        {
-          id: 'nested-modals',
-          label: 'Nested modals',
-          component: null,
-        },
-      ],
-    },
-    {
-      label: 'Other',
-      items: [
-        {
-          id: 'troubleshooting',
-          label: 'Troubleshooting',
-          component: null,
-        },
-        {
-          id: 'support',
-          label: 'Support',
-          component: null,
-        },
-      ],
-    },
-  ];
-
-  $: sections = menu.reduce((acc, menuItem) => [...acc, ...menuItem.items], []);
+  $: sections = routes.reduce((acc, route) => [...acc, ...route.items], []);
 </script>
 
 <Notifications>
@@ -127,7 +54,7 @@
       <SidebarLayout>
         <svelte:fragment slot="aside">
           <Sidenav>
-            {#each menu as { label, items }, i}
+            {#each routes as { label, items }, i}
               <SidenavLabel>{label}</SidenavLabel>
               <SidenavList>
                 {#each items as { id, label }, j}
@@ -160,15 +87,10 @@
             </Modal>
             <hr />
           </section>
-
-          {#each sections as { id, label }, i}
+          {#each sections as { id, label, component }, i}
             <ScrollSpySection {id}>
               <h2>{label}</h2>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia
-                officiis at corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse
-                alias quidem. Quia debitis velit autem facilis.
-              </p>
+              <svelte:component this={component} />
             </ScrollSpySection>
           {/each}
         </div>

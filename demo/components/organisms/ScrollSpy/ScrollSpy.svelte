@@ -64,7 +64,7 @@
 
     scrollTimeoutId = setTimeout(
       () => scrollSpy.update((state) => ({ ...state, clickScrolling: false })),
-      delay
+      delay,
     );
   };
 </script>

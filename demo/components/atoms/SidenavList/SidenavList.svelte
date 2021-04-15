@@ -1,3 +1,3 @@
-<ul class="margin-bottom-xxs">
+<nav class="margin-bottom-xxs">
   <slot />
-</ul>
+</nav>

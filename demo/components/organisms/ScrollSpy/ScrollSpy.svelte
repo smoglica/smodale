@@ -15,29 +15,27 @@
     if (sectionsElms.length) {
       let timeoutId = 0;
 
-      const onIntersectionObserved = (entries) => {
+      const onIntersectionObserved = () => {
         if ($scrollSpy.clickScrolling) {
           return;
         }
 
-        entries.forEach(() => {
-          clearTimeout(timeoutId);
+        clearTimeout(timeoutId);
 
-          timeoutId = setTimeout(() => {
-            const halfWindowHeight = window.innerHeight / 2;
-            const currentSectionId = sectionsElms.reduce((acc, elm) => {
-              const { top } = elm.getBoundingClientRect();
+        timeoutId = setTimeout(() => {
+          const halfWindowHeight = window.innerHeight / 2;
+          const currentSectionId = sectionsElms.reduce((acc, elm) => {
+            const { top } = elm.getBoundingClientRect();
 
-              if (top < halfWindowHeight) {
-                return elm.id;
-              }
+            if (top < halfWindowHeight) {
+              return elm.id;
+            }
 
-              return acc;
-            }, '');
+            return acc;
+          }, '');
 
-            scrollSpy.update((state) => ({ ...state, currentSectionId }));
-          }, delay);
-        });
+          scrollSpy.update((state) => ({ ...state, currentSectionId }));
+        }, delay);
       };
 
       intersectionObserver = new IntersectionObserver(onIntersectionObserved, {
@@ -64,7 +62,7 @@
 
     scrollTimeoutId = setTimeout(
       () => scrollSpy.update((state) => ({ ...state, clickScrolling: false })),
-      delay,
+      delay
     );
   };
 </script>

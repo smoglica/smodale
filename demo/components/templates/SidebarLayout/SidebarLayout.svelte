@@ -2,6 +2,7 @@
   import Sidebar from 'Demo/components/templates/SidebarLayout/Sidebar';
   import eRemove from 'Demo/assets/icons/e-remove.svg';
   import HamburgerMenuIcon from 'Demo/components/atoms/HamburgerMenuIcon';
+  import { version } from '@@/package.json';
 
   let sidebar = null;
 
@@ -42,7 +43,7 @@
       <header class="sidebar__header z-index-2">
         <div>
           <h1 class="text-md text-truncate" id="sidebar-title">Smodale</h1>
-          <small class="color-contrast-medium">v1.0.0</small>
+          <small class="color-contrast-medium">{`v${version}`}</small>
         </div>
         <button class="btn btn--subtle padding-sm js-sidebar__close-btn js-tab-focus" type="button">
           <img class="icon icon--sm" src={eRemove} alt="Close panel" />

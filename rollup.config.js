@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import image from '@rollup/plugin-image';
 import alias from '@rollup/plugin-alias';
+import json from '@rollup/plugin-json';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
 import browsersync from 'rollup-plugin-browsersync';
@@ -39,6 +40,7 @@ export default (argv) => {
             extensions,
           }),
           image(),
+          json(),
           alias({
             entries: aliases.map(([find, replacement]) => ({ find, replacement })),
           }),

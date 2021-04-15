@@ -42,6 +42,7 @@ module.exports = {
         map: [
           ['smodale', join(__dirname, 'src')],
           ['Demo', join(__dirname, 'demo')],
+          ['@@', __dirname],
         ],
       },
     },

@@ -41,7 +41,7 @@
   const getAndSetFocusableElms = (elm) => {
     const allFocusableElm = [
       ...elm.querySelectorAll(
-        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary'
+        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
       ),
     ];
 
@@ -121,7 +121,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
     currentBreakpoint = {
@@ -129,16 +129,16 @@
       config:
         index > -1
           ? sortedBreakpointList
-              .filter((item, i) => index <= i)
-              .reverse()
-              .reduce(
-                // eslint-disable-next-line no-unused-vars
-                (acc, [key, value]) => ({
-                  ...acc,
-                  ...value,
-                }),
-                defaults
-              )
+            .filter((item, i) => index <= i)
+            .reverse()
+            .reduce(
+              // eslint-disable-next-line no-unused-vars
+              (acc, [key, value]) => ({
+                ...acc,
+                ...value,
+              }),
+              defaults,
+            )
           : defaults,
     };
   };
@@ -191,8 +191,11 @@
     updateBreakpoint();
     emit('opened');
 
+    let resizeObserver = null;
+
     if (resizeObserverSupported) {
-      new ResizeObserver(onWindowResize).observe(elm);
+      resizeObserver = new ResizeObserver(onWindowResize);
+      resizeObserver.observe(elm);
     } else {
       window.addEventListener('resize', onWindowResize);
     }
@@ -270,7 +273,9 @@
           window.removeEventListener('keydown', onWindowKeydown);
         }
 
-        if (!resizeObserverSupported) {
+        if (resizeObserverSupported && resizeObserver) {
+          resizeObserver.disconnect();
+        } else {
           window.removeEventListener('resize', onWindowResize);
         }
 

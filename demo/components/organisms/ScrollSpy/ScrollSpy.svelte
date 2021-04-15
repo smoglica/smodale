@@ -1,10 +1,13 @@
 <script context="module">
   import { writable } from 'svelte/store';
 
-  export const currentSectionId = writable();
+  export const scrollSpy = writable({ currentSectionId: '', clickScrolling: false });
 </script>
 
 <script>
+  const delay = 240;
+  let scrollTimeoutId = 0;
+
   const onMount = (node) => {
     const sectionsElms = [...node.getElementsByClassName('js-scroll-spy-section')];
     let intersectionObserver = null;
@@ -13,6 +16,10 @@
       let timeoutId = 0;
 
       const onIntersectionObserved = (entries) => {
+        if ($scrollSpy.clickScrolling) {
+          return;
+        }
+
         entries.forEach(() => {
           if (timeoutId) {
             clearTimeout(timeoutId);
@@ -20,7 +27,7 @@
 
           timeoutId = setTimeout(() => {
             const halfWindowHeight = window.innerHeight / 2;
-            const id = sectionsElms.reduce((acc, elm) => {
+            const currentSectionId = sectionsElms.reduce((acc, elm) => {
               const { top } = elm.getBoundingClientRect();
 
               if (top < halfWindowHeight) {
@@ -30,10 +37,10 @@
               return acc;
             }, '');
 
-            currentSectionId.set(id);
+            scrollSpy.update((state) => ({ ...state, currentSectionId }));
 
             timeoutId = 0;
-          }, 240);
+          }, delay);
         });
       };
 
@@ -55,7 +62,18 @@
       },
     };
   };
+
+  const onWindowScroll = () => {
+    clearTimeout(scrollTimeoutId);
+
+    scrollTimeoutId = setTimeout(
+      () => scrollSpy.update((state) => ({ ...state, clickScrolling: false })),
+      delay,
+    );
+  };
 </script>
+
+<svelte:window on:scroll={onWindowScroll} />
 
 <div use:onMount>
   <slot />

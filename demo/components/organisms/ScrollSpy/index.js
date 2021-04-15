@@ -1,1 +1,1 @@
-export { default, currentSectionId } from 'Demo/components/organisms/ScrollSpy/ScrollSpy';
+export { default, scrollSpy } from 'Demo/components/organisms/ScrollSpy/ScrollSpy';

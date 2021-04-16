@@ -2,9 +2,8 @@
   @import 'codyhouse-framework/main/assets/css/base';
   @import 'codyhouse-framework/main/assets/css/custom-style';
 
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
-      monospace;
+  code:not(code[class*='language-']) {
+    font-family: var(--font-mono);
     font-weight: 600;
 
     &::before,
@@ -12,8 +11,14 @@
       content: '`';
     }
   }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
 }
 
 :root {
   --font-primary: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
+    monospace;
 }

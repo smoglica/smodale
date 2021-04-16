@@ -1,3 +1,7 @@
+<script>
+  import CodeSnippet from 'Demo/components/molecules/CodeSnippet';
+</script>
+
 <p>
   Smodale uses <code>svelte/store</code> module for handling the visibility of modals. When using
   static modals the property <code>name</code> it's mandatory and must be unique.
@@ -10,3 +14,5 @@
 </p>
 
 <p>Smodale also provides a built-in way for getting back data on modal acceptance or removal.</p>
+
+<CodeSnippet filename="App.svelte" language="css" code={'body { color: white; }'} />

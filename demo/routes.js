@@ -8,6 +8,7 @@ import SectionProperties from 'Demo/components/organisms/SectionProperties';
 import SectionApi from 'Demo/components/organisms/SectionApi';
 import SectionInstallation from 'Demo/components/organisms/SectionInstallation';
 import SectionIntroduction from 'Demo/components/organisms/SectionIntroduction';
+import SectionSlots from 'Demo/components/organisms/SectionSlots';
 
 export default [
   {
@@ -42,6 +43,11 @@ export default [
         id: 'events',
         label: 'Events',
         component: SectionEvents,
+      },
+      {
+        id: 'slots',
+        label: 'Slots',
+        component: SectionSlots,
       },
     ],
   },

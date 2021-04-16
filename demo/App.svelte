@@ -84,6 +84,10 @@
               <p class="text-md color-contrast-medium">
                 A simple, light and highly customizable modal for Svelte
               </p>
+              <p>
+                Designed with the "Mobile-first" approach for serving static and dynamic modals
+                which are customizable on specific viewport breakpoints
+              </p>
             </div>
             <div class="flex flex-column flex-row@xs gap-xs">
               <button type="button" class="btn btn--primary" on:click={showStaticModal}>

@@ -7,12 +7,16 @@
 
 <script>
   import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
+  import 'prismjs/plugins/unescaped-markup/prism-unescaped-markup';
 
-  export let language = 'javascript';
+  export let language = 'js';
+  export let unescaped = false;
   export let filename = '';
   export let code = '';
 
   const onMount = (node) => window.Prism.highlightElement(node);
+
+  $: formattedCode = unescaped && language === 'markup' ? `<!--${code.trim()}-->` : code;
 </script>
 
 {#if code}
@@ -26,7 +30,7 @@
       class="radius-md"
       {...$$restProps}>
     <code class="language-{language}" use:onMount>
-      {@html code}
+      {@html formattedCode}
     </code>
   </pre>
   </div>

@@ -8,31 +8,35 @@
 <p>Modals can be shown statically or dynamically. When shown dynamically can be also nested.</p>
 
 <h4>Static modal</h4>
-<p>When using static modals the property <code>name</code> it's mandatory and must be unique.</p>
+<p>
+  They are defined through a <code>Modal</code> component in the template markup. When using static
+  modals the property <code>name</code> it's mandatory and must be unique.
+</p>
 
 <CodeSnippet
   filename="App.svelte"
   language="markup"
+  unescaped
   code={`
-    &lt;script&gt;
-      import smodale, { Modal } from 'smodale';
+<script>
+  import smodale, { Modal } from 'smodale';
 
-      smodale.show('modal-name')
-        .then(data => {
-          console.log(data); // { foo: 'bar' }
-        })
-        .catch(data => {
-          console.log(data); // 'cancelled'
-        });
+  smodale.show('modal-name')
+    .then(data => {
+      console.log(data); // { foo: 'bar' }
+    })
+    .catch(data => {
+      console.log(data); // 'cancelled'
+    });
+</script>
 
-      &lt;Modal name="modal-name"&gt;
-        &lt;h1&gt;Modal title&lt;/h1&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet consectetur, adipisicing elit.&lt;/p&gt;
-        &lt;button on:click={smodale.cancel('cancelled')}&gt;Cancel&lt;/button&gt;
-        &lt;button on:click={smodale.hide({ foo: 'bar' })}&gt;Ok&lt;/button&gt;
-      &lt;/Modal&gt;
-    &lt;/script&gt;
-  `}
+<Modal name="modal-name">
+  <h1>Modal title</h1>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+  <button on:click={smodale.cancel('cancelled')}>Cancel</button>
+  <button on:click={smodale.hide({ foo: 'bar' })}>Ok</button>
+</Modal>
+`}
 />
 
 <h4>Dynamic modal</h4>
@@ -43,35 +47,37 @@
 <CodeSnippet
   filename="MyCustomModalContent.svelte"
   language="markup"
+  unescaped
   code={`
-    &lt;script&gt;
-      import { getModalContext } from 'smodale';
+<script>
+  import { getModalContext } from 'smodale';
 
-      const { hide, cancel } = getModalContext();
+  const { hide, cancel } = getModalContext();
 
-      export let text = '';
+  export let text = '';
+</script>
 
-      &lt;button on:click={cancel(text.toUpperCase())}&gt;Cancel&lt;/button&gt;
-      &lt;button on:click={hide({ foo: 'bar' })}&gt;Ok&lt;/button&gt;
-    &lt;/script&gt;
+<button on:click={cancel(text.toUpperCase())}>Cancel</button>
+<button on:click={hide({ foo: 'bar' })}>Ok</button>
   `}
 />
 
 <CodeSnippet
   filename="App.svelte"
   language="markup"
+  unescaped
   code={`
-    &lt;script&gt;
-    import smodale, { Modal } from 'smodale';
-    import MyCustomModalContent from 'MyCustomModalContent.svelte';
+<script>
+import smodale, { Modal } from 'smodale';
+import MyCustomModalContent from 'MyCustomModalContent.svelte';
 
-    smodale.show(MyCustomModalContent, { text: 'Lorem ipsum' })
-      .then(data => {
-        console.log(data); // { foo: 'bar' }
-      })
-      .catch(data => {
-        console.log(data); // 'LOREM IPSUM'
-      });
-    &lt;/script&gt;
+smodale.show(MyCustomModalContent, { text: 'Lorem ipsum' })
+  .then(data => {
+    console.log(data); // { foo: 'bar' }
+  })
+  .catch(data => {
+    console.log(data); // 'LOREM IPSUM'
+  });
+</script>
   `}
 />

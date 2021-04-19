@@ -40,9 +40,18 @@
 />
 
 <h4>Dynamic modal</h4>
-<p>When using dynamic modals you should first define your modal content as a Svelte component.</p>
+<p>
+  They are generated at runtime by using <code>show()</code> method. When using dynamic modals you should first
+  define your modal content as a Svelte component.
+</p>
 
-<blockquote>💡 Dynamic modals are useful especially for code splitting</blockquote>
+<blockquote>
+  <p>💡 TIP</p>
+  <p>
+    Dynamic modals are useful especially for code splitting or when you need to show multiple modals at
+    the same time (nested modals)
+  </p>
+</blockquote>
 
 <CodeSnippet
   filename="MyCustomModalContent.svelte"

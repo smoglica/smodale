@@ -97,24 +97,16 @@
 <script>
   import smodale, { Modal } from 'smodale';
 
-  const modalProps = {
-    breakpoints: {
-      '768px': {
-        maxWidth: '450px',
-      },
-    },
-  };
-
-  const onOkClick = () => smodale.hide('modal-name', { foo: 'bar' });
-
   smodale
     .show('modal-name')
     .then(data => {
       console.log(data); // { foo: 'bar' }
     });
+
+  const onOkClick = () => smodale.hide('modal-name', { foo: 'bar' });
 </script>
 
-<Modal name="modal-name" {...modalProps}>
+<Modal name="modal-name">
   <h1>Modal title</h1>
   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
   <button on:click={onOkClick}>Ok</button>
@@ -127,8 +119,51 @@
 <h4><code>cancel()</code></h4>
 <hr />
 
-<h4><code>ModalDismissReasons</code></h4>
-<hr />
+<p>Hide an existing modal and <u>reject</u> the promise returned from <code>show();</code></p>
+
+<List>
+  <li>
+    <strong><small>Arguments:</small></strong>
+    <ul>
+      <li>
+        <code>{'{ string } name (required)'}</code>
+      </li>
+      <li>
+        <code>{'{ any } data (optional)'}</code> - Argument for the rejected promise
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong><small>Example:</small></strong>
+    <CodeSnippet
+      filename="App.svelte"
+      language="markup"
+      unescaped
+      code={`
+<script>
+  import smodale, { Modal } from 'smodale';
+
+  smodale
+    .show('modal-name')
+    .then(data => {
+      console.log(data); // { foo: 'bar' }
+    });
+
+  const onCancelClick = () => smodale.cancel('modal-name', { foo: 'bar' });
+</script>
+
+<Modal name="modal-name">
+  <h1>Modal title</h1>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+  <button on:click={onCancelClick}>Cancel</button>
+</Modal>
+`}
+    />
+  </li>
+</List>
 
 <h4><code>getModalContext()</code></h4>
+<hr />
+
+<h4><code>ModalDismissReasons</code></h4>
 <hr />

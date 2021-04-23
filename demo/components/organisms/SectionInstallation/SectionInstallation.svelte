@@ -66,10 +66,13 @@
   const { hide, cancel } = getModalContext();
 
   export let text = '';
+
+  const onCancelClick = () => cancel(text.toUpperCase());
+  const onOkClick = () => hide({ foo: 'bar' });
 </script>
 
-<button on:click={cancel(text.toUpperCase())}>Cancel</button>
-<button on:click={hide({ foo: 'bar' })}>Ok</button>
+<button on:click={onCancelClick}>Cancel</button>
+<button on:click={onOkClick}>Ok</button>
   `}
 />
 

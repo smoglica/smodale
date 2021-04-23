@@ -35,8 +35,8 @@
     },
   };
 
-  const closed = () => notify('Event: <code>opened</code>');
-  const opened = () => notify('Event: <code>closed</code>');
+  const closed = () => notify('Event: <code>closed</code>');
+  const opened = () => notify('Event: <code>opened</code>');
   const showStaticModal = () =>
     smodale
       .show('example')

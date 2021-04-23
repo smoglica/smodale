@@ -28,13 +28,16 @@
     .catch(data => {
       console.log(data); // 'cancelled'
     });
+
+  const onCancelClick = () => smodale.cancel('modal-name', 'cancelled');
+  const onOkClick = () => smodale.hide('modal-name', { foo: 'bar' });
 </script>
 
 <Modal name="modal-name">
   <h1>Modal title</h1>
   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-  <button on:click={smodale.cancel('cancelled')}>Cancel</button>
-  <button on:click={smodale.hide({ foo: 'bar' })}>Ok</button>
+  <button on:click={onCancelClick}>Cancel</button>
+  <button on:click={onOkClick}>Ok</button>
 </Modal>
 `}
 />

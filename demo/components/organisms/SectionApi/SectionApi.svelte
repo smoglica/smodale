@@ -163,14 +163,14 @@
 <hr />
 
 <p>
-  Usable on children components of <code>Modal</code> component or in custom components for dynamic modals.
+  Usable in children components of <code>Modal</code> component or in custom components for dynamic modals.
 </p>
 
 <List>
   <li>
     <strong><small>Returns:</small></strong>
     <ul>
-      <li>An <code>Object</code> literal with the following properties.
+      <li>An <code>Object</code> with the following properties.
         <ul>
           <li><code>hide(data: any)</code> - Hide modal and resolve the promise</li>
           <li><code>close(data: any)</code> - Hide modal and reject the promise</li>
@@ -224,3 +224,49 @@
 
 <h4><code>ModalDismissReasons</code></h4>
 <hr />
+
+<p>Constans for checking what's the modal close reason.</p>
+
+<List>
+  <li>
+    <strong><small>Type:</small></strong> <code>Object</code>
+    <ul>
+      <li><code>BACKDROP_CLICK</code></li>
+      <li><code>ESC</code></li>
+    </ul>
+  </li>
+  <li><strong><small>Read only</small></strong></li>
+  <li>
+    <strong><small>Details:</small></strong>
+    <p>
+      When props <code>escapeToClose</code> or <code>clickOutsideToClose</code> are set to
+      <code>true</code> the modal will be closed with the <code>cancel()</code> method with a dismiss
+      string argument.
+    </p>
+  </li>
+  <li>
+    <strong><small>Example:</small></strong>
+    <CodeSnippet
+      filename="App.svelte"
+      language="markup"
+      unescaped
+      code={`
+<script>
+  import smodale, { ModalDismissReasons } from 'smodale';
+  import MyCustomModalContent from 'MyCustomModalContent.svelte';
+
+  smodale.show(MyCustomModalContent)
+    .then(() => {})
+    .catch(reason => {
+      if (
+        reason === ModalDismissReasons.BACKDROP_CLICK ||
+        reason === ModalDismissReasons.ESC
+      ) {
+        // do something
+      }
+    });
+</script>
+`}
+    />
+  </li>
+</List>

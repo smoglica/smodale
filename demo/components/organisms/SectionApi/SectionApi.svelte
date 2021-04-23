@@ -55,10 +55,7 @@
   };
 
   smodale.show('modal-name');
-  smodale
-  .show(MyCustomModalContent, componentProps, modalProps)
-  .then(() => {/* when hide(); method invoked */})
-  .catch(() => {/* when cancel(); method invoked */});
+  smodale.show(MyCustomModalContent, componentProps, modalProps);
 </script>
 
 <Modal name="modal-name" {...modalProps}>
@@ -164,6 +161,66 @@
 
 <h4><code>getModalContext()</code></h4>
 <hr />
+
+<p>
+  Usable on children components of <code>Modal</code> component or in custom components for dynamic modals.
+</p>
+
+<List>
+  <li>
+    <strong><small>Returns:</small></strong>
+    <ul>
+      <li>An <code>Object</code> literal with the following properties.
+        <ul>
+          <li><code>hide(data: any)</code> - Hide modal and resolve the promise</li>
+          <li><code>close(data: any)</code> - Hide modal and reject the promise</li>
+          <li><code>component</code> - <code>Modal</code> component instance</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong><small>Example:</small></strong>
+    <CodeSnippet
+      filename="MyCustomModalContent.svelte"
+      language="markup"
+      unescaped
+      code={`
+<script>
+  import { getModalContext } from 'smodale';
+  
+  const { hide, cancel, component } = getModalContext();
+
+  console.log(component);
+
+  const onCancelClick = () => cancel('cancelled');
+  const onOkClick = () => hide({ foo: 'bar' });
+
+  <button on:click={onCancelClick}>Cancel</button>
+  <button on:click={onOkClick}>Ok</button>
+</script>
+`}
+    />
+    <CodeSnippet
+      filename="App.svelte"
+      language="markup"
+      unescaped
+      code={`
+<script>
+  import smodale, { Modal } from 'smodale';
+  import MyCustomModalContent from 'MyCustomModalContent.svelte';
+
+  smodale.show('modal-name');
+  smodale.show(MyCustomModalContent);
+</script>
+
+<Modal name="modal-name">
+  <MyCustomModalContent />
+</Modal>
+`}
+    />
+  </li>
+</List>
 
 <h4><code>ModalDismissReasons</code></h4>
 <hr />

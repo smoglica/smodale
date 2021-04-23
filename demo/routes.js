@@ -31,7 +31,7 @@ export default [
     items: [
       {
         id: 'api',
-        label: 'Api',
+        label: 'API',
         component: SectionApi,
       },
       {

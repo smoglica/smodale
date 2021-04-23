@@ -5,6 +5,7 @@
   code:not(code[class*='language-']) {
     font-family: var(--font-mono);
     font-weight: 600;
+    color: var(--color-primary);
 
     &::before,
     &::after {

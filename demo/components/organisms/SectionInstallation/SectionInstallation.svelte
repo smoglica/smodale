@@ -46,7 +46,6 @@
 </p>
 
 <blockquote>
-  <p>💡 TIP</p>
   <p>
     Dynamic modals are useful especially for code splitting or when you need to show multiple modals at
     the same time (nested modals)

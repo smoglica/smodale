@@ -39,7 +39,7 @@ const showDynamicModal = (
   component,
   componentProps,
   props,
-  events,
+  events
 ) => {
   const modalsElm = document.getElementsByClassName('js-modals')[0];
 

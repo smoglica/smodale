@@ -28,6 +28,7 @@ module.exports = {
         'import/prefer-default-export': 'off',
         'import/first': 'off',
         'implicit-arrow-linebreak': 'off',
+        'no-useless-escape': 'off',
       },
     },
   ],

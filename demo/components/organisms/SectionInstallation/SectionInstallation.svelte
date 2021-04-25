@@ -31,7 +31,7 @@
 
   const onCancelClick = () => smodale.cancel('modal-name', 'cancelled');
   const onOkClick = () => smodale.hide('modal-name', { foo: 'bar' });
-</script>
+<\/script>
 
 <Modal name="modal-name">
   <h1>Modal title</h1>
@@ -44,14 +44,14 @@
 
 <h4>Dynamic modal</h4>
 <p>
-  They are generated at runtime by using <code>show()</code> method. When using dynamic modals you should first
-  define your modal content as a Svelte component.
+  They are generated at runtime by using <code>show()</code> method. When using dynamic modals you should
+  first define your modal content as a Svelte component.
 </p>
 
 <blockquote>
   <p>
-    Dynamic modals are useful especially for code splitting or when you need to show multiple modals at
-    the same time (nested modals)
+    Dynamic modals are useful especially for code splitting or when you need to show multiple modals
+    at the same time (nested modals)
   </p>
 </blockquote>
 
@@ -69,7 +69,7 @@
 
   const onCancelClick = () => cancel(text.toUpperCase());
   const onOkClick = () => hide({ foo: 'bar' });
-</script>
+<\/script>
 
 <button on:click={onCancelClick}>Cancel</button>
 <button on:click={onOkClick}>Ok</button>
@@ -92,6 +92,6 @@ smodale.show(MyCustomModalContent, { text: 'Lorem ipsum' })
   .catch(data => {
     console.log(data); // 'LOREM IPSUM'
   });
-</script>
+<\/script>
   `}
 />

@@ -56,7 +56,7 @@
 
   smodale.show('modal-name');
   smodale.show(MyCustomModalContent, componentProps, modalProps);
-</script>
+<\/script>
 
 <Modal name="modal-name" {...modalProps}>
   <h1>Modal title</h1>
@@ -101,7 +101,7 @@
     });
 
   const onOkClick = () => smodale.hide('modal-name', { foo: 'bar' });
-</script>
+<\/script>
 
 <Modal name="modal-name">
   <h1>Modal title</h1>
@@ -147,7 +147,7 @@
     });
 
   const onCancelClick = () => smodale.cancel('modal-name', { foo: 'bar' });
-</script>
+<\/script>
 
 <Modal name="modal-name">
   <h1>Modal title</h1>
@@ -170,7 +170,8 @@
   <li>
     <strong><small>Returns:</small></strong>
     <ul>
-      <li>An <code>Object</code> with the following properties.
+      <li>
+        An <code>Object</code> with the following properties.
         <ul>
           <li><code>hide(data: any)</code> - Hide modal and resolve the promise</li>
           <li><code>close(data: any)</code> - Hide modal and reject the promise</li>
@@ -198,7 +199,7 @@
 
   <button on:click={onCancelClick}>Cancel</button>
   <button on:click={onOkClick}>Ok</button>
-</script>
+<\/script>
 `}
     />
     <CodeSnippet
@@ -212,7 +213,7 @@
 
   smodale.show('modal-name');
   smodale.show(MyCustomModalContent);
-</script>
+<\/script>
 
 <Modal name="modal-name">
   <MyCustomModalContent />
@@ -240,7 +241,7 @@
     <strong><small>Details:</small></strong>
     <p>
       When props <code>escapeToClose</code> or <code>clickOutsideToClose</code> are set to
-      <code>true</code> the modal will be closed with the <code>cancel()</code> method with a dismiss
+      <code>true</code>the modal will be closed with the <code>cancel()</code> method with a dismiss
       string argument.
     </p>
   </li>
@@ -265,7 +266,7 @@
         // do something
       }
     });
-</script>
+<\/script>
 `}
     />
   </li>

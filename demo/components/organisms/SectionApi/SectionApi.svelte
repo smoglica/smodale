@@ -80,7 +80,7 @@
         <code>{'{ string } name (required)'}</code>
       </li>
       <li>
-        <code>{'{ any } data (optional)'}</code> - Argument for the resolved promise
+        <code>{'{ any } data (optional)'}</code> &mdash; Argument for the resolved promise
       </li>
     </ul>
   </li>
@@ -126,7 +126,7 @@
         <code>{'{ string } name (required)'}</code>
       </li>
       <li>
-        <code>{'{ any } data (optional)'}</code> - Argument for the rejected promise
+        <code>{'{ any } data (optional)'}</code> &mdash; Argument for the rejected promise
       </li>
     </ul>
   </li>
@@ -173,9 +173,9 @@
       <li>
         An <code>Object</code> with the following properties.
         <ul>
-          <li><code>hide(data: any)</code> - Hide modal and resolve the promise</li>
-          <li><code>close(data: any)</code> - Hide modal and reject the promise</li>
-          <li><code>component</code> - <code>Modal</code> component instance</li>
+          <li><code>hide(data: any)</code> &mdash; Hide modal and resolve the promise</li>
+          <li><code>close(data: any)</code> &mdash; Hide modal and reject the promise</li>
+          <li><code>component</code> &mdash; <code>Modal</code> component instance</li>
         </ul>
       </li>
     </ul>
@@ -226,7 +226,7 @@
 <h4><code>ModalDismissReasons</code></h4>
 <hr />
 
-<p>Constans for checking what's the modal close reason.</p>
+<p>Constants for checking what's the modal close reason.</p>
 
 <List>
   <li>

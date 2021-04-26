@@ -25,7 +25,6 @@
         maxWidth: '500px',
         margin: 'var(--component-padding)',
         borderRadius: 'var(--radius-md)',
-        height: 'auto',
         scrollable: true,
         centered: true,
       },

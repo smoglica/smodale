@@ -1,7 +1,7 @@
 import SectionSupport from 'Demo/components/organisms/SectionSupport';
 import SectionTroubleshooting from 'Demo/components/organisms/SectionTroubleshooting';
 import SectionNestedModals from 'Demo/components/organisms/SectionNestedModals';
-import SectionVerticallyCentered from 'Demo/components/organisms/SectionVerticallyCentered';
+import SectionCentered from 'Demo/components/organisms/SectionCentered';
 import SectionLongContent from 'Demo/components/organisms/SectionLongContent';
 import SectionEvents from 'Demo/components/organisms/SectionEvents';
 import SectionProperties from 'Demo/components/organisms/SectionProperties';
@@ -55,14 +55,14 @@ export default [
     label: 'Examples',
     items: [
       {
+        id: 'vertically-centered',
+        label: 'Centered',
+        component: SectionCentered,
+      },
+      {
         id: 'long-content',
         label: 'Long content',
         component: SectionLongContent,
-      },
-      {
-        id: 'vertically-centered',
-        label: 'Vertically centered',
-        component: SectionVerticallyCentered,
       },
       {
         id: 'nested-modals',

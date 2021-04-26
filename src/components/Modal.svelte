@@ -21,7 +21,7 @@
     disableBodyScroll = true,
     focusOnOpen = true,
     focusTrap = true,
-    classes,
+    classes = '',
     ...defaults
   } = $$restProps;
 
@@ -36,7 +36,6 @@
     .sort((a, b) => b[2] - a[2])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);
-  $: classList = classes ? ` ${classes}` : '';
 
   const getAndSetFocusableElms = (elm) => {
     const allFocusableElm = [
@@ -137,7 +136,7 @@
                 ...acc,
                 ...value,
               }),
-              defaults,
+              { height: 'auto', ...defaults },
             )
           : defaults,
     };
@@ -287,7 +286,7 @@
 
 {#if modal && $$slots.default}
   <div
-    class="modal{classList}"
+    class="modal {classes}"
     data-name={name}
     use:onMount={{ currentBreakpoint }}
     transition:transition={transitionParams}

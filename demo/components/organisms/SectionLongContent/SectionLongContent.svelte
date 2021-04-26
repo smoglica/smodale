@@ -19,7 +19,7 @@
   };
 </script>
 
-<button class="btn btn--primary" type="button" on:click={onClick}>Show long content modal</button>
+<button class="btn btn--accent" type="button" on:click={onClick}>Show long content modal</button>
 
 <Details class="margin-top-sm" title="Show code">
   <CodeSnippet
@@ -45,7 +45,7 @@
   };
 <\/script>
 
-<button class="btn btn--primary" type="button" on:click={onClick}>Show long content modal</button>
+<button class="btn btn--accent" type="button" on:click={onClick}>Show long content modal</button>
 `}
   />
 </Details>

@@ -1,5 +1,10 @@
-<p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia officiis at
-  corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse alias quidem. Quia debitis
-  velit autem facilis.
-</p>
+<script>
+  import List from 'Demo/components/atoms/List';
+</script>
+
+<List>
+  <li>
+    <code>default</code>
+    <div>Slot for the modal content.</div>
+  </li>
+</List>

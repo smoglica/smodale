@@ -287,9 +287,9 @@
 
 {#if modal && $$slots.default}
   <div
-    class={`modal${classList}`}
-    use:onMount={{ currentBreakpoint }}
+    class="modal{classList}"
     data-name={name}
+    use:onMount={{ currentBreakpoint }}
     transition:transition={transitionParams}
   >
     <div class="modal__dialog">

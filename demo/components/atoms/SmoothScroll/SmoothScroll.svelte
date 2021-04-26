@@ -14,7 +14,7 @@
 {#if $$slots.default}
   <a
     {href}
-    class={`js-smooth-scroll ${className}`}
+    class="js-smooth-scroll {className}"
     data-duration={duration}
     aria-current={ariaCurrent}
     use:onMount

@@ -7,7 +7,7 @@
 </script>
 
 <button
-  class={`reset anim-menu-btn color-contrast-high js-tab-focus ${className}`}
+  class="reset anim-menu-btn color-contrast-high js-tab-focus {className}"
   aria-label={ariaLabel}
   aria-controls={ariaControls}
   type="button"

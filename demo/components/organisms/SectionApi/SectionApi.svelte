@@ -70,7 +70,7 @@
 <h4><code>hide()</code></h4>
 <hr />
 
-<p>Hide an existing modal and <u>resolve</u> the promise returned from <code>show();</code></p>
+<p>Hide an existing modal and <u>resolve</u> the promise returned from <code>show()</code></p>
 
 <List>
   <li>
@@ -116,7 +116,7 @@
 <h4><code>cancel()</code></h4>
 <hr />
 
-<p>Hide an existing modal and <u>reject</u> the promise returned from <code>show();</code></p>
+<p>Hide an existing modal and <u>reject</u> the promise returned from <code>show()</code></p>
 
 <List>
   <li>

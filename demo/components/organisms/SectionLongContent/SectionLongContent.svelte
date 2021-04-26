@@ -1,51 +1,12 @@
 <script>
-  import smodale from 'smodale';
-  import ModalWithLongText from 'Demo/components/examples/ModalWithLongText';
+  import LongContentExample from 'Demo/components/organisms/SectionLongContent/examples/LongContentExample';
   import Details from 'Demo/components/molecules/Details';
   import CodeSnippet from 'Demo/components/molecules/CodeSnippet';
-
-  const onClick = () => {
-    smodale.show(ModalWithLongText, null, {
-      breakpoints: {
-        '768px': {
-          maxWidth: '500px',
-          margin: '20px',
-          borderRadius: '4px',
-          centered: true,
-          scrollable: true,
-        },
-      },
-    });
-  };
 </script>
 
-<button class="btn btn--accent" type="button" on:click={onClick}>Show long content modal</button>
-
+<LongContentExample />
 <Details class="margin-top-sm" title="Show code">
   <CodeSnippet
-    language="markup"
-    unescaped
-    code={`
-<script>
-  import smodale from 'smodale';
-  import ModalWithLongText from 'Demo/components/examples/ModalWithLongText';
-
-  const onClick = () => {
-    smodale.show(ModalWithLongText, null, {
-      breakpoints: {
-        '768px': {
-          maxWidth: '500px',
-          margin: '20px',
-          borderRadius: '4px',
-          centered: true,
-          scrollable: true,
-        },
-      },
-    });
-  };
-<\/script>
-
-<button class="btn btn--accent" type="button" on:click={onClick}>Show long content modal</button>
-`}
+    data-src="demo/components/organisms/SectionLongContent/examples/LongContentExample.svelte"
   />
 </Details>

@@ -47,7 +47,12 @@ export default (argv) => {
           demo && terser(),
           !demo &&
             browsersync({
-              server: 'public',
+              server: {
+                baseDir: 'public',
+                routes: {
+                  '/demo': 'demo',
+                },
+              },
               port: 5000,
               open: false,
               files: ['public/index.html'],

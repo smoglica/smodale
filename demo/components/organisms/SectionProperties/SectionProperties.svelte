@@ -144,43 +144,43 @@
     <ul>
       <li>
         <code>{'{ string } maxWidth'}</code>
-        <div>Set modal max width.</div>
+        <div>Set max width.</div>
       </li>
       <li>
         <code>{'{ string } margin'}</code>
-        <div>Set modal margin.</div>
+        <div>Set margin.</div>
       </li>
       <li>
         <code>{'{ string } height'}</code>
-        <div>Set modal height.</div>
+        <div>Set height.</div>
       </li>
       <li>
         <code>{'{ string } backgroundColor'}</code>
-        <div>Set modal background color. Default <code>#fff</code>.</div>
+        <div>Set background color. Default <code>#fff</code>.</div>
       </li>
       <li>
         <code>{'{ string } padding'}</code>
-        <div>Set modal padding. Default <code>20px</code>.</div>
+        <div>Set padding. Default <code>20px</code>.</div>
       </li>
       <li>
         <code>{'{ string } borderRadius'}</code>
-        <div>Set modal border radius.</div>
+        <div>Set border radius.</div>
       </li>
       <li>
         <code>{'{ string } backdropColor'}</code>
-        <div>Set modal backdrop color. Default <code>rgba(0, 0, 0, 0.6)</code>.</div>
+        <div>Set backdrop color. Default <code>rgba(0, 0, 0, 0.6)</code>.</div>
       </li>
       <li>
         <code>{'{ string } boxShadow'}</code>
-        <div>Set modal box shadow.</div>
+        <div>Set box shadow.</div>
       </li>
       <li>
         <code>{'{ boolean } centered'}</code>
-        <div>Whether or not modal it's vertically centered.</div>
+        <div>Whether or not vertically centered.</div>
       </li>
       <li>
         <code>{'{ boolean } scrollable'}</code>
-        <div>Whether or not modal content it's scrollable.</div>
+        <div>Whether or not scrollable content.</div>
       </li>
       <li>
         <code>{'{ string } zIndex'}</code>

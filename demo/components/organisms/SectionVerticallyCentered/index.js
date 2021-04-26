@@ -1,1 +1,1 @@
-export { default } from 'Demo/components/organisms/SectionIntroduction/SectionIntroduction';
+export { default } from 'Demo/components/organisms/SectionVerticallyCentered/SectionVerticallyCentered';

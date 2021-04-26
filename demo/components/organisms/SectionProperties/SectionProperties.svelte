@@ -97,7 +97,6 @@
         </blockquote>
         <strong><small>Example:</small></strong>
         <CodeSnippet
-          filename="App.svelte"
           language="markup"
           unescaped
           code={`
@@ -176,7 +175,7 @@
       </li>
       <li>
         <code>{'{ boolean } centered'}</code>
-        <div>Whether or not vertically centered.</div>
+        <div>Whether or not vertically and horizontally centered.</div>
       </li>
       <li>
         <code>{'{ boolean } scrollable'}</code>

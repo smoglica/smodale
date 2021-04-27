@@ -9,6 +9,8 @@ import SectionApi from 'Demo/components/organisms/SectionApi';
 import SectionInstallation from 'Demo/components/organisms/SectionInstallation';
 import SectionIntroduction from 'Demo/components/organisms/SectionIntroduction';
 import SectionSlots from 'Demo/components/organisms/SectionSlots';
+import SectionAnimate from 'Demo/components/organisms/SectionAnimate';
+import SectionBreakpoints from 'Demo/components/organisms/SectionBreakpoints';
 
 export default [
   {
@@ -55,7 +57,7 @@ export default [
     label: 'Examples',
     items: [
       {
-        id: 'vertically-centered',
+        id: 'centered',
         label: 'Centered',
         component: SectionCentered,
       },
@@ -68,6 +70,16 @@ export default [
         id: 'nested-modals',
         label: 'Nested modals',
         component: SectionNestedModals,
+      },
+      {
+        id: 'animate',
+        label: 'Animate',
+        component: SectionAnimate,
+      },
+      {
+        id: 'breakpoints',
+        label: 'Breakpoints',
+        component: SectionBreakpoints,
       },
     ],
   },

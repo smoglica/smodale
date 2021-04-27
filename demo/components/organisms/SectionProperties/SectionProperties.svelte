@@ -100,28 +100,29 @@
           language="markup"
           unescaped
           code={`
-    <script>
-      import smodale, { Modal } from 'smodale';
-    
-      const modalProps = {
-        breakpoints: {
-          // @media (min-width: 768px)
-          '768px': {
-            maxWidth: '450px',
-            centered: true,
-            borderRadius: 'var(--radius-md)',
-          },
-          // @media (min-width: 64rem)
-          '64rem': {
-            maxWidth: '650px',
-          },
-        },
-      };
-    
-      smodale.show('modal-name');
-    <\/script>
-    
-    <Modal name="modal-name" {...modalProps}>...</Modal>
+<script>
+  import smodale, { Modal } from 'smodale';
+
+  const modalProps = {
+    name: 'modal-name',
+    breakpoints: {
+      // @media (min-width: 768px)
+      '768px': {
+        maxWidth: '450px',
+        centered: true,
+        borderRadius: 'var(--radius-md)',
+      },
+      // @media (min-width: 64rem)
+      '64rem': {
+        maxWidth: '650px',
+      },
+    },
+  };
+
+  smodale.show('modal-name');
+<\/script>
+
+<Modal {...modalProps}>...</Modal>
     `}
         />
       </li>

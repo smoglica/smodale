@@ -9,7 +9,7 @@ import SectionApi from 'Demo/components/organisms/SectionApi';
 import SectionInstallation from 'Demo/components/organisms/SectionInstallation';
 import SectionIntroduction from 'Demo/components/organisms/SectionIntroduction';
 import SectionSlots from 'Demo/components/organisms/SectionSlots';
-import SectionAnimate from 'Demo/components/organisms/SectionAnimate';
+import SectionTransition from 'Demo/components/organisms/SectionTransition';
 import SectionBreakpoints from 'Demo/components/organisms/SectionBreakpoints';
 
 export default [
@@ -72,9 +72,9 @@ export default [
         component: SectionNestedModals,
       },
       {
-        id: 'animate',
-        label: 'Animate',
-        component: SectionAnimate,
+        id: 'transition',
+        label: 'Transition',
+        component: SectionTransition,
       },
       {
         id: 'breakpoints',

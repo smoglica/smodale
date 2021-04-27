@@ -11,6 +11,7 @@ import SectionIntroduction from 'Demo/components/organisms/SectionIntroduction';
 import SectionSlots from 'Demo/components/organisms/SectionSlots';
 import SectionTransition from 'Demo/components/organisms/SectionTransition';
 import SectionBreakpoints from 'Demo/components/organisms/SectionBreakpoints';
+import SectionVideo from 'Demo/components/organisms/SectionVideo';
 
 export default [
   {
@@ -80,6 +81,11 @@ export default [
         id: 'breakpoints',
         label: 'Breakpoints',
         component: SectionBreakpoints,
+      },
+      {
+        id: 'video',
+        label: 'Video',
+        component: SectionVideo,
       },
     ],
   },

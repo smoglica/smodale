@@ -1,5 +1,12 @@
-<p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia officiis at
-  corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse alias quidem. Quia debitis
-  velit autem facilis.
-</p>
+<script>
+  import NestedModalsExample from 'Demo/components/organisms/SectionNestedModals/NestedModalsExample';
+  import CodeSnippet from 'Demo/components/molecules/CodeSnippet';
+  import Details from 'Demo/components/molecules/Details';
+</script>
+
+<NestedModalsExample />
+<Details class="margin-top-sm" title="Show code">
+  <CodeSnippet
+    data-src="demo/components/organisms/SectionNestedModals/NestedModalsExample.svelte"
+  />
+</Details>

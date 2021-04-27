@@ -22,14 +22,14 @@
     transitionParams: { duration: 150 },
     breakpoints: {
       '32rem': {
-        maxWidth: '500px',
+        maxWidth: 'var(--max-width-xxs)',
         margin: 'var(--component-padding)',
         borderRadius: 'var(--radius-md)',
         scrollable: true,
         centered: true,
       },
       '48rem': {
-        maxWidth: '800px',
+        maxWidth: 'var(--max-width-sm)',
       },
     },
   };

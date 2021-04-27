@@ -5,10 +5,10 @@
   const onClick = () =>
     smodale.show(ModalWithCloseBtnInHeader, null, {
       breakpoints: {
-        '768px': {
-          maxWidth: '500px',
-          margin: '20px auto',
-          borderRadius: '4px',
+        '32rem': {
+          maxWidth: 'var(--max-width-xxs)',
+          margin: 'var(--component-padding) auto',
+          borderRadius: 'var(--radius-md)',
         },
       },
     });

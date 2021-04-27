@@ -13,12 +13,12 @@
         '32rem': {
           borderRadius: 'var(--radius-md)',
           margin: 'var(--component-padding)',
-          maxWidth: '500px',
+          maxWidth: 'var(--max-width-xxs)',
           centered: true,
           scrollable: true,
         },
         '48rem': {
-          maxWidth: '800px',
+          maxWidth: 'var(--max-width-sm)',
         },
       },
     });

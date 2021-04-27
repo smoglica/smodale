@@ -5,10 +5,10 @@
   const onClick = () => {
     smodale.show(ModalWithLongText, null, {
       breakpoints: {
-        '768px': {
-          maxWidth: '500px',
-          margin: '20px',
-          borderRadius: '4px',
+        '32rem': {
+          maxWidth: 'var(--max-width-xxs)',
+          margin: 'var(--component-padding)',
+          borderRadius: 'var(--radius-md)',
           centered: true,
           scrollable: true,
         },

@@ -17,7 +17,7 @@
           boxShadow: '0 0 20px 3px rgba(0, 0, 0, 0.3)',
           maxWidth: 'var(--max-width-xs)',
         },
-        '1280px': {
+        '80rem': {
           centered: false,
           margin: 'var(--component-padding) auto',
           backgroundColor: 'rgba(255, 255, 255, 0.9)',

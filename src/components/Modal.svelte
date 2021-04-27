@@ -32,7 +32,25 @@
 
   $: modal = [...$store.dynamic, ...$store.static].find((m) => m?.props?.name === name);
   $: sortedBreakpoints = Object.entries(breakpoints)
-    .map(([key, value]) => [key, value, parseInt(key.replace(/px|em|rem/, ''), 10)])
+    .map(([key, value]) => {
+      const regex = /px|em|rem/;
+      const [unit] = key.match(regex) || [];
+      let rawValue = parseInt(key.replace(regex, ''), 10);
+
+      if (unit && ['em', 'rem'].includes(unit)) {
+        const rootFontSize = parseInt(
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue('font-size')
+            .replace('px', ''),
+          10,
+        );
+
+        rawValue *= rootFontSize;
+      }
+
+      return [key, value, rawValue];
+    })
     .sort((a, b) => b[2] - a[2])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   $: sortedBreakpointList = Object.entries(sortedBreakpoints);

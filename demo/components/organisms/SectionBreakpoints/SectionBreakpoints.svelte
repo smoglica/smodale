@@ -1,5 +1,10 @@
-<p>
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita repellendus voluptas doloremque
-  dolorem provident iure eos, maiores fuga alias iste et, quaerat repellat, quos at tempora soluta
-  asperiores aliquam rem.
-</p>
+<script>
+  import Details from 'Demo/components/molecules/Details';
+  import CodeSnippet from 'Demo/components/molecules/CodeSnippet';
+  import BreakpointsExample from 'Demo/components/organisms/SectionBreakpoints/BreakpointsExample';
+</script>
+
+<BreakpointsExample />
+<Details class="margin-top-sm" title="Show code">
+  <CodeSnippet data-src="demo/components/organisms/SectionBreakpoints/BreakpointsExample.svelte" />
+</Details>

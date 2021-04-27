@@ -15,17 +15,20 @@ export const notify = (text, options) => {
   });
 };
 
-export const notifyWarning = (text, options) => notify(text, {
-  ...options,
-  type: NotificationTypeEnum.WARNING,
-});
+export const notifyWarning = (text, options) =>
+  notify(text, {
+    ...options,
+    type: NotificationTypeEnum.WARNING,
+  });
 
-export const notifyError = (text, options) => notify(text, {
-  ...options,
-  type: NotificationTypeEnum.DANGER,
-});
+export const notifyError = (text, options) =>
+  notify(text, {
+    ...options,
+    type: NotificationTypeEnum.DANGER,
+  });
 
-export const notifySuccess = (text, options) => notify(text, {
-  ...options,
-  type: NotificationTypeEnum.SUCCESS,
-});
+export const notifySuccess = (text, options) =>
+  notify(text, {
+    ...options,
+    type: NotificationTypeEnum.SUCCESS,
+  });

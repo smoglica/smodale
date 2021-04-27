@@ -15,6 +15,8 @@
   import routes from 'Demo/routes';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';
 
+  $: sections = routes.reduce((acc, route) => [...acc, ...route.items], []);
+
   const modalProps = {
     name: 'example',
     padding: 'var(--component-padding)',
@@ -41,9 +43,7 @@
       .show('example')
       .then(() => notifySuccess('Hide: Confirmed'))
       .catch((data) => notifyWarning(`Cancel${data ? `: <code>${data}</code>` : ''}`));
-  const showDynamicModal = () => {
-    smodale.show(ModalWithModal, null, modalProps, { closed, opened });
-  };
+  const showDynamicModal = () => smodale.show(ModalWithModal, null, modalProps, { closed, opened });
   const onSidenavListItemClick = (sidebar) => {
     if (sidebar.layout !== 'mobile') {
       return;
@@ -51,7 +51,6 @@
 
     sidebar.close();
   };
-  $: sections = routes.reduce((acc, route) => [...acc, ...route.items], []);
 </script>
 
 <Notifications>

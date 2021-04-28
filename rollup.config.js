@@ -23,31 +23,61 @@ export default (argv) => {
     .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
     .replace(/^\w/, (m) => m.toUpperCase())
     .replace(/-\w/g, (m) => m[1].toUpperCase());
+  const watchOrDemo = watch || demo;
+  const commonPlugins = [
+    svelte({ preprocess, compilerOptions: { dev: !demo } }),
+    resolve({
+      browser: true,
+      dedupe: ['svelte'],
+      extensions,
+    }),
+    image(),
+    json(),
+    alias({
+      entries: aliases.map(([find, replacement]) => ({ find, replacement })),
+    }),
+  ];
 
-  return watch || demo
-    ? {
-        input: 'demo/main',
-        output: {
-          sourcemap: true,
-          format: 'iife',
-          name: 'app',
-          file: 'public/bundle.js',
+  return watchOrDemo
+    ? [
+        watchOrDemo && {
+          input: 'demo/main',
+          output: {
+            format: 'es',
+            file: 'public/dist/main.esm.js',
+            sourcemap: true,
+            exports: 'named',
+          },
+          plugins: [
+            ...commonPlugins,
+            css({ output: 'main.css' }),
+            !demo &&
+              browsersync({
+                server: {
+                  baseDir: 'public',
+                  routes: {
+                    '/demo': 'demo',
+                  },
+                },
+                port: 5000,
+                open: false,
+                files: ['public/index.html'],
+              }),
+            demo && terser(),
+          ].filter(Boolean),
         },
-        plugins: [
-          commonjs(),
-          svelte({ preprocess, compilerOptions: { dev: !demo } }),
-          css({ output: 'bundle.css' }),
-          resolve({
-            browser: true,
-            dedupe: ['svelte'],
-            extensions,
-          }),
-          image(),
-          json(),
-          alias({
-            entries: aliases.map(([find, replacement]) => ({ find, replacement })),
-          }),
-          demo &&
+        demo && {
+          input: 'demo/main',
+          output: {
+            sourcemap: true,
+            format: 'iife',
+            name: 'app',
+            file: 'public/dist/main.js',
+          },
+          plugins: [
+            ...commonPlugins,
+            commonjs(),
+            css({ output: false }),
             babel({
               extensions: ['.js', '.svelte'],
               presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3 }]],
@@ -55,21 +85,10 @@ export default (argv) => {
               exclude: [/core-js/],
               plugins: ['@babel/plugin-transform-runtime'],
             }),
-          demo && terser(),
-          !demo &&
-            browsersync({
-              server: {
-                baseDir: 'public',
-                routes: {
-                  '/demo': 'demo',
-                },
-              },
-              port: 5000,
-              open: false,
-              files: ['public/index.html'],
-            }),
-        ].filter(Boolean),
-      }
+            terser(),
+          ],
+        },
+      ].filter(Boolean)
     : {
         input: 'src',
         output: [

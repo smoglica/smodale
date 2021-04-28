@@ -4,6 +4,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   plugins: ['svelte3'],
   extends: ['airbnb-base'],

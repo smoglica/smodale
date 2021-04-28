@@ -51,8 +51,9 @@ export default (argv) => {
             babel({
               extensions: ['.js', '.svelte'],
               presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3 }]],
-              babelHelpers: 'bundled',
+              babelHelpers: 'runtime',
               exclude: [/core-js/],
+              plugins: ['@babel/plugin-transform-runtime'],
             }),
           demo && terser(),
           !demo &&

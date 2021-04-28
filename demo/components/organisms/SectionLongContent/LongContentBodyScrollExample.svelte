@@ -30,7 +30,7 @@
       <h2>Modal title</h2>
     </header>
     <main>
-      {#each Array(6) as n, i}
+      {#each Array(10) as n, i}
         <p>
           {i + 1}. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis consequuntur
           odio natus veritatis, cupiditate iusto velit numquam at voluptates. Laudantium, deleniti

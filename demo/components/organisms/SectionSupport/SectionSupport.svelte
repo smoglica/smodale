@@ -1,5 +1,11 @@
 <p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia officiis at
-  corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse alias quidem. Quia debitis
-  velit autem facilis.
+  Smodale module targets modern browsers. However if you want to support older browsers make sure to
+  transpile <code>ECMAScript 2020</code> and provide
+  <a
+    target="_blank"
+    ref="noopener noreferrer"
+    href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#polyfill"
+  >
+    closest polyfill
+  </a>to your code.
 </p>

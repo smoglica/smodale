@@ -1,5 +1,23 @@
+<script>
+  import CodeSnippet from 'Demo/components/molecules/CodeSnippet';
+</script>
+
+<h3><code>Uncaught (in promise)</code></h3>
+<hr />
+
 <p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptatem! Officia officiis at
-  corrupti minima. Libero deserunt tenetur sunt incidunt ullam illum esse alias quidem. Quia debitis
-  velit autem facilis.
+  This console error happens when the returned promise from <code>show()</code> method has been
+  rejected through the <code>cancel()</code> method and has no rejection handler.
 </p>
+
+<p>
+  You can prevent that from happening by handling the rejection with the <code>catch</code> block:
+</p>
+
+<CodeSnippet
+  code={`
+  import smodale from 'smodale';
+
+  smodale.show().catch(() => {});
+  `}
+/>

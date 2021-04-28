@@ -1,8 +1,10 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import image from '@rollup/plugin-image';
 import alias from '@rollup/plugin-alias';
 import json from '@rollup/plugin-json';
+import { babel } from '@rollup/plugin-babel';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
 import browsersync from 'rollup-plugin-browsersync';
@@ -32,6 +34,7 @@ export default (argv) => {
           file: 'public/bundle.js',
         },
         plugins: [
+          commonjs(),
           svelte({ preprocess, compilerOptions: { dev: !demo } }),
           css({ output: 'bundle.css' }),
           resolve({
@@ -44,6 +47,13 @@ export default (argv) => {
           alias({
             entries: aliases.map(([find, replacement]) => ({ find, replacement })),
           }),
+          demo &&
+            babel({
+              extensions: ['.js', '.svelte'],
+              presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3 }]],
+              babelHelpers: 'bundled',
+              exclude: [/core-js/],
+            }),
           demo && terser(),
           !demo &&
             browsersync({

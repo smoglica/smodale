@@ -8,6 +8,7 @@ module.exports = {
     '^.+\\.svelte$': ['svelte-jester', { preprocess: true }],
   },
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'svelte'],
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   moduleNameMapper: {
     '^smodale/(.*)$': '<rootDir>/src/$1',
   },

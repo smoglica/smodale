@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modals should instantiate correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="js-modals"
+    />
+  </div>
+</body>
+`;

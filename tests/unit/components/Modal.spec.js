@@ -1,5 +1,5 @@
 import { render } from '@testing-library/svelte';
-import Modal, { toggleClass, toInlineCss } from 'smodale/components/Modal';
+import Modal, { toggleClass, toInlineCss, resizeObserverSupported } from 'smodale/components/Modal';
 
 describe('Modal', () => {
   let wrapper;
@@ -37,6 +37,18 @@ describe('Modal', () => {
           zIndex: 100,
         })
       );
+    });
+  });
+
+  describe('resizeObserverSupported', () => {
+    it('should be truthy when supported', () => {
+      expect(resizeObserverSupported()).toBeFalsy();
+
+      jest.spyOn(window, 'window', 'get').mockImplementation(() => ({
+        ResizeObserver: {},
+      }));
+
+      expect(resizeObserverSupported()).toBeTruthy();
     });
   });
 });

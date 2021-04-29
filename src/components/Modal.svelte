@@ -1,4 +1,5 @@
 <script context="module">
+  export const resizeObserverSupported = () => 'ResizeObserver' in window;
   export const ModalDismissReasons = Object.freeze({
     BACKDROP_CLICK: 'BACKDROP_CLICK',
     ESC: 'ESC',
@@ -63,7 +64,7 @@
             .getComputedStyle(document.documentElement)
             .getPropertyValue('font-size')
             .replace('px', ''),
-          10
+          10,
         );
 
         rawValue *= rootFontSize;
@@ -78,7 +79,7 @@
   const getAndSetFocusableElms = (elm) => {
     const allFocusableElm = [
       ...elm.querySelectorAll(
-        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary'
+        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
       ),
     ];
 
@@ -113,7 +114,6 @@
     }
   };
 
-  const resizeObserverSupported = 'ResizeObserver' in window;
   const emit = createEventDispatcher();
   const hide = (data) => modal?.hide(name, data);
   const cancel = (data) => modal?.cancel(name, data);
@@ -158,7 +158,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
     );
 
     currentBreakpoint = {
@@ -166,16 +166,16 @@
       config:
         index > -1
           ? sortedBreakpointList
-              .filter((item, i) => index <= i)
-              .reverse()
-              .reduce(
-                // eslint-disable-next-line no-unused-vars
-                (acc, [key, value]) => ({
-                  ...acc,
-                  ...value,
-                }),
-                { height: 'auto', ...defaults }
-              )
+            .filter((item, i) => index <= i)
+            .reverse()
+            .reduce(
+              // eslint-disable-next-line no-unused-vars
+              (acc, [key, value]) => ({
+                ...acc,
+                ...value,
+              }),
+              { height: 'auto', ...defaults },
+            )
           : defaults,
     };
   };
@@ -210,7 +210,7 @@
 
     let resizeObserver = null;
 
-    if (resizeObserverSupported) {
+    if (resizeObserverSupported()) {
       resizeObserver = new ResizeObserver(onWindowResize);
       resizeObserver.observe(elm);
     } else {
@@ -290,7 +290,7 @@
           window.removeEventListener('keydown', onWindowKeydown);
         }
 
-        if (resizeObserverSupported && resizeObserver) {
+        if (resizeObserverSupported() && resizeObserver) {
           resizeObserver.disconnect();
         } else {
           window.removeEventListener('resize', onWindowResize);

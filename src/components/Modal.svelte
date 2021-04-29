@@ -3,6 +3,14 @@
     BACKDROP_CLICK: 'BACKDROP_CLICK',
     ESC: 'ESC',
   });
+
+  export const toggleClass = (elm, className, bool) => {
+    if (bool) {
+      return elm.classList.add(className);
+    }
+
+    return elm.classList.remove(className);
+  };
 </script>
 
 <script>
@@ -43,7 +51,7 @@
             .getComputedStyle(document.documentElement)
             .getPropertyValue('font-size')
             .replace('px', ''),
-          10,
+          10
         );
 
         rawValue *= rootFontSize;
@@ -58,7 +66,7 @@
   const getAndSetFocusableElms = (elm) => {
     const allFocusableElm = [
       ...elm.querySelectorAll(
-        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary',
+        '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary'
       ),
     ];
 
@@ -138,7 +146,7 @@
     }
 
     const index = sortedBreakpointList.findIndex(
-      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches,
+      ([breakpoint]) => window.matchMedia(`(min-width: ${breakpoint})`).matches
     );
 
     currentBreakpoint = {
@@ -146,26 +154,18 @@
       config:
         index > -1
           ? sortedBreakpointList
-            .filter((item, i) => index <= i)
-            .reverse()
-            .reduce(
-              // eslint-disable-next-line no-unused-vars
-              (acc, [key, value]) => ({
-                ...acc,
-                ...value,
-              }),
-              { height: 'auto', ...defaults },
-            )
+              .filter((item, i) => index <= i)
+              .reverse()
+              .reduce(
+                // eslint-disable-next-line no-unused-vars
+                (acc, [key, value]) => ({
+                  ...acc,
+                  ...value,
+                }),
+                { height: 'auto', ...defaults }
+              )
           : defaults,
     };
-  };
-
-  const toggleClass = (elm, className, bool) => {
-    if (bool) {
-      return elm.classList.add(className);
-    }
-
-    return elm.classList.remove(className);
   };
 
   const toInlineCss = (elm = {}, styles = {}) => {

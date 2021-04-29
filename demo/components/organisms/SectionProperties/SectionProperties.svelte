@@ -130,7 +130,7 @@
   </li>
   <li>
     <strong>Style properties</strong>
-    <p>Properties that can be also used in the generic <code>breakpoint</code> property.</p>
+    <p>Properties that can be also used in the generic <code>breakpoints</code> property.</p>
     <p>
       When properties are <code>string</code> type,
       <a

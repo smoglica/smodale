@@ -11,6 +11,18 @@
 
     return elm.classList.remove(className);
   };
+
+  export const toInlineCss = (elm = {}, styles = {}) => {
+    const el = elm;
+
+    Object.entries(styles).forEach(([key, value]) => {
+      if (!(key in el?.style)) {
+        return;
+      }
+
+      el.style[key] = value || '';
+    });
+  };
 </script>
 
 <script>
@@ -166,18 +178,6 @@
               )
           : defaults,
     };
-  };
-
-  const toInlineCss = (elm = {}, styles = {}) => {
-    const el = elm;
-
-    Object.entries(styles).forEach(([key, value]) => {
-      if (!(key in el?.style)) {
-        return;
-      }
-
-      el.style[key] = value || '';
-    });
   };
 
   const throttle = (callback, wait, immediate = false) => {

@@ -17,7 +17,7 @@
     const el = elm;
 
     Object.entries(styles).forEach(([key, value]) => {
-      if (!(key in el?.style)) {
+      if (!(key in el.style)) {
         return;
       }
 
@@ -52,7 +52,7 @@
   let lastFocusableElm;
 
   $: modals = [...$store.dynamic, ...$store.static];
-  $: modal = modals.find((m) => m?.props?.name === name);
+  $: modal = modals.find((m) => m.props.name === name);
   $: sortedBreakpoints = Object.entries(breakpoints)
     .map(([key, value]) => {
       const regex = /px|em|rem/;
@@ -89,7 +89,7 @@
     }
 
     const elmIsVisible = (element) =>
-      element?.offsetWidth || element?.offsetHeight || element?.getClientRects()?.length;
+      element.offsetWidth || element.offsetHeight || element.getClientRects().length;
 
     for (let i = 0; i < allFocusableElm.length; i += 1) {
       const el = allFocusableElm[i];
@@ -116,8 +116,8 @@
   };
 
   const emit = createEventDispatcher();
-  const hide = (data) => modal?.hide(name, data);
-  const cancel = (data) => modal?.cancel(name, data);
+  const hide = (data) => modal.hide(name, data);
+  const cancel = (data) => modal.cancel(name, data);
   const onUnhandledrejection = (event) => event.preventDefault();
   const onModalClick = ({ target }) => {
     if (target.closest('.js-modal__content')) {
@@ -127,14 +127,14 @@
     cancel(ModalDismissReasons.BACKDROP_CLICK);
   };
   const onWindowKeydown = (event) => {
-    if (!event?.keyCode === 27 || event?.key?.toLowerCase() !== 'escape') {
+    if (!event.keyCode === 27 || event.key !== 'Escape') {
       return;
     }
 
     cancel(ModalDismissReasons.ESC);
   };
   const onModalKeydown = (event) => {
-    if (!event?.keyCode === 9 || event?.key?.toLowerCase() !== 'tab') {
+    if (!event.keyCode === 9 || event.key !== 'Tab') {
       return;
     }
 
@@ -256,7 +256,7 @@
           centered,
           scrollable,
           zIndex = '50',
-        } = currentBreakpoint?.config || {};
+        } = currentBreakpoint.config || {};
 
         toggleClass(elm, 'modal--centered', centered);
         toggleClass(elm, 'modal--scrollable', scrollable);

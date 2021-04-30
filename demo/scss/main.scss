@@ -1,6 +1,7 @@
 :global {
   @import 'codyhouse-framework/main/assets/css/base';
   @import 'codyhouse-framework/main/assets/css/custom-style';
+  @import 'demo/scss/common';
 
   code:not(code[class*='language-']) {
     font-family: var(--font-mono);
@@ -16,10 +17,4 @@
   .font-mono {
     font-family: var(--font-mono);
   }
-}
-
-:root {
-  --font-primary: 'Inter', system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
-    monospace;
 }

@@ -22,7 +22,7 @@
           margin: 'var(--component-padding) auto',
           backgroundColor: 'rgba(255, 255, 255, 0.9)',
           borderRadius: 'var(--radius-lg)',
-          boxShadow: '0 0 20px 3px hsl(220, 90%, 70%, 0.6)',
+          boxShadow: '0 0 20px 3px hsl(7, 87%, 57%, 0.3)',
           maxWidth: '48rem',
         },
       },

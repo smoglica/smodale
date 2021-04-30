@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  You can prevent that from happening by handling the rejection with the <code>catch</code> block:
+  You can prevent that from happening by handling the rejection with the <code>catch</code> block
 </p>
 
 <CodeSnippet
@@ -19,5 +19,15 @@
   import smodale from 'smodale';
 
   smodale.show().catch(() => {});
+  `}
+/>
+
+<p>
+  Another solution could be preventing the unhandled rejection event from <code>window</code> object
+</p>
+
+<CodeSnippet
+  code={`
+  window.addEventListener('unhandledrejection', (event) => event.preventDefault());
   `}
 />

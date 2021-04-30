@@ -39,7 +39,7 @@ export default (argv) => {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(watch ? 'development' : 'production'),
-      'process.env.GA_PROPERTY_ID': JSON.stringify('G-DWTF185SQV'),
+      'process.env.GA_MEASUREMENT_ID': JSON.stringify('G-DWTF185SQV'),
       preventAssignment: true,
     }),
   ];

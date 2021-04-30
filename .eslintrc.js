@@ -14,7 +14,6 @@ module.exports = {
   },
   globals: {
     Util: true,
-    dataLayer: true,
   },
   overrides: [
     {

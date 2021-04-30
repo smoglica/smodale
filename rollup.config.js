@@ -9,6 +9,7 @@ import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
 import browsersync from 'rollup-plugin-browsersync';
 import { terser } from 'rollup-plugin-terser';
+import replace from '@rollup/plugin-replace';
 import pkg from './package.json';
 
 const { settings } = require('./.eslintrc');
@@ -25,16 +26,20 @@ export default (argv) => {
     .replace(/-\w/g, (m) => m[1].toUpperCase());
   const watchOrDemo = watch || demo;
   const commonPlugins = [
+    image(),
+    json(),
     svelte({ preprocess, compilerOptions: { dev: !demo } }),
     resolve({
       browser: true,
       dedupe: ['svelte'],
       extensions,
     }),
-    image(),
-    json(),
     alias({
       entries: aliases.map(([find, replacement]) => ({ find, replacement })),
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(watch ? 'development' : 'production'),
+      preventAssignment: true,
     }),
   ];
 

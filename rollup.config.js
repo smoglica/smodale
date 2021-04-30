@@ -39,7 +39,7 @@ export default (argv) => {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(watch ? 'development' : 'production'),
-      'process.env.GA_PROPERTY_ID': JSON.stringify('G-K01G7CKPDV'),
+      'process.env.GA_PROPERTY_ID': JSON.stringify('G-DWTF185SQV'),
       preventAssignment: true,
     }),
   ];
@@ -50,7 +50,7 @@ export default (argv) => {
           input: 'demo/main',
           output: {
             format: 'es',
-            file: 'docs/dist/main.esm.js',
+            file: 'demo/public/dist/main.esm.js',
             sourcemap: true,
             exports: 'named',
           },
@@ -60,14 +60,14 @@ export default (argv) => {
             !demo &&
               browsersync({
                 server: {
-                  baseDir: 'docs',
+                  baseDir: 'demo/public',
                   routes: {
                     '/demo': 'demo',
                   },
                 },
                 port: 5000,
                 open: false,
-                files: ['docs/index.html'],
+                files: ['demo/public/index.html'],
               }),
             demo && terser(),
           ].filter(Boolean),
@@ -78,7 +78,7 @@ export default (argv) => {
             sourcemap: true,
             format: 'iife',
             name: 'app',
-            file: 'docs/dist/main.js',
+            file: 'demo/public/dist/main.js',
           },
           plugins: [
             ...commonPlugins,

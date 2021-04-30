@@ -56,8 +56,8 @@
       </div>
     </div>
   </aside>
-  <main class="position-relative flex-grow height-100%">
-    <div class="padding-md">
+  <main class="position-relative flex-grow height-100% overflow-auto">
+    <div class="padding-md@md">
       <slot prop={{ sidebar }} />
     </div>
   </main>

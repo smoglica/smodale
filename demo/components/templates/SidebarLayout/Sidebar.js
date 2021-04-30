@@ -10,6 +10,7 @@ function closeSidebar(instance) {
 
   // mobile layout only
   Util.removeClass(sidebar.element, sidebar.showClass);
+  Util.removeClass(document.body, 'overflow-hidden');
   sidebar.firstFocusable = null;
   sidebar.lastFocusable = null;
 
@@ -109,6 +110,7 @@ function getFocusableElements(sidebar) {
 function showSidebar(sidebar) {
   // mobile layout only
   Util.addClass(sidebar.element, sidebar.showClass);
+  Util.addClass(document.body, 'overflow-hidden');
   getFocusableElements(sidebar);
   Util.moveFocus(sidebar.element);
 }

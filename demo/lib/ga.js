@@ -16,6 +16,6 @@ export default () => {
 
   ga.l = +new Date();
 
-  ga('create', 'UA-XXXXX-Y', 'auto');
+  ga('create', 'G-K01G7CKPDV', 'auto');
   ga('send', 'pageview', { anonymizeIp: true });
 };

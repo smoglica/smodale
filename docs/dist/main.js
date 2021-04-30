@@ -6451,7 +6451,7 @@ var app = (function () {
           (u = To('div')),
           ((s = To('h1')).textContent = 'Smodale'),
           (l = _o()),
-          ((f = To('small')).textContent = ''.concat('v'.concat('1.0.0'))),
+          ((f = To('small')).textContent = ''.concat('v'.concat('1.0.2'))),
           (d = _o()),
           (p = To('button')),
           (m = To('img')),
@@ -13117,7 +13117,7 @@ var app = (function () {
         (n = t.q = t.q || []).push.apply(n, arguments);
       }),
     (ga.l = +new Date()),
-    ga('create', 'UA-XXXXX-Y', 'auto'),
+    ga('create', 'G-K01G7CKPDV', 'auto'),
     ga('send', 'pageview', { anonymizeIp: !0 }),
     new bh({ target: document.body })
   );

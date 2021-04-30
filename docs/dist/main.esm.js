@@ -209,7 +209,7 @@ function U() {
   if (!D) throw new Error('Function called outside component initialization');
   return D;
 }
-function Y() {
+function K() {
   const e = U();
   return (t, n) => {
     const o = e.$$.callbacks[t];
@@ -224,15 +224,15 @@ function Y() {
 function V(e, t) {
   U().$$.context.set(e, t);
 }
-function K(e) {
+function G(e) {
   return U().$$.context.get(e);
 }
-function X(e, t) {
+function Y(e, t) {
   const n = e.$$.callbacks[t.type];
   n && n.slice().forEach((e) => e(t));
 }
-const G = [],
-  Z = [],
+const Z = [],
+  X = [],
   J = [],
   Q = [],
   ee = Promise.resolve();
@@ -249,17 +249,17 @@ function ie() {
   if (!se) {
     se = !0;
     do {
-      for (let e = 0; e < G.length; e += 1) {
-        const t = G[e];
+      for (let e = 0; e < Z.length; e += 1) {
+        const t = Z[e];
         I(t), ae(t.$$);
       }
-      for (I(null), G.length = 0; Z.length; ) Z.pop()();
+      for (I(null), Z.length = 0; X.length; ) X.pop()();
       for (let e = 0; e < J.length; e += 1) {
         const t = J[e];
         re.has(t) || (re.add(t), t());
       }
       J.length = 0;
-    } while (G.length);
+    } while (Z.length);
     for (; Q.length; ) Q.pop()();
     (te = !1), (se = !1), re.clear();
   }
@@ -570,7 +570,7 @@ function Le(t, n, o, i, a, l, c = [-1]) {
               (!u.skip_bound && u.bound[e] && u.bound[e](s),
               m &&
                 (function (e, t) {
-                  -1 === e.$$.dirty[0] && (G.push(e), ne(), e.$$.dirty.fill(0)),
+                  -1 === e.$$.dirty[0] && (Z.push(e), ne(), e.$$.dirty.fill(0)),
                     (e.$$.dirty[(t / 31) | 0] |= 1 << t % 31);
                 })(t, e)),
             n
@@ -708,7 +708,7 @@ var Oe = {
   },
 };
 const ze = { hide: () => ({}), cancel: () => ({}), component: null },
-  De = () => K(ze);
+  De = () => G(ze);
 function Re(e) {
   let t, n, o, s, r, a, l, c;
   const u = e[13].default,
@@ -793,7 +793,7 @@ function We(e) {
 const Be = () => 'ResizeObserver' in window,
   Ie = Object.freeze({ BACKDROP_CLICK: 'BACKDROP_CLICK', ESC: 'ESC' }),
   Ue = (e, t, n) => (n ? e.classList.add(t) : e.classList.remove(t)),
-  Ye = (e = {}, t = {}) => {
+  Ke = (e = {}, t = {}) => {
     const n = e;
     Object.entries(t).forEach(([e, t]) => {
       e in n.style && (n.style[e] = t || '');
@@ -821,7 +821,7 @@ function Ve(e, t, o) {
       ...E
     } = u;
   let L, T, _, F;
-  const j = Y(),
+  const j = K(),
     q = (e) => r.cancel(b, e),
     H = ({ target: e }) => {
       e.closest('.js-modal__content') || q(Ie.BACKDROP_CLICK);
@@ -906,7 +906,7 @@ function Ve(e, t, o) {
         let t = null;
         return (
           Be() ? ((t = new ResizeObserver(z)), t.observe(e)) : window.addEventListener('resize', z),
-          k && Ye(document.body, { overflow: 'hidden' }),
+          k && Ke(document.body, { overflow: 'hidden' }),
           S &&
             (((e) => {
               const t = [
@@ -953,8 +953,8 @@ function Ve(e, t, o) {
               } = T.config || {};
               Ue(e, 'modal--centered', c),
                 Ue(e, 'modal--scrollable', d),
-                Ye(e, { zIndex: u, backgroundColor: a }),
-                Ye(L, {
+                Ke(e, { zIndex: u, backgroundColor: a }),
+                Ke(L, {
                   maxWidth: t,
                   height: o,
                   margin: n,
@@ -966,7 +966,7 @@ function Ve(e, t, o) {
             },
             destroy() {
               j('closed'),
-                k && !s.length && Ye(document.body, { overflow: '' }),
+                k && !s.length && Ke(document.body, { overflow: '' }),
                 S && M && e.removeEventListener('keydown', N),
                 C && e.removeEventListener('click', H),
                 y && window.removeEventListener('keydown', P),
@@ -982,23 +982,23 @@ function Ve(e, t, o) {
       h,
       m,
       function (e) {
-        Z[e ? 'unshift' : 'push'](() => {
+        X[e ? 'unshift' : 'push'](() => {
           (L = e), o(0, L);
         });
       },
     ]
   );
 }
-class Ke extends Te {
+class Ge extends Te {
   constructor(e) {
     super(), Le(this, e, Ve, We, a, {}, [-1, -1]);
   }
 }
-function Xe(e, t, n) {
+function Ye(e, t, n) {
   const o = e.slice();
   return (o[1] = t[n]), o;
 }
-function Ge(e) {
+function Ze(e) {
   let t, o, s;
   const r = [e[1].componentProps];
   var i = e[1].component;
@@ -1044,13 +1044,13 @@ function Ge(e) {
     }
   );
 }
-function Ze(e, t) {
+function Xe(e, t) {
   let o, s, r;
   const a = [t[1].props];
-  let l = { $$slots: { default: [Ge] }, $$scope: { ctx: t } };
+  let l = { $$slots: { default: [Ze] }, $$scope: { ctx: t } };
   for (let e = 0; e < a.length; e += 1) l = n(l, a[e]);
   return (
-    (s = new Ke({ props: l })),
+    (s = new Ge({ props: l })),
     s.$on('opened', function () {
       i(t[1].events && t[1].events.opened) &&
         (t[1].events && t[1].events.opened).apply(this, arguments);
@@ -1093,9 +1093,9 @@ function Je(e) {
     r = e[0].dynamic;
   const i = (e) => e[1].props.name;
   for (let t = 0; t < r.length; t += 1) {
-    let n = Xe(e, r, t),
+    let n = Ye(e, r, t),
       a = i(n);
-    s.set(a, (o[t] = Ze(a, n)));
+    s.set(a, (o[t] = Xe(a, n)));
   }
   return {
     c() {
@@ -1109,7 +1109,7 @@ function Je(e) {
       n = !0;
     },
     p(e, [n]) {
-      1 & n && ((r = e[0].dynamic), pe(), (o = Ce(o, n, i, 1, e, r, s, t, ye, Ze, null, Xe)), fe());
+      1 & n && ((r = e[0].dynamic), pe(), (o = Ce(o, n, i, 1, e, r, s, t, ye, Xe, null, Ye)), fe());
     },
     i(e) {
       if (!n) {
@@ -1261,7 +1261,7 @@ function at(e, t, n) {
   let { item: o } = t,
     { notification: s = {} } = t,
     { withoutStyles: r = !1 } = t;
-  const { removeNotification: i } = K(rt),
+  const { removeNotification: i } = G(rt),
     { id: a, removeAfter: l, customClass: c = '' } = s,
     d = () => i(a);
   let u = null;
@@ -1757,7 +1757,7 @@ function _t(e, t, n) {
     r,
     { $$slots: i = {}, $$scope: a } = t,
     { severity: l } = t;
-  const c = Y();
+  const c = K();
   return (
     (e.$$set = (e) => {
       'severity' in e && n(4, (l = e.severity)), '$$scope' in e && n(5, (a = e.$$scope));
@@ -2049,7 +2049,7 @@ function Ut(e) {
       }),
   ];
 }
-class Yt extends Te {
+class Kt extends Te {
   constructor(e) {
     super(), Le(this, e, Ut, It, a, {});
   }
@@ -2108,12 +2108,12 @@ function Vt(t) {
     },
   };
 }
-function Kt(e) {
+function Gt(e) {
   const { cancel: t } = De();
   return [
     t,
     () =>
-      st.show(Yt, null, {
+      st.show(Kt, null, {
         padding: 'var(--component-padding)',
         backdropColor: 'transparent',
         breakpoints: {
@@ -2129,12 +2129,12 @@ function Kt(e) {
       }),
   ];
 }
-class Xt extends Te {
+class Yt extends Te {
   constructor(e) {
-    super(), Le(this, e, Kt, Vt, a, {});
+    super(), Le(this, e, Gt, Vt, a, {});
   }
 }
-function Gt(e) {
+function Zt(e) {
   const t = e;
   Util.removeClass(t.element, t.showClass),
     (t.firstFocusable = null),
@@ -2145,9 +2145,9 @@ function Gt(e) {
       e.element.removeEventListener('keydown', e), e.element.removeEventListener('click', e);
     })(t);
 }
-function Zt(e, t) {
+function Xt(e, t) {
   (t.keyCode && 27 === t.keyCode) || (t.key && 'Escape' === t.key)
-    ? Gt(e)
+    ? Zt(e)
     : ((t.keyCode && 9 === t.keyCode) || (t.key && 'Tab' === t.key)) &&
       (function (e, t) {
         e.firstFocusable === document.activeElement &&
@@ -2193,7 +2193,7 @@ function en(e) {
     'static' === n
       ? t.element.removeAttribute('role', 'alertdialog')
       : t.element.setAttribute('role', 'alertdialog'),
-    'static' === n && Util.hasClass(t.element, t.showClass) && Gt(t));
+    'static' === n && Util.hasClass(t.element, t.showClass) && Zt(t));
 }
 function tn(e) {
   const t = e;
@@ -2214,7 +2214,7 @@ function tn(e) {
     for (let e = 0; e < t.triggers.length; e += 1)
       t.triggers[e].addEventListener('click', function (e) {
         if ((e.preventDefault(), Util.hasClass(t.element, t.showClass)))
-          return (t.selectedTrigger = e.target), void Gt(t);
+          return (t.selectedTrigger = e.target), void Zt(t);
         (t.selectedTrigger = e.target), Jt(t), Qt(t);
       });
 }
@@ -2287,18 +2287,18 @@ function sn(e, t, n) {
   );
 }
 (nn.prototype.close = function () {
-  Gt(this);
+  Zt(this);
 }),
   (nn.prototype.handleEvent = function (e) {
     switch (e.type) {
       case 'click':
         !(function (e, t) {
           (t.target.closest('.js-sidebar__close-btn') || Util.hasClass(t.target, 'js-sidebar')) &&
-            (t.preventDefault(), Gt(e));
+            (t.preventDefault(), Zt(e));
         })(this, e);
         break;
       case 'keydown':
-        Zt(this, e);
+        Xt(this, e);
     }
   }),
   (nn.prototype.resetLayout = function () {
@@ -2340,7 +2340,7 @@ function un(e) {
         (c.textContent = 'Smodale'),
         (u = _()),
         (p = E('small')),
-        (p.textContent = 'v1.0.0'),
+        (p.textContent = 'v1.0.2'),
         (f = _()),
         (g = E('button')),
         (h = E('img')),
@@ -2812,7 +2812,7 @@ function qn(e, t, n) {
       s,
       o,
       function (t) {
-        X(e, t);
+        Y(e, t);
       },
     ]
   );
@@ -2969,7 +2969,7 @@ function On(e, t, n) {
       a,
       s,
       function (t) {
-        X(e, t);
+        Y(e, t);
       },
       r,
     ]
@@ -3073,7 +3073,7 @@ function Un(t) {
     },
   };
 }
-var Yn = (function (e) {
+var Kn = (function (e) {
   var t = /\blang(?:uage)?-([\w-]+)\b/i,
     n = 0,
     o = {
@@ -3459,7 +3459,7 @@ var Yn = (function (e) {
     },
   };
 }
-function Kn(e) {
+function Gn(e) {
   let t, n, o, s;
   return {
     c() {
@@ -3477,14 +3477,14 @@ function Kn(e) {
     },
   };
 }
-function Xn(t) {
+function Yn(t) {
   let o,
     s,
     r,
     i,
     a,
     l = t[1] && Vn(t),
-    c = !('data-src' in t[5]) && t[2] && Kn(t),
+    c = !('data-src' in t[5]) && t[2] && Gn(t),
     d = [{ class: 'radius-lg' }, t[5]],
     u = {};
   for (let e = 0; e < d.length; e += 1) u = n(u, d[e]);
@@ -3512,7 +3512,7 @@ function Xn(t) {
         !('data-src' in e[5]) && e[2]
           ? c
             ? c.p(e, t)
-            : ((c = Kn(e)), c.c(), c.m(r, null))
+            : ((c = Gn(e)), c.c(), c.m(r, null))
           : c && (c.d(1), (c = null)),
         H(r, (u = ke(d, [{ class: 'radius-lg' }, 32 & t && e[5]]))),
         N(r, 'svelte-12j4wht', !0);
@@ -3524,7 +3524,7 @@ function Xn(t) {
     },
   };
 }
-function Gn(e, t, o) {
+function Zn(e, t, o) {
   let s;
   const r = ['language', 'unescaped', 'filename', 'code'];
   let i = f(t, r),
@@ -3548,9 +3548,9 @@ function Gn(e, t, o) {
     [a, c, d, s, (e) => window.Prism.highlightElement(e), i, l]
   );
 }
-'undefined' != typeof module && module.exports && (module.exports = Yn),
-  'undefined' != typeof global && (global.Prism = Yn),
-  (Yn.languages.markup = {
+'undefined' != typeof module && module.exports && (module.exports = Kn),
+  'undefined' != typeof global && (global.Prism = Kn),
+  (Kn.languages.markup = {
     comment: /<!--[\s\S]*?-->/,
     prolog: /<\?[\s\S]+?\?>/,
     doctype: {
@@ -3588,22 +3588,22 @@ function Gn(e, t, o) {
     },
     entity: [{ pattern: /&[\da-z]{1,8};/i, alias: 'named-entity' }, /&#x?[\da-f]{1,8};/i],
   }),
-  (Yn.languages.markup.tag.inside['attr-value'].inside.entity = Yn.languages.markup.entity),
-  (Yn.languages.markup.doctype.inside['internal-subset'].inside = Yn.languages.markup),
-  Yn.hooks.add('wrap', function (e) {
+  (Kn.languages.markup.tag.inside['attr-value'].inside.entity = Kn.languages.markup.entity),
+  (Kn.languages.markup.doctype.inside['internal-subset'].inside = Kn.languages.markup),
+  Kn.hooks.add('wrap', function (e) {
     'entity' === e.type && (e.attributes.title = e.content.replace(/&amp;/, '&'));
   }),
-  Object.defineProperty(Yn.languages.markup.tag, 'addInlined', {
+  Object.defineProperty(Kn.languages.markup.tag, 'addInlined', {
     value: function (e, t) {
       var n = {};
       (n['language-' + t] = {
         pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
         lookbehind: !0,
-        inside: Yn.languages[t],
+        inside: Kn.languages[t],
       }),
         (n.cdata = /^<!\[CDATA\[|\]\]>$/i);
       var o = { 'included-cdata': { pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i, inside: n } };
-      o['language-' + t] = { pattern: /[\s\S]+/, inside: Yn.languages[t] };
+      o['language-' + t] = { pattern: /[\s\S]+/, inside: Kn.languages[t] };
       var s = {};
       (s[e] = {
         pattern: RegExp(
@@ -3619,16 +3619,16 @@ function Gn(e, t, o) {
         greedy: !0,
         inside: o,
       }),
-        Yn.languages.insertBefore('markup', 'cdata', s);
+        Kn.languages.insertBefore('markup', 'cdata', s);
     },
   }),
-  (Yn.languages.html = Yn.languages.markup),
-  (Yn.languages.mathml = Yn.languages.markup),
-  (Yn.languages.svg = Yn.languages.markup),
-  (Yn.languages.xml = Yn.languages.extend('markup', {})),
-  (Yn.languages.ssml = Yn.languages.xml),
-  (Yn.languages.atom = Yn.languages.xml),
-  (Yn.languages.rss = Yn.languages.xml),
+  (Kn.languages.html = Kn.languages.markup),
+  (Kn.languages.mathml = Kn.languages.markup),
+  (Kn.languages.svg = Kn.languages.markup),
+  (Kn.languages.xml = Kn.languages.extend('markup', {})),
+  (Kn.languages.ssml = Kn.languages.xml),
+  (Kn.languages.atom = Kn.languages.xml),
+  (Kn.languages.rss = Kn.languages.xml),
   (function (e) {
     var t = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
     (e.languages.css = {
@@ -3694,8 +3694,8 @@ function Gn(e, t, o) {
         },
         n.tag
       ));
-  })(Yn),
-  (Yn.languages.clike = {
+  })(Kn),
+  (Kn.languages.clike = {
     comment: [
       { pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/, lookbehind: !0, greedy: !0 },
       { pattern: /(^|[^\\:])\/\/.*/, lookbehind: !0, greedy: !0 },
@@ -3713,9 +3713,9 @@ function Gn(e, t, o) {
     operator: /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
     punctuation: /[{}[\];(),.:]/,
   }),
-  (Yn.languages.javascript = Yn.languages.extend('clike', {
+  (Kn.languages.javascript = Kn.languages.extend('clike', {
     'class-name': [
-      Yn.languages.clike['class-name'],
+      Kn.languages.clike['class-name'],
       {
         pattern: /(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:prototype|constructor))/,
         lookbehind: !0,
@@ -3732,10 +3732,10 @@ function Gn(e, t, o) {
     number: /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
     operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
   })),
-  (Yn.languages.javascript[
+  (Kn.languages.javascript[
     'class-name'
   ][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/),
-  Yn.languages.insertBefore('javascript', 'keyword', {
+  Kn.languages.insertBefore('javascript', 'keyword', {
     regex: {
       pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,
       lookbehind: !0,
@@ -3745,7 +3745,7 @@ function Gn(e, t, o) {
           pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
           lookbehind: !0,
           alias: 'language-regex',
-          inside: Yn.languages.regex,
+          inside: Kn.languages.regex,
         },
         'regex-flags': /[a-z]+$/,
         'regex-delimiter': /^\/|\/$/,
@@ -3759,26 +3759,26 @@ function Gn(e, t, o) {
       {
         pattern: /(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,
         lookbehind: !0,
-        inside: Yn.languages.javascript,
+        inside: Kn.languages.javascript,
       },
       {
         pattern: /(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,
-        inside: Yn.languages.javascript,
+        inside: Kn.languages.javascript,
       },
       {
         pattern: /(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,
         lookbehind: !0,
-        inside: Yn.languages.javascript,
+        inside: Kn.languages.javascript,
       },
       {
         pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
         lookbehind: !0,
-        inside: Yn.languages.javascript,
+        inside: Kn.languages.javascript,
       },
     ],
     constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/,
   }),
-  Yn.languages.insertBefore('javascript', 'string', {
+  Kn.languages.insertBefore('javascript', 'string', {
     'template-string': {
       pattern: /`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|(?!\${)[^\\`])*`/,
       greedy: !0,
@@ -3789,15 +3789,15 @@ function Gn(e, t, o) {
           lookbehind: !0,
           inside: {
             'interpolation-punctuation': { pattern: /^\${|}$/, alias: 'punctuation' },
-            rest: Yn.languages.javascript,
+            rest: Kn.languages.javascript,
           },
         },
         string: /[\s\S]+/,
       },
     },
   }),
-  Yn.languages.markup && Yn.languages.markup.tag.addInlined('script', 'javascript'),
-  (Yn.languages.js = Yn.languages.javascript),
+  Kn.languages.markup && Kn.languages.markup.tag.addInlined('script', 'javascript'),
+  (Kn.languages.js = Kn.languages.javascript),
   (function () {
     if ('undefined' != typeof self && self.Prism && self.document) {
       Element.prototype.matches ||
@@ -4023,20 +4023,20 @@ function Gn(e, t, o) {
     })),
   (window.Prism = window.Prism || {}),
   (window.Prism.manual = !0);
-class Zn extends Te {
+class Xn extends Te {
   constructor(e) {
-    super(), Le(this, e, Gn, Xn, a, { language: 0, unescaped: 6, filename: 1, code: 2 });
+    super(), Le(this, e, Zn, Yn, a, { language: 0, unescaped: 6, filename: 1, code: 2 });
   }
 }
 function Jn(t) {
   let n, o, s, r, i, a, l, c, d, u, m, p, f, g;
   return (
-    (d = new Zn({
+    (d = new Xn({
       props: {
         code: "\n  import smodale from 'smodale';\n\n  smodale.show().catch(() => {});\n  ",
       },
     })),
-    (f = new Zn({
+    (f = new Xn({
       props: {
         code:
           "\n  window.addEventListener('unhandledrejection', (event) => event.preventDefault());\n  ",
@@ -4129,7 +4129,7 @@ function Qn(t) {
 function eo(e) {
   return [
     () =>
-      st.show(Xt, null, {
+      st.show(Yt, null, {
         breakpoints: {
           '32rem': {
             maxWidth: 'var(--max-width-xxs)',
@@ -4269,7 +4269,7 @@ class io extends Te {
 function ao(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src': 'demo/components/organisms/SectionNestedModals/NestedModalsExample.svelte',
       },
@@ -4465,7 +4465,7 @@ class bo extends Te {
 function xo(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src':
           'demo/components/organisms/SectionCentered/VerticallyAndHorizontallyCenteredExample.svelte',
@@ -4494,7 +4494,7 @@ function xo(t) {
 function vo(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src': 'demo/components/organisms/SectionCentered/VerticallyCenteredExample.svelte',
       },
@@ -4802,7 +4802,7 @@ function jo(e) {
   let c = { $$slots: { default: [Fo] }, $$scope: { ctx: e } };
   for (let e = 0; e < l.length; e += 1) c = n(c, l[e]);
   return (
-    (s = new Ke({ props: c })),
+    (s = new Ge({ props: c })),
     {
       c() {
         (t = E('button')),
@@ -4859,7 +4859,7 @@ class Po extends Te {
 function No(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src': 'demo/components/organisms/SectionLongContent/LongContentExample.svelte',
       },
@@ -4887,7 +4887,7 @@ function No(t) {
 function Oo(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src':
           'demo/components/organisms/SectionLongContent/LongContentBodyScrollExample.svelte',
@@ -5120,12 +5120,12 @@ function Uo(t) {
     B,
     I,
     U,
-    Y,
-    V,
     K,
-    X,
+    V,
     G,
+    Y,
     Z,
+    X,
     J,
     Q,
     ee,
@@ -5169,12 +5169,12 @@ function Uo(t) {
     Be,
     Ie,
     Ue,
-    Ye,
-    Ve,
     Ke,
-    Xe,
+    Ve,
     Ge,
+    Ye,
     Ze,
+    Xe,
     Je,
     Qe,
     et,
@@ -5217,7 +5217,7 @@ function Uo(t) {
     Nt,
     Ot;
   return (
-    (Se = new Zn({
+    (Se = new Xn({
       props: {
         language: 'markup',
         unescaped: !0,
@@ -5284,16 +5284,16 @@ function Uo(t) {
           (I = E('code')),
           (I.textContent = '{ boolean } focusTrap'),
           (U = _()),
-          (Y = E('div')),
-          (Y.innerHTML =
+          (K = E('div')),
+          (K.innerHTML =
             'Whether or not focus only the elements that are inside the modal on TAB key press. Default\n          <code>true</code>.'),
           (V = _()),
-          (K = E('li')),
-          (X = E('code')),
-          (X.textContent = '{ string } classes'),
-          (G = _()),
-          (Z = E('div')),
-          (Z.innerHTML =
+          (G = E('li')),
+          (Y = E('code')),
+          (Y.textContent = '{ string } classes'),
+          (Z = _()),
+          (X = E('div')),
+          (X.innerHTML =
             'Append custom classes on <code>.modal</code> element. Default <code>&#39;&#39;</code>.'),
           (J = _()),
           (Q = E('li')),
@@ -5357,15 +5357,15 @@ function Uo(t) {
           (Ie = E('code')),
           (Ie.textContent = '{ string } margin'),
           (Ue = _()),
-          (Ye = E('div')),
-          (Ye.textContent = 'Set margin.'),
+          (Ke = E('div')),
+          (Ke.textContent = 'Set margin.'),
           (Ve = _()),
-          (Ke = E('li')),
-          (Xe = E('code')),
-          (Xe.textContent = '{ string } height'),
-          (Ge = _()),
-          (Ze = E('div')),
-          (Ze.textContent = 'Set height.'),
+          (Ge = E('li')),
+          (Ye = E('code')),
+          (Ye.textContent = '{ string } height'),
+          (Ze = _()),
+          (Xe = E('div')),
+          (Xe.textContent = 'Set height.'),
           (Je = _()),
           (Qe = E('li')),
           (et = E('code')),
@@ -5464,12 +5464,12 @@ function Uo(t) {
           k(r, B),
           k(B, I),
           k(B, U),
-          k(B, Y),
+          k(B, K),
           k(r, V),
-          k(r, K),
-          k(K, X),
-          k(K, G),
-          k(K, Z),
+          k(r, G),
+          k(G, Y),
+          k(G, Z),
+          k(G, X),
           k(r, J),
           k(r, Q),
           k(Q, ee),
@@ -5513,12 +5513,12 @@ function Uo(t) {
           k(Ne, Be),
           k(Be, Ie),
           k(Be, Ue),
-          k(Be, Ye),
+          k(Be, Ke),
           k(Ne, Ve),
-          k(Ne, Ke),
-          k(Ke, Xe),
-          k(Ke, Ge),
-          k(Ke, Ze),
+          k(Ne, Ge),
+          k(Ge, Ye),
+          k(Ge, Ze),
+          k(Ge, Xe),
           k(Ne, Je),
           k(Ne, Qe),
           k(Qe, et),
@@ -5574,7 +5574,7 @@ function Uo(t) {
     }
   );
 }
-function Yo(e) {
+function Ko(e) {
   let t, n, o, s;
   return (
     (o = new Wo({ props: { $$slots: { default: [Uo] }, $$scope: { ctx: e } } })),
@@ -5608,7 +5608,7 @@ function Yo(e) {
 function Vo(t) {
   let n, o, s, r, i, a, l, c, d, u, m, p, f, g, h, $, b, x, v, w, y, C, A, L, T;
   return (
-    (L = new Zn({
+    (L = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -5694,10 +5694,10 @@ function Vo(t) {
     }
   );
 }
-function Ko(t) {
+function Go(t) {
   let n, o, s, r, i, a, l, c, d, u, m, p, f, g, h, $;
   return (
-    (h = new Zn({
+    (h = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -5759,10 +5759,10 @@ function Ko(t) {
     }
   );
 }
-function Xo(t) {
+function Yo(t) {
   let n, o, s, r, i, a, l, c, d, u, m, p, f, g, h, $;
   return (
-    (h = new Zn({
+    (h = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -5824,10 +5824,10 @@ function Xo(t) {
     }
   );
 }
-function Go(t) {
+function Zo(t) {
   let n, o, s, r, i, a, l, c, d;
   return (
-    (a = new Zn({
+    (a = new Xn({
       props: {
         filename: 'MyCustomModalContent.svelte',
         language: 'markup',
@@ -5836,7 +5836,7 @@ function Go(t) {
           "\n<script>\n  import { getModalContext } from 'smodale';\n  \n  const { hide, cancel, component } = getModalContext();\n\n  console.log(component);\n\n  const onCancelClick = () => cancel('cancelled');\n  const onOkClick = () => hide({ foo: 'bar' });\n\n  <button on:click={onCancelClick}>Cancel</button>\n  <button on:click={onOkClick}>Ok</button>\n</script>\n",
       },
     })),
-    (c = new Zn({
+    (c = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -5883,10 +5883,10 @@ function Go(t) {
     }
   );
 }
-function Zo(t) {
+function Xo(t) {
   let n, o, s, r, i, a, l, c, d, u, m;
   return (
-    (u = new Zn({
+    (u = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -5983,10 +5983,10 @@ function Jo(e) {
     I;
   return (
     (a = new Wo({ props: { $$slots: { default: [Vo] }, $$scope: { ctx: e } } })),
-    (g = new Wo({ props: { $$slots: { default: [Ko] }, $$scope: { ctx: e } } })),
-    (C = new Wo({ props: { $$slots: { default: [Xo] }, $$scope: { ctx: e } } })),
-    (H = new Wo({ props: { $$slots: { default: [Go] }, $$scope: { ctx: e } } })),
-    (B = new Wo({ props: { $$slots: { default: [Zo] }, $$scope: { ctx: e } } })),
+    (g = new Wo({ props: { $$slots: { default: [Go] }, $$scope: { ctx: e } } })),
+    (C = new Wo({ props: { $$slots: { default: [Yo] }, $$scope: { ctx: e } } })),
+    (H = new Wo({ props: { $$slots: { default: [Zo] }, $$scope: { ctx: e } } })),
+    (B = new Wo({ props: { $$slots: { default: [Xo] }, $$scope: { ctx: e } } })),
     {
       c() {
         (t = E('h4')),
@@ -6160,8 +6160,8 @@ function Jo(e) {
 function Qo(t) {
   let n, o, s, r, i, a, l, c, d, u, m, p, f, g, h, $, b, x, v, w, y, C;
   return (
-    (n = new Zn({ props: { language: 'bash', code: 'npm i -S smodale' } })),
-    (m = new Zn({
+    (n = new Xn({ props: { language: 'bash', code: 'npm i -S smodale' } })),
+    (m = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -6170,7 +6170,7 @@ function Qo(t) {
           "\n<script>\n  import smodale, { Modal } from 'smodale';\n\n  smodale.show('modal-name')\n    .then(data => {\n      console.log(data); // { foo: 'bar' }\n    })\n    .catch(data => {\n      console.log(data); // 'cancelled'\n    });\n\n  const onCancelClick = () => smodale.cancel('modal-name', 'cancelled');\n  const onOkClick = () => smodale.hide('modal-name', { foo: 'bar' });\n</script>\n\n<Modal name=\"modal-name\">\n  <h1>Modal title</h1>\n  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>\n  <button on:click={onCancelClick}>Cancel</button>\n  <button on:click={onOkClick}>Ok</button>\n</Modal>\n",
       },
     })),
-    (v = new Zn({
+    (v = new Xn({
       props: {
         filename: 'MyCustomModalContent.svelte',
         language: 'markup',
@@ -6179,7 +6179,7 @@ function Qo(t) {
           "\n<script>\n  import { getModalContext } from 'smodale';\n\n  const { hide, cancel } = getModalContext();\n\n  export let text = '';\n\n  const onCancelClick = () => cancel(text.toUpperCase());\n  const onOkClick = () => hide({ foo: 'bar' });\n</script>\n\n<button on:click={onCancelClick}>Cancel</button>\n<button on:click={onOkClick}>Ok</button>\n  ",
       },
     })),
-    (y = new Zn({
+    (y = new Xn({
       props: {
         filename: 'App.svelte',
         language: 'markup',
@@ -6445,7 +6445,7 @@ class ls extends Te {
 function cs(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src': 'demo/components/organisms/SectionTransition/TransitionFadeExample.svelte',
       },
@@ -6473,7 +6473,7 @@ function cs(t) {
 function ds(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src': 'demo/components/organisms/SectionTransition/TransitionBlurExample.svelte',
       },
@@ -6636,7 +6636,7 @@ class fs extends Te {
 function gs(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: {
         'data-src': 'demo/components/organisms/SectionBreakpoints/BreakpointsExample.svelte',
       },
@@ -6749,7 +6749,7 @@ function bs(e) {
   let c = { $$slots: { default: [$s] }, $$scope: { ctx: e } };
   for (let e = 0; e < l.length; e += 1) c = n(c, l[e]);
   return (
-    (s = new Ke({ props: c })),
+    (s = new Ge({ props: c })),
     {
       c() {
         (t = E('button')),
@@ -6804,7 +6804,7 @@ class ws extends Te {
 function ys(t) {
   let n, o;
   return (
-    (n = new Zn({
+    (n = new Xn({
       props: { 'data-src': 'demo/components/organisms/SectionVideo/VideoExample.svelte' },
     })),
     {
@@ -6903,7 +6903,7 @@ var ks = [
         label: 'Properties',
         component: class extends Te {
           constructor(e) {
-            super(), Le(this, e, null, Yo, a, {});
+            super(), Le(this, e, null, Ko, a, {});
           }
         },
       },
@@ -7122,7 +7122,7 @@ function _s(e) {
   const x = [e[1]];
   let v = { $$slots: { default: [Es] }, $$scope: { ctx: e } };
   for (let e = 0; e < x.length; e += 1) v = n(v, x[e]);
-  (m = new Ke({ props: v })), m.$on('opened', e[3]), m.$on('closed', e[2]);
+  (m = new Ge({ props: v })), m.$on('opened', e[3]), m.$on('closed', e[2]);
   let w = e[0],
     y = [];
   for (let t = 0; t < w.length; t += 1) y[t] = Ts(Ss(e, w, t));
@@ -7584,7 +7584,7 @@ function Bs(e, t, n) {
               'Cancel' + (e ? `: <code>${e}</code>` : '')
             )
           ),
-      () => st.show(Xt, null, s, { closed: r, opened: i }),
+      () => st.show(Yt, null, s, { closed: r, opened: i }),
       (e) => {
         'mobile' === e.layout && e.close();
       },
@@ -7597,7 +7597,7 @@ function Bs(e, t, n) {
     (e.q = e.q || []).push(...t);
   }),
   (ga.l = +new Date()),
-  ga('create', 'UA-XXXXX-Y', 'auto'),
+  ga('create', 'G-K01G7CKPDV', 'auto'),
   ga('send', 'pageview', { anonymizeIp: !0 });
 var Is = new (class extends Te {
   constructor(e) {

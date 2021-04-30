@@ -39,6 +39,7 @@ export default (argv) => {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(watch ? 'development' : 'production'),
+      'process.env.GA_PROPERTY_ID': JSON.stringify('G-K01G7CKPDV'),
       preventAssignment: true,
     }),
   ];

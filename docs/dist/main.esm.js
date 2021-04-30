@@ -7591,18 +7591,15 @@ function Bs(e, t, n) {
     ]
   );
 }
-(window.ga =
-  window.ga ||
-  function e(...t) {
-    (e.q = e.q || []).push(...t);
-  }),
-  (ga.l = +new Date()),
-  ga('create', 'G-K01G7CKPDV', 'auto'),
-  ga('send', 'pageview', { anonymizeIp: !0 });
-var Is = new (class extends Te {
+const Is = () => ((window.dataLayer = window.dataLayer || []), dataLayer),
+  Us = (...e) => {
+    Is().push(...e);
+  };
+Us('js', new Date()), Us('config', 'G-K01G7CKPDV', { anonymize_ip: !0 });
+var Ks = new (class extends Te {
   constructor(e) {
     super(), Le(this, e, Bs, Ws, a, {});
   }
 })({ target: document.body });
-export default Is;
+export default Ks;
 //# sourceMappingURL=main.esm.js.map

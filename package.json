@@ -6,6 +6,7 @@
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "types": "@types/index.d.ts",
+  "license": "MIT",
   "author": {
     "name": "Skender Moglica",
     "email": "moglica.s@gmail.com",

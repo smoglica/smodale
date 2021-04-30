@@ -5,20 +5,20 @@ import { error } from './logger';
 const getModalByName = (name) => {
   const state = store.getState();
 
-  return [...state.static, ...state.dynamic].find((m) => m?.props?.name === name);
+  return [...state.static, ...state.dynamic].find((m) => m.props.name === name);
 };
 
 const removeModalByName = (name) => {
   store.update((modals) => ({
-    static: modals?.static.filter((m) => m?.props?.name !== name),
-    dynamic: modals?.dynamic.filter((m) => m?.props?.name !== name),
+    static: modals.static.filter((m) => m.props.name !== name),
+    dynamic: modals.dynamic.filter((m) => m.props.name !== name),
   }));
 };
 
 const showStaticModal = (name, resolve, reject, hide, cancel) => {
   store.update((modals) => ({
     static: [
-      ...modals?.static,
+      ...modals.static,
       {
         props: { name },
         resolve,
@@ -27,7 +27,7 @@ const showStaticModal = (name, resolve, reject, hide, cancel) => {
         cancel,
       },
     ],
-    dynamic: modals?.dynamic,
+    dynamic: modals.dynamic,
   }));
 };
 
@@ -49,18 +49,18 @@ const showDynamicModal = (
   }
 
   store.update((modals) => {
-    const prefix = props?.name || 'modal';
+    const prefix = (props && props.name) || 'modal';
 
     return {
-      static: modals?.static,
+      static: modals.static,
       dynamic: [
-        ...modals?.dynamic,
+        ...modals.dynamic,
         {
           component,
           componentProps,
           props: {
             ...props,
-            name: `${prefix}-${modals?.dynamic?.length}`,
+            name: `${prefix}-${modals.dynamic.length}`,
           },
           events,
           resolve,

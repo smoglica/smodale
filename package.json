@@ -7,6 +7,9 @@
   "main": "dist/index.js",
   "types": "@types/index.d.ts",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "author": {
     "name": "Skender Moglica",
     "email": "moglica.s@gmail.com",

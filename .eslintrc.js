@@ -14,6 +14,7 @@ module.exports = {
   },
   globals: {
     Util: true,
+    ga: true,
   },
   overrides: [
     {

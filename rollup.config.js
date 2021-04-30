@@ -49,7 +49,7 @@ export default (argv) => {
           input: 'demo/main',
           output: {
             format: 'es',
-            file: 'public/dist/main.esm.js',
+            file: 'docs/dist/main.esm.js',
             sourcemap: true,
             exports: 'named',
           },
@@ -59,14 +59,14 @@ export default (argv) => {
             !demo &&
               browsersync({
                 server: {
-                  baseDir: 'public',
+                  baseDir: 'docs',
                   routes: {
                     '/demo': 'demo',
                   },
                 },
                 port: 5000,
                 open: false,
-                files: ['public/index.html'],
+                files: ['docs/index.html'],
               }),
             demo && terser(),
           ].filter(Boolean),
@@ -77,7 +77,7 @@ export default (argv) => {
             sourcemap: true,
             format: 'iife',
             name: 'app',
-            file: 'public/dist/main.js',
+            file: 'docs/dist/main.js',
           },
           plugins: [
             ...commonPlugins,

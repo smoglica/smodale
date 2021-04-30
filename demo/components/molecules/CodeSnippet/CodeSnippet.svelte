@@ -23,12 +23,14 @@
 
 <div class="code-snippet position-relative">
   {#if filename}
-    <div class="position-absolute top-0 right-0 text-xs margin-top-sm margin-right-md font-mono">
+    <div
+      class="position-absolute top-0 right-0 text-xs margin-top-sm margin-right-md font-mono color-contrast-low"
+    >
       {filename}
     </div>
   {/if}
   <pre
-    class="radius-md"
+    class="radius-lg"
     {...$$restProps}
     use:onMount>
     {#if !('data-src' in $$restProps) && code}

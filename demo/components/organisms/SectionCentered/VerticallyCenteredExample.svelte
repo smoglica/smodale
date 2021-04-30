@@ -15,5 +15,5 @@
 </script>
 
 <button class="btn btn--accent" type="button" on:click={onClick}>
-  Show horizontally centered modal
+  Show vertically centered modal
 </button>

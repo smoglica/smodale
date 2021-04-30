@@ -2,7 +2,7 @@
   import Details from 'Demo/components/molecules/Details';
   import CodeSnippet from 'Demo/components/molecules/CodeSnippet';
   import VerticallyAndHorizontallyCenteredExample from 'Demo/components/organisms/SectionCentered/VerticallyAndHorizontallyCenteredExample';
-  import HorizontallyCenteredExample from 'Demo/components/organisms/SectionCentered/HorizontallyCenteredExample';
+  import VerticallyCenteredExample from 'Demo/components/organisms/SectionCentered/VerticallyCenteredExample';
 </script>
 
 <VerticallyAndHorizontallyCenteredExample />
@@ -14,9 +14,9 @@
 
 <div class="margin-top-sm" />
 
-<HorizontallyCenteredExample />
+<VerticallyCenteredExample />
 <Details class="margin-top-sm" title="Show code">
   <CodeSnippet
-    data-src="demo/components/organisms/SectionCentered/HorizontallyCenteredExample.svelte"
+    data-src="demo/components/organisms/SectionCentered/VerticallyCenteredExample.svelte"
   />
 </Details>

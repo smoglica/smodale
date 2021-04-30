@@ -51,7 +51,8 @@
   let firstFocusableElm;
   let lastFocusableElm;
 
-  $: modal = [...$store.dynamic, ...$store.static].find((m) => m?.props?.name === name);
+  $: modals = [...$store.dynamic, ...$store.static];
+  $: modal = modals.find((m) => m?.props?.name === name);
   $: sortedBreakpoints = Object.entries(breakpoints)
     .map(([key, value]) => {
       const regex = /px|em|rem/;
@@ -274,7 +275,7 @@
       destroy() {
         emit('closed');
 
-        if (disableBodyScroll) {
+        if (disableBodyScroll && !modals.length) {
           toInlineCss(document.body, { overflow: '' });
         }
 

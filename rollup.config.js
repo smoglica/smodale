@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import image from '@rollup/plugin-image';
 import alias from '@rollup/plugin-alias';
 import json from '@rollup/plugin-json';
+import copy from 'rollup-plugin-copy';
 import { babel } from '@rollup/plugin-babel';
 import css from 'rollup-plugin-css-only';
 import license from 'rollup-plugin-license';
@@ -62,7 +63,7 @@ export default (argv) => {
                 server: {
                   baseDir: 'demo/public',
                   routes: {
-                    '/demo': 'demo',
+                    '/dist/snippets': 'demo/components/snippets',
                   },
                 },
                 port: 5000,
@@ -92,6 +93,9 @@ export default (argv) => {
               plugins: ['@babel/plugin-transform-runtime'],
             }),
             terser(),
+            copy({
+              targets: [{ src: 'demo/components/snippets', dest: 'demo/public/dist' }],
+            }),
           ],
         },
       ].filter(Boolean)

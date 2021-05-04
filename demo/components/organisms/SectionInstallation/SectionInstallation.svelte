@@ -82,7 +82,7 @@
   unescaped
   code={`
 <script>
-import smodale, { Modal } from 'smodale';
+import smodale from 'smodale';
 import MyCustomModalContent from 'MyCustomModalContent.svelte';
 
 smodale.show(MyCustomModalContent, { text: 'Lorem ipsum' })

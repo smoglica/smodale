@@ -14,6 +14,7 @@
   import ScrollSpyLink from 'Demo/components/atoms/ScrollSpyLink';
   import routes from 'Demo/routes';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';
+  import logo from 'Demo/assets/images/logo.svg';
 
   $: sections = routes.reduce((acc, route) => [...acc, ...route.items], []);
 
@@ -75,10 +76,16 @@
             {/each}
           </Sidenav>
         </svelte:fragment>
+        <h1>
+          <a href="/" title="Smodale">
+            <figure class="inline-flex">
+              <img src={logo} alt="Smodale" width="256" />
+            </figure>
+          </a>
+        </h1>
         <div class="text-component article">
           <section>
             <div class="margin-bottom-md">
-              <h1>Smodale</h1>
               <p class="text-md color-contrast-medium">
                 A simple, light and highly customizable modal for Svelte
               </p>

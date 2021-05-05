@@ -8,9 +8,15 @@ Designed with the "Mobile-first" approach for serving static and dynamic modals 
 
 Project documentation is available at [smodale.vercel.app](https://smodale.vercel.app/)
 
+## Install
+
+```bash
+npm i -S smodale
+```
+
 ## Quick look
 
-An example of dynamic modal usage. For more examples check the documentation.
+An example of dynamic modal usage. For more use cases check the documentation.
 
 **App.svelte**
 

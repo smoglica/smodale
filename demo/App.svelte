@@ -15,6 +15,8 @@
   import routes from 'Demo/routes';
   import { notifySuccess, notifyWarning, notify } from 'Demo/lib/notifier';
   import logo from 'Demo/assets/images/logo.svg';
+  import logoGithub from 'Demo/assets/icons/logo-github.svg';
+  import heart from 'Demo/assets/icons/heart.svg';
 
   $: sections = routes.reduce((acc, route) => [...acc, ...route.items], []);
 
@@ -76,6 +78,17 @@
             {/each}
           </Sidenav>
         </svelte:fragment>
+        <div class="margin-bottom-xxxs">
+          <a
+            class="btn btn--subtle btn--sm inline-flex items-center gap-x-xs"
+            href="https://github.com/smoglica/smodale"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span>View on GitHub</span>
+            <img class="icon icon--xs" src={logoGithub} alt="GitHub" />
+          </a>
+        </div>
         <h1>
           <a href="/" title="Smodale">
             <figure class="inline-flex">
@@ -113,6 +126,35 @@
               <svelte:component this={component} />
             </ScrollSpySection>
           {/each}
+        </div>
+        <div class="text-component text-sm color-contrast-medium text-center">
+          <hr />
+          <p>
+            Designed and built with <img
+              class="icon icon-xs"
+              src={heart}
+              alt="Heart"
+              style="display: inline;"
+            />
+            by
+            <a href="https://skendermoglica.it/" target="_blank" rel="noopener noreferrer">
+              Skender Moglica
+            </a>
+          </p>
+          <p>
+            Code licensed <a
+              href="https://github.com/smoglica/smodale/blob/main/LICENSE.md"
+              rel="noopener noreferrer"
+              target="_blank">MIT</a
+            >. Docs generated with
+            <a href="https://svelte.dev/" rel="noopener noreferrer" target="_blank">Svelte</a>
+            and proudly hosted on
+            <a
+              href="https://vercel.com/?utm_source=smodale"
+              rel="noopener noreferrer"
+              target="_blank">Vercel</a
+            >.
+          </p>
         </div>
       </SidebarLayout>
     </ScrollSpy>

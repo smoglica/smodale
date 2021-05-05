@@ -4,6 +4,11 @@
 
 Designed with the "Mobile-first" approach for serving static and dynamic modals which are customizable on specific viewport breakpoints
 
+<br />
+<div align="center">
+  <img src="screenshot.gif" alt="Smodale" width="540" height="auto">
+</div>
+
 ## Documentation
 
 Project documentation is available at [smodale.vercel.app](https://smodale.vercel.app/)

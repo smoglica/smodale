@@ -6,7 +6,7 @@ Designed with the "Mobile-first" approach for serving static and dynamic modals 
 
 <br />
 <div align="center">
-  <img src="screenshot.gif" alt="Smodale" width="540" height="auto">
+  <img src="media/screenshot.gif" alt="Smodale" width="540" height="auto">
 </div>
 
 ## Documentation

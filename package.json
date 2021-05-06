@@ -1,6 +1,6 @@
 {
   "name": "smodale",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple, light and highly customizable modal for Svelte",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",

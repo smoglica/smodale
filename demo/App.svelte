@@ -78,14 +78,14 @@
             {/each}
           </Sidenav>
         </svelte:fragment>
-        <div class="margin-bottom-xxxs">
+        <div class="margin-bottom-xxxs text-right@md">
           <a
-            class="btn btn--subtle btn--sm inline-flex items-center gap-x-xs"
+            class="btn btn--subtle btn--sm inline-flex items-center"
             href="https://github.com/smoglica/smodale"
             rel="noopener noreferrer"
             target="_blank"
           >
-            <span>View on GitHub</span>
+            <span class="margin-right-xs">View on GitHub</span>
             <img class="icon icon--xs" src={logoGithub} alt="GitHub" />
           </a>
         </div>
